@@ -1,9 +1,10 @@
 if Vapour.plugins.lsp.enabled then
   local lsp_installer = Vapour.utils.plugins.require('nvim-lsp-installer')
+  if not lsp_installer then return end
   lsp_installer.on_server_ready(function(server)
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
       .make_client_capabilities())
-    local on_attach = function(client, bufnr)
+    local on_attach = function(_, bufnr)
       vim.api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
         callback = function()
