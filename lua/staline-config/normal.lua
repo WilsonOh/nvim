@@ -95,6 +95,16 @@ end
 
 local colors = get_colors()
 
+local gps = require("nvim-gps")
+
+local get_gps = function()
+  if gps.is_available() then
+    return gps.get_location()
+  else
+    return ""
+  end
+end
+
 require('staline').setup {
   defaults = {
     left_separator = "",
@@ -127,9 +137,9 @@ require('staline').setup {
     V = " VISUAL"
   },
   sections = {
-    left = { '-mode', 'left_sep_double', ' ', 'branch', '-lsp' },
-    mid = { 'file_name' },
-    right = { 'right_sep_double', '-line_column' }
+    left = { '-mode', 'left_sep_double', ' ', '-lsp'},
+    mid = {' ', 'branch','file_name', 'lsp_name' },
+    right = {get_gps, 'right_sep_double', '-line_column' }
   },
   special_table = {
     NvimTree = { 'NvimTree', ' ' },
