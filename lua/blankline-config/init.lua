@@ -9,7 +9,8 @@ local function get_char_highlights()
     vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF blend=nocombine]]
     vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD blend=nocombine]]
     return {
-      "IndentBlanklineIndent1", "IndentBlanklineIndent2", "IndentBlanklineIndent3", "IndentBlanklineIndent4", "IndentBlanklineIndent5",
+      "IndentBlanklineIndent1", "IndentBlanklineIndent2", "IndentBlanklineIndent3", "IndentBlanklineIndent4",
+      "IndentBlanklineIndent5",
       "IndentBlanklineIndent6"
     }
   else
@@ -17,14 +18,21 @@ local function get_char_highlights()
   end
 end
 
+vim.opt.list = true
+-- vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
+
 indent_blankline.setup {
-  filetype_exclude = {"dashboard", "packer", "NvimTree", "lsp-installer"},
-  buftype_exclude = {"terminal"},
+  show_end_of_line = true,
+  space_char_blankline = " ",
+  filetype_exclude = { "dashboard", "packer", "NvimTree", "lsp-installer" },
+  buftype_exclude = { "terminal" },
   show_current_context = not Vapour.plugins.indent_blankline.enable_rainbow_colors,
   char_highlight_list = get_char_highlights(),
   context_patterns = {
-    "class", "return", "function", "method", "^if", "^while", "jsx_element", "^for", "^object", "^table", "block", "arguments", "if_statement",
-    "else_clause", "jsx_element", "jsx_self_closing_element", "try_statement", "catch_clause", "import_statement", "operation_type"
-
+    "class", "return", "function", "method", "^if", "^while", "jsx_element", "^for", "^object", "^table", "block",
+    "arguments", "if_statement",
+    "else_clause", "jsx_element", "jsx_self_closing_element", "try_statement", "catch_clause", "import_statement",
+    "operation_type"
   }
 }
