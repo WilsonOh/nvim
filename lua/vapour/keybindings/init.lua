@@ -70,6 +70,9 @@ set('i', '<C-a>', '<esc>I', opts)
 set('n', 'gd', '0D', opts)
 set('n', 'gC', '0C', opts)
 
+--Source Current Buffer
+set('n', '<leader><leader>s', '<cmd>%so<CR>', opts)
+
 if Vapour.plugins.nvim_comment.enabled then set('v', '<leader>/', ':CommentToggle<cr>', opts) end
 
 vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
