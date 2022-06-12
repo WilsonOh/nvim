@@ -1,10 +1,17 @@
 local npairs = Vapour.utils.plugins.packadd('nvim-autopairs', true)
 
+if not npairs then return end
+
 -- if remap == nil then return end
 
-npairs.setup({break_line_filetype = nil, check_ts = true})
+npairs.setup({
+  break_line_filetype = nil,
+  check_ts = true,
+  enable_check_bracket_line = true,
+  fast_wrap = {},
+})
 
-local remap = vim.api.nvim_set_keymap
+local remap = vim.keymap.set
 _G.MUtils = {}
 
 if Vapour.plugins.lsp.enabled == true then
@@ -20,5 +27,5 @@ else
     end
   end
 
-  remap('i', '<CR>', 'v:lua.MUtils.completion_confirm()', {expr = true, noremap = true})
+  remap('i', '<CR>', 'v:lua.MUtils.completion_confirm()', { expr = true, noremap = true })
 end
