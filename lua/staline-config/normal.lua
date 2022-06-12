@@ -95,11 +95,11 @@ end
 
 local colors = get_colors()
 
-local gps = require("nvim-gps")
+local navic = require("nvim-navic")
 
-local get_gps = function()
-  if gps.is_available() then
-    return gps.get_location()
+local function get_navic()
+  if navic.is_available() then
+    return navic.get_location()
   else
     return ""
   end
@@ -109,7 +109,7 @@ require('staline').setup {
   defaults = {
     left_separator = "",
     right_separator = "",
-    -- cool_symbol = " ", -- Change this to override defult OS icon.
+    cool_symbol = " ", -- Change this to override defult OS icon.
     full_path = false,
     mod_symbol = "  ",
     lsp_client_symbol = " ",
@@ -137,9 +137,9 @@ require('staline').setup {
     V = " VISUAL"
   },
   sections = {
-    left = { '-mode', 'left_sep_double', ' ', '-lsp'},
-    mid = {' ', 'branch','file_name', 'lsp_name' },
-    right = {get_gps, 'right_sep_double', '-line_column' }
+    left = { '-mode', 'left_sep_double', ' ', 'branch', ' ', '-lsp' },
+    mid = { 'file_name', ' LSP: ', 'lsp_name' },
+    right = { get_navic, ' ', 'right_sep_double', '-line_column' }
   },
   special_table = {
     NvimTree = { 'NvimTree', ' ' },
