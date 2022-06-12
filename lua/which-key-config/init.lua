@@ -27,7 +27,6 @@ local mappings = {
     },
     t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', "Type definition" },
     d = { '<cmd>lua vim.lsp.buf.definition()<CR>', "Go to definition" },
-    D = { '<cmd>lua vim.lsp.buf.delaration()<CR>', "Go to declaration" },
     r = { '<cmd>lua vim.lsp.buf.references()<CR>', "References" },
     R = { ':IncRename ', "Rename" },
     a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', "Code actions" },
@@ -35,15 +34,14 @@ local mappings = {
     n = { '<cmd>lua vim.diagnostic.goto_next()<CR>', "Go to next diagnostic" },
     N = { '<cmd>lua vim.diagnostic.goto_prev()<CR>', "Go to previous diagnostic" },
     I = { '<cmd>LspInstallInfo<cr>', 'Install language server' },
-    f = { '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', "Format File" },
+    f = { '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', "Format File" },
+    F = { '<cmd>lua vim.lsp.buf.range_formatting()<CR>', "Range Format File" },
     T = { '<cmd> Telescope diagnostics bufnr=0<CR>', "Get Diagnostics" }
   },
-  c = { "ggVGc", "Clear Buffer" },
-  x = { ":bdelete<cr>", "Close Buffer" },
-  X = { ":bdelete!<cr>", "Force Close Buffer" },
-  q = { ":q<cr>", "Quit" },
-  Q = { ":q!<cr>", "Force Quit" },
-  w = { ":w<cr>", "Write" },
+  q = { "<cmd>copen<CR>", "Open QuickFix List" },
+  a = { "ggVG", "Select Entire Buffer" },
+  x = { ":Bdelete<cr>", "Close Buffer" },
+  X = { ":Bdelete!<cr>", "Force Close Buffer" },
   E = { ":e ~/.config/nvim/lua/vapour/user-config/init.lua<cr>", "Edit User Config" },
   p = {
     name = "Packer",
@@ -72,7 +70,7 @@ if Vapour.plugins.telescope.enabled then
     f = { "<cmd>Telescope find_files theme=ivy<cr>", "Find Files" },
     c = { "<cmd>Telescope find_files cwd=~/.config/nvim/lua/ theme=ivy<cr>", "Search Config" },
     r = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
-    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    b = { "<cmd>Telescope buffers bufnr=0<cr>", "Buffers" },
     o = { "<cmd>Telescope oldfiles<cr>", "Recent Files" }
   }
 end
