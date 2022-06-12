@@ -59,12 +59,6 @@ return packer.startup(function(use)
     event = 'BufRead'
   }
   use {
-    'glepnir/dashboard-nvim',
-    disable = not is_enabled('dashboard'),
-    config = "require'dashboard-config'",
-    event = 'BufWinEnter'
-  }
-  use {
     'lukas-reineke/indent-blankline.nvim',
     disable = not is_enabled('indent_blankline'),
     config = "require'blankline-config'",
@@ -87,7 +81,7 @@ return packer.startup(function(use)
     event = 'BufRead',
     config = "require('gitsigns-config')"
   }
-  use { 'kyazdani42/nvim-web-devicons', event = 'BufRead' }
+  use { 'kyazdani42/nvim-web-devicons' }
 
   -- Tree-Sitter
   use {
@@ -247,8 +241,15 @@ return packer.startup(function(use)
     vim.fn['fzf#install']()
   end
   }
-  use {'kevinhwang91/nvim-bqf', ft = 'qf' }
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
   use { 'moll/vim-bbye' }
+  use {
+    'goolord/alpha-nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function()
+      require('alpha-config')
+    end
+  }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)
