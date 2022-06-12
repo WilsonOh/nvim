@@ -12,6 +12,12 @@ local function has_words_before()
       :match "%s" == nil
 end
 
+local function get_sources()
+  local sources = Vapour.plugins.lsp.cmp_sources
+  table.insert(sources, { name = "dictionary", keyword_length = 2 })
+  return sources
+end
+
 cmp.setup({
   enabled = function()
     -- disable completion in comments
@@ -28,7 +34,13 @@ cmp.setup({
     format = lspkind.cmp_format({
       with_text = true,
       maxwidth = 50,
-      menu = { buffer = "[Buffer]", nvim_lsp = "[LSP]", luasnip = "[LuaSnip]", path = "[Path]" }
+      menu = {
+        buffer = "[Buffer]",
+        nvim_lsp = "[LSP]",
+        luasnip = "[LuaSnip]",
+        path = "[Path]",
+        dictionary = "[Dictionary]"
+      }
     }),
     fields = { "kind", "abbr", "menu" }
   },
@@ -44,8 +56,8 @@ cmp.setup({
     ["<Down>"] = cmp.mapping.select_next_item(),
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
-    ["<C-j>"] = cmp.mapping.select_next_item(),
+    --[[ ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(), ]]
     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -75,10 +87,13 @@ cmp.setup({
       end
     end, { "i", "s" })
   },
-  sources = Vapour.plugins.lsp.cmp_sources
+  sources = get_sources()
 })
 vim.cmd(
   "autocmd FileType TelescopePrompt lua Vapour.utils.plugins.require('cmp').setup.buffer { enabled = false }")
+
+require("snippets")
+
 --[[
 cmp.setup.cmdline(':%s/', {
   view = { entries = { name = 'custom', selection_order = 'near_cursor' } },
