@@ -1,3 +1,4 @@
+--------------------------------------Bootstrapping Packer----------------------------------
 local execute = vim.api.nvim_command
 
 local fn = vim.fn
@@ -12,6 +13,17 @@ end
 local packer = Vapour.utils.plugins.require('packer')
 
 packer.init(Vapour.plugins.packer.init)
+---------------------------------------------------------------------------------------------
+
+--------------------------------Autocommand for PackerSync-----------------------------------
+--[[ local packer_augroup = vim.api.nvim_create_augroup("packer_user_config", {})
+vim.api.nvim_clear_autocmds({ group = packer_augroup, buffer = 0 })
+vim.api.nvim_create_autocmd("BufWritePost ", {
+  pattern = "plugins/init.lua",
+  group = packer_augroup,
+  command = "PackerSync"
+}) ]]
+---------------------------------------------------------------------------------------------
 
 local function is_enabled(plugin)
   return Vapour.plugins[plugin].enabled
@@ -32,7 +44,6 @@ return packer.startup(function(use)
     'norcalli/nvim-colorizer.lua',
     disable = not is_enabled('colorizer'),
     config = "require'colorizer-config'",
-    event = 'BufRead'
   }
   use {
     'akinsho/nvim-bufferline.lua',
@@ -139,13 +150,10 @@ return packer.startup(function(use)
   }
   use { 'tzachar/fuzzy.nvim', requires = { 'nvim-telescope/telescope-fzf-native.nvim' } }
   use { 'tzachar/cmp-fuzzy-buffer', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
-  --[[ use { 'hrsh7th/cmp-vsnip', after = "nvim-cmp", disable = not is_enabled('lsp') }
-  use { 'hrsh7th/vim-vsnip', disable = not is_enabled('lsp'), after = "nvim-cmp" } ]]
   use {
     'L3MON4D3/LuaSnip',
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
-      -- require("luasnip.loaders.from_lua").load({ paths = "~/.local/snippets" })
     end
   }
   use { 'saadparwaiz1/cmp_luasnip' }
@@ -235,6 +243,12 @@ return packer.startup(function(use)
   use { 'zane-/cder.nvim' }
   use { 'ThePrimeagen/harpoon' }
   use { "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }
+  use { 'junegunn/fzf', run = function()
+    vim.fn['fzf#install']()
+  end
+  }
+  use {'kevinhwang91/nvim-bqf', ft = 'qf' }
+  use { 'moll/vim-bbye' }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)
