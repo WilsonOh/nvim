@@ -1,4 +1,5 @@
 local execute = vim.api.nvim_command
+
 local fn = vim.fn
 
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -128,6 +129,14 @@ return packer.startup(function(use)
   use { 'hrsh7th/cmp-buffer', after = "nvim-cmp", disable = not is_enabled('lsp') }
   use { 'hrsh7th/cmp-path', after = "nvim-cmp", disable = not is_enabled('lsp') }
   use { 'hrsh7th/cmp-cmdline', after = "nvim-cmp", disable = not is_enabled('lsp') }
+  use {
+    'uga-rosa/cmp-dictionary',
+    after = "nvim-cmp",
+    disable = not is_enabled('lsp'),
+    config = function()
+      require("cmp_dictionary").setup({ dic = { ["text,markdown"] = { "/usr/share/dict/words" } } })
+    end
+  }
   use { 'tzachar/fuzzy.nvim', requires = { 'nvim-telescope/telescope-fzf-native.nvim' } }
   use { 'tzachar/cmp-fuzzy-buffer', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
   --[[ use { 'hrsh7th/cmp-vsnip', after = "nvim-cmp", disable = not is_enabled('lsp') }
@@ -217,14 +226,15 @@ return packer.startup(function(use)
   use { 'rafamadriz/friendly-snippets' }
   use { 'mfussenegger/nvim-jdtls' }
   use { 'nvim-treesitter/nvim-treesitter-context' }
-  use {
+  --[[ use {
     "smjonas/inc-rename.nvim",
     config = function()
       require("inc_rename").setup()
     end
-  }
+  } ]]
   use { 'zane-/cder.nvim' }
   use { 'ThePrimeagen/harpoon' }
+  use { "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)
