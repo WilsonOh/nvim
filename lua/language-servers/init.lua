@@ -7,7 +7,9 @@ if Vapour.plugins.lsp.enabled then
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
       .make_client_capabilities())
     local on_attach = function(client, bufnr)
-      navic.attach(client, bufnr)
+      if client.supports_method("textDocument/documentSymbol") then
+        navic.attach(client, bufnr)
+      end
       vim.api.nvim_create_autocmd("CursorHold", {
         buffer = bufnr,
         callback = function()
@@ -19,13 +21,7 @@ if Vapour.plugins.lsp.enabled then
             prefix = ' ',
             scope = 'cursor'
           }
-          --[[ local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
-          local diag = vim.diagnostic.get(bufnr, { lnum = lnum })
-          if vim.tbl_isempty(diag) then
-            vim.lsp.buf.hover()
-          else ]]
           vim.diagnostic.open_float(nil, opts)
-          -- end
         end
       })
     end
