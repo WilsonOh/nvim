@@ -29,6 +29,8 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.cursorline = true
 vim.wo.signcolumn = "yes"
+--[[ vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()' ]]
 
 vim.o.tabstop = Vapour.options.tabwidth
 vim.bo.tabstop = Vapour.options.tabwidth
@@ -40,6 +42,8 @@ vim.o.autoindent = true
 vim.bo.autoindent = true
 vim.o.expandtab = true
 vim.bo.expandtab = true
+
+vim.g.c_syntax_for_h = 1
 
 -- Disable various builtin plugins in Vim that bog down speed
 vim.g.loaded_matchparen = 1
