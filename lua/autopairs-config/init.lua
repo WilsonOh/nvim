@@ -8,7 +8,9 @@ npairs.setup({
   break_line_filetype = nil,
   check_ts = true,
   enable_check_bracket_line = true,
-  fast_wrap = {},
+  fast_wrap = {
+    map = '<C-f>'
+  },
 })
 
 local remap = vim.keymap.set
