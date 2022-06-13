@@ -18,14 +18,14 @@ local function get_char_highlights()
   end
 end
 
-vim.opt.list = true
+-- vim.opt.list = true
 -- vim.opt.listchars:append("space:⋅")
-vim.opt.listchars:append("eol:↴")
+-- vim.opt.listchars:append("eol:↴")
 
 indent_blankline.setup {
-  show_end_of_line = true,
+  show_end_of_line = false,
   space_char_blankline = " ",
-  filetype_exclude = { "dashboard", "packer", "NvimTree", "lsp-installer" },
+  filetype_exclude = { "alpha", "packer", "NvimTree", "lsp-installer" },
   buftype_exclude = { "terminal" },
   show_current_context = not Vapour.plugins.indent_blankline.enable_rainbow_colors,
   char_highlight_list = get_char_highlights(),

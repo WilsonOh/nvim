@@ -13,13 +13,15 @@ dashboard.section.header.val = {
     "                                                     ",
 }
 
+local opts = { silent = true }
+
 -- Set menu
 dashboard.section.buttons.val = {
-    dashboard.button( "e", "  > New file" , ":ene <BAR> startinsert <CR>"),
-    dashboard.button( "f", "  > Find file", ":Telescope find_files<CR>"),
-    dashboard.button( "r", "  > Recent"   , ":Telescope oldfiles<CR>"),
-    dashboard.button( "s", "  > Settings" , ":e ~/.config/nvim/lua/vapour/init.lua<CR>"),
-    dashboard.button( "q", "  > Quit NVIM", ":qa<CR>"),
+    dashboard.button( "e", "  > New file" , ":ene <BAR> startinsert <CR>", opts),
+    dashboard.button( "f", "  > Find file", ":Telescope find_files<CR>", opts),
+    dashboard.button( "r", "  > Recent"   , ":Telescope oldfiles<CR>", opts),
+    dashboard.button( "s", "  > Settings" , ":e ~/.config/nvim/lua/vapour/init.lua<CR>", opts),
+    dashboard.button( "q", "  > Quit NVIM", ":qa<CR>", opts),
 }
 
 dashboard.section.footer.val = "I really don't know what I'm doing 😔"
