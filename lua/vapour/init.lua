@@ -21,7 +21,12 @@ Vapour = {
     jsonls = {
       config = function(opts)
         opts = vim.tbl_deep_extend("force", {
-          settings = { json = { schemas = Vapour.utils.plugins.require('schemastore').json.schemas() } }
+          settings = {
+            json = {
+              schemas = Vapour.utils.plugins.require('schemastore').json.schemas(),
+              validate = { enable = true }
+            }
+          }
         }, opts)
         return opts
       end
@@ -82,11 +87,23 @@ Vapour = {
           [';'] = 'textsubjects-container-outer',
           ['i;'] = 'textsubjects-container-inner'
         }
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+          }
+        }
       }
     },
     vsnip = { enabled = true },
     telescope = { enabled = true },
-    nvim_tree = { enabled = true, view_width = 25 },
+    nvim_tree = { enabled = true, view_width = 50 },
     dial = { enabled = true },
     null_ls = { enabled = true },
     nvim_comment = { enabled = true },
@@ -120,7 +137,7 @@ Vapour = {
   settings = {
     -- If true, :w -> :w!
     always_force_write = false,
-    colorscheme = 'catppuccin',
+    colorscheme = 'rose-pine',
     staline_colorscheme = 'rose-pine',
     transparent_bg = false
   }
