@@ -137,7 +137,7 @@ Vapour = {
   settings = {
     -- If true, :w -> :w!
     always_force_write = false,
-    colorscheme = 'rose-pine',
+    colorscheme = 'catppuccin',
     staline_colorscheme = 'rose-pine',
     transparent_bg = false
   }

@@ -1,5 +1,5 @@
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = '/home/wilsonoh/java/workspaces/' .. project_name
+local workspace_dir = '/Users/wilsonoh/coding_stuff/java_projects/workspace/' .. project_name
 
 local config = {
   cmd = {
@@ -7,8 +7,8 @@ local config = {
     '-Dosgi.bundles.defaultStartLevel=4', '-Declipse.product=org.eclipse.jdt.ls.core.product',
     '-Dlog.protocol=true', '-Dlog.level=ALL', '-Xms1g', '--add-modules=ALL-SYSTEM', '--add-opens',
     'java.base/java.util=ALL-UNNAMED', '--add-opens', 'java.base/java.lang=ALL-UNNAMED', '-jar',
-    '/home/wilsonoh/.local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-    '-configuration', '/home/wilsonoh/.local/jdtls/config_linux/', '-data', workspace_dir
+    '/Users/wilsonoh/.local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+    '-configuration', '/Users/wilsonoh/.local/jdtls/config_mac/', '-data', workspace_dir
   },
   on_attach = function(client, bufnr)
     vim.api.nvim_create_autocmd("CursorHold", {
