@@ -241,7 +241,11 @@ return packer.startup(function(use)
     vim.fn['fzf#install']()
   end
   }
-  use { 'kevinhwang91/nvim-bqf', ft = 'qf' }
+  use { 'kevinhwang91/nvim-bqf', ft = 'qf', config = function()
+    require('bqf').setup({
+      func_map = { ptogglemode = 'a' }
+    })
+  end }
   use { 'moll/vim-bbye' }
   use {
     'goolord/alpha-nvim',
@@ -250,6 +254,7 @@ return packer.startup(function(use)
       require('alpha-config')
     end
   }
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)
