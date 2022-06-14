@@ -12,6 +12,8 @@ end
 
 local packer = Vapour.utils.plugins.require('packer')
 
+if not packer then return end
+
 packer.init(Vapour.plugins.packer.init)
 ---------------------------------------------------------------------------------------------
 
@@ -207,7 +209,7 @@ return packer.startup(function(use)
     'jose-elias-alvarez/null-ls.nvim',
     disable = not is_enabled('null_ls'),
     config = function()
-      require('null-ls.config')
+      require('null-ls-config')
     end,
   }
   use { 'folke/which-key.nvim', event = 'BufWinEnter' }
