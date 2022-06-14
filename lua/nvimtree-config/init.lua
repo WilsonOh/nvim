@@ -15,7 +15,6 @@ nvimtree.setup {
     -- the command arguments as a list
     args = {}
   },
-  filters = {custom = {'.git'}},
   view = {
     width = Vapour.plugins.nvim_tree.view_width,
     side = 'left',
