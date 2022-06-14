@@ -1,9 +1,9 @@
 local bufferline = Vapour.utils.plugins.require('bufferline')
 bufferline.setup {
   options = {
-    close_command = "Bdelete! %d",
-    right_mouse_command = "Bdelete! %d",
-    separator_style = "thick",
+    close_command = 'Bdelete! %d',
+    right_mouse_command = 'Bdelete! %d',
+    separator_style = 'slant',
     --[[ diagnostics = "nvim_lsp",
 
     diagnostics_indicator = function(count, level, diagnostics_dict, context)
@@ -17,11 +17,11 @@ bufferline.setup {
     end, ]]
     offsets = {
       {
-        filetype = "NvimTree",
-        text = "File Explorer",
-        highlight = "Directory",
-        text_align = "center"
-      }
-    }
-  }
+        filetype = 'NvimTree',
+        text = 'File Explorer',
+        highlight = 'Directory',
+        text_align = 'center',
+      },
+    },
+  },
 }

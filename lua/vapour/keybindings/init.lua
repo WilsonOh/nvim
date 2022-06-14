@@ -36,7 +36,7 @@ set('n', '<leader>O', 'O<esc>j', opts)
 set('n', '<leader>D', 'dd<leader>O<esc>', opts)
 
 -- Whole Word Find and Replace
-set('n', '<leader>s', [[:%s/\<\>/<Left><Left><Left>]], opts)
+-- set('n', '<leader>s', [[:%s/\<\>/<Left><Left><Left>]], opts)
 
 -- N jumping
 set('n', 'n', 'nzzzv', opts)
@@ -70,14 +70,12 @@ set('i', '<C-a>', '<esc>I', opts)
 set('n', 'gd', '0D', opts)
 set('n', 'gC', '0C', opts)
 
---Source Current Buffer
+-- Source Current Buffer
 set('n', '<leader><leader>s', '<cmd>%so<CR>', opts)
 
---Range Formatting in Visual Mode
-set('v', '<leader>f', "<cmd>lua require('lsp_utils').filtered_range_formatters(0)<cr>", opts)
-
-if Vapour.plugins.nvim_comment.enabled then set('v', '<leader>/', ':CommentToggle<cr>', opts) end
+-- Range Formatting in Visual Mode
+set('v', '<leader>f', '<cmd>lua require(\'lsp_utils\').filtered_range_formatters(0)<cr>', opts)
 
 vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
 vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
-vim.cmd("vnoremap // y/\\V<C-R>=escape(@\",'/\')<CR><CR>")
+vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])

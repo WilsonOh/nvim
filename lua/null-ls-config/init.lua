@@ -8,35 +8,31 @@ local diag = null_ls.builtins.diagnostics
 
 local code_action = null_ls.builtins.code_actions
 
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
-local formatting_sources = {
+local sources = {
   formatting.prettier, formatting.gofmt, formatting.lua_format.with({
     extra_args = {
       '--no-keep-simple-function-one-line', '--no-break-after-operator', '--column-limit=100',
-      '--break-after-table-lb', '--indent-width=2'
-    }
-  }), formatting.black, formatting.eslint_d
+      '--break-after-table-lb', '--indent-width=2', '--extra-sep-at-table-end',
+      '--double-quote-to-single-quote', '--spaces-inside-table-braces',
+    },
+  }), formatting.black, formatting.eslint_d, diag.codespell, diag.flake8, diag.eslint_d,
+  code_action.eslint_d,
 }
-
-local diagnostic_sources = { --[[  diag.codespell, diag.flake8, diag.eslint_d  ]] }
-
-local code_action_sources = {code_action.eslint_d}
-
-local sources = vim.tbl_extend("force", formatting_sources, diagnostic_sources, code_action_sources)
 
 null_ls.setup({
   sources = sources,
   on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
-      vim.api.nvim_create_autocmd("BufWritePre", {
+    if client.supports_method('textDocument/formatting') then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd('BufWritePre', {
         group = augroup,
         buffer = bufnr,
         callback = function()
-          require("lsp_utils").filtered_formatters(bufnr)
-        end
+          require('lsp_utils').filtered_formatters(bufnr)
+        end,
       })
     end
-  end
+  end,
 })

@@ -6,7 +6,7 @@ local fn = vim.fn
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
   execute 'packadd packer.nvim'
 end
 
@@ -43,225 +43,233 @@ return packer.startup(function(use)
   use {
     'norcalli/nvim-colorizer.lua',
     disable = not is_enabled('colorizer'),
-    config = "require'colorizer-config'"
+    config = function()
+      require('colorizer-config')
+    end,
   }
   use {
     'akinsho/nvim-bufferline.lua',
     requires = 'kyazdani42/nvim-web-devicons',
-    config = 'require"bufferline-config"',
-    disable = not is_enabled('bufferline')
+    config = function()
+      require('bufferline-config')
+    end,
+    disable = not is_enabled('bufferline'),
   }
   use {
     'tamton-aquib/staline.nvim',
     disable = not is_enabled('staline'),
-    config = "require'staline-config'"
+    config = function()
+      require('staline-config')
+    end,
   }
   use {
     'lukas-reineke/indent-blankline.nvim',
     disable = not is_enabled('indent_blankline'),
-    config = "require'blankline-config'"
+    config = function()
+      require('blankline-config')
+    end,
   }
   use {
-    "folke/zen-mode.nvim",
-    config = 'require("zen-mode-config")',
-    disable = not is_enabled('zen_mode')
+    'folke/zen-mode.nvim',
+    config = function()
+      require('zen-mode-config')
+    end,
+    disable = not is_enabled('zen_mode'),
   }
   use {
-    "folke/twilight.nvim",
-    config = "require('twilight-config')",
-    disable = not is_enabled('twilight')
+    'folke/twilight.nvim',
+    config = function()
+      require('twilight-config')
+    end,
+    disable = not is_enabled('twilight'),
   }
   use {
     'lewis6991/gitsigns.nvim',
-    requires = {'nvim-lua/plenary.nvim'},
+    requires = { 'nvim-lua/plenary.nvim' },
     disable = not is_enabled('gitsigns'),
-    config = "require('gitsigns-config')"
+    config = function()
+      require('gitsigns-config')
+    end,
   }
-  use {'kyazdani42/nvim-web-devicons'}
+  use { 'kyazdani42/nvim-web-devicons' }
 
   -- Tree-Sitter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     disable = not is_enabled('treesitter'),
-    config = "require'treesitter-config'"
+    config = function()
+      require('treesitter-config')
+    end,
   }
-  use {'p00f/nvim-ts-rainbow', disable = not is_enabled('treesitter'), after = 'nvim-treesitter'}
-  use {'windwp/nvim-ts-autotag', disable = not is_enabled('treesitter'), after = 'nvim-treesitter'}
+  use { 'p00f/nvim-ts-rainbow', disable = not is_enabled('treesitter'), after = 'nvim-treesitter' }
+  use { 'windwp/nvim-ts-autotag', disable = not is_enabled('treesitter'), after = 'nvim-treesitter' }
   use {
     'RRethy/nvim-treesitter-endwise',
     disable = not is_enabled('treesitter'),
-    after = 'nvim-treesitter'
+    after = 'nvim-treesitter',
   }
   use {
     'RRethy/nvim-treesitter-textsubjects',
     disable = not is_enabled('treesitter'),
-    after = 'nvim-treesitter'
+    after = 'nvim-treesitter',
   }
 
   -- Colorschemes
-  use {'rose-pine/neovim', as = 'rose-pine', opt = true}
-  use {'joshdick/onedark.vim', opt = true}
-  use {'gruvbox-community/gruvbox', opt = true}
-  use {'shaunsingh/nord.nvim', opt = true}
-  use {'folke/tokyonight.nvim', opt = true}
-  use {'dracula/vim', as = 'dracula', opt = true}
-  use {'tiagovla/tokyodark.nvim', opt = true}
-  use {'catppuccin/nvim', as = 'catppuccin', opt = true}
+  use { 'rose-pine/neovim', as = 'rose-pine', opt = true }
+  use { 'joshdick/onedark.vim', opt = true }
+  use { 'gruvbox-community/gruvbox', opt = true }
+  use { 'shaunsingh/nord.nvim', opt = true }
+  use { 'folke/tokyonight.nvim', opt = true }
+  use { 'dracula/vim', as = 'dracula', opt = true }
+  use { 'tiagovla/tokyodark.nvim', opt = true }
+  use { 'catppuccin/nvim', as = 'catppuccin', opt = true }
 
   -- LSP and Autocomplete
-  use {'neovim/nvim-lspconfig', after = "nvim-lsp-installer", disable = not is_enabled('lsp')}
-  use {'williamboman/nvim-lsp-installer', disable = not is_enabled('lsp')}
+  use { 'neovim/nvim-lspconfig', after = 'nvim-lsp-installer', disable = not is_enabled('lsp') }
+  use { 'williamboman/nvim-lsp-installer', disable = not is_enabled('lsp') }
   use {
     'onsails/lspkind-nvim',
     config = function()
-      require 'lspkind-config'
+      require('lspkind-config')
     end,
-    disable = not is_enabled('lsp')
+    disable = not is_enabled('lsp'),
   }
   use {
     'hrsh7th/nvim-cmp',
     config = function()
-      require 'cmp-config'
+      require('cmp-config')
     end,
-    disable = not is_enabled('lsp')
+    disable = not is_enabled('lsp'),
   }
-  use {'hrsh7th/cmp-nvim-lsp', disable = not is_enabled('lsp')}
-  use {'hrsh7th/cmp-buffer', after = "nvim-cmp", disable = not is_enabled('lsp')}
-  use {'hrsh7th/cmp-path', after = "nvim-cmp", disable = not is_enabled('lsp')}
-  use {'hrsh7th/cmp-cmdline', after = "nvim-cmp", disable = not is_enabled('lsp')}
+  use { 'hrsh7th/cmp-nvim-lsp', disable = not is_enabled('lsp') }
+  use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', disable = not is_enabled('lsp') }
+  use { 'hrsh7th/cmp-path', after = 'nvim-cmp', disable = not is_enabled('lsp') }
+  use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', disable = not is_enabled('lsp') }
   use {
     'uga-rosa/cmp-dictionary',
-    after = "nvim-cmp",
+    after = 'nvim-cmp',
     disable = not is_enabled('lsp'),
     config = function()
-      require("cmp_dictionary").setup({dic = {["text,markdown"] = {"/usr/share/dict/words"}}})
-    end
+      require('cmp_dictionary').setup({ dic = { ['text,markdown'] = { '/usr/share/dict/words' } } })
+    end,
   }
-  use {'tzachar/fuzzy.nvim', requires = {'nvim-telescope/telescope-fzf-native.nvim'}}
-  use {'tzachar/cmp-fuzzy-buffer', requires = {'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim'}}
+  use { 'tzachar/fuzzy.nvim', requires = { 'nvim-telescope/telescope-fzf-native.nvim' } }
+  use { 'tzachar/cmp-fuzzy-buffer', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } }
   use {
     'L3MON4D3/LuaSnip',
     config = function()
-      require("luasnip.loaders.from_vscode").lazy_load()
-    end
+      require('luasnip.loaders.from_vscode').lazy_load()
+    end,
   }
-  use {'saadparwaiz1/cmp_luasnip'}
+  use { 'saadparwaiz1/cmp_luasnip' }
   use {
     'windwp/nvim-autopairs',
     after = get_cmp(),
-    config = "require'autopairs-config'",
-    disable = not is_enabled('autopairs')
+    config = function()
+      require('autopairs-config')
+    end,
+    disable = not is_enabled('autopairs'),
   }
-  use {"b0o/schemastore.nvim", after = 'nvim-lsp-installer', disable = not is_enabled('lsp')}
+  use { 'b0o/schemastore.nvim', after = 'nvim-lsp-installer', disable = not is_enabled('lsp') }
 
   -- Terminal Integration
   use {
     'akinsho/nvim-toggleterm.lua',
     disable = not is_enabled('toggleterm'),
-    config = 'require"toggleterm-config"'
+    config = function()
+      require('toggleterm-config')
+    end,
   }
 
   -- Navigation
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make', disable = not is_enabled('lsp')}
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', disable = not is_enabled('lsp') }
   use {
     'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}},
-    cmd = "Telescope",
+    requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
+    cmd = 'Telescope',
     disable = not is_enabled('telescope'),
-    config = "require'telescope-config'"
+    config = function()
+      require('telescope-config')
+    end,
   }
   use {
     'kyazdani42/nvim-tree.lua',
-    cmd = "NvimTreeToggle",
+    cmd = 'NvimTreeToggle',
     disable = not is_enabled('nvim_tree'),
-    config = "require'nvimtree-config'"
+    config = function()
+      require('nvimtree-config')
+    end,
   }
 
   -- Other
   use {
-    'terrortylor/nvim-comment',
-    cmd = "CommentToggle",
-    config = "require('nvim_comment').setup()",
-    disable = not is_enabled('nvim_comment')
-  }
-  use {
     'jose-elias-alvarez/null-ls.nvim',
     disable = not is_enabled('null_ls'),
-    config = "require'null-ls-config'"
+    config = function()
+      require('null-ls.config')
+    end,
   }
-  use {'folke/which-key.nvim', event = "BufWinEnter"}
-  use {
-    'andweeb/presence.nvim',
-    event = "BufRead",
-    config = 'require("presence-config")',
-    disable = not is_enabled('presence')
-  }
+  use { 'folke/which-key.nvim', event = 'BufWinEnter' }
   ----------My Personal Plugins-------------------------
   use {
-    "ray-x/lsp_signature.nvim",
+    'ray-x/lsp_signature.nvim',
     config = function()
-      require("lsp_signature").setup()
-    end
+      require('lsp_signature').setup()
+    end,
   }
-  use {'tpope/vim-surround'}
-  use {'tpope/vim-repeat'}
-  use {'wellle/targets.vim'}
-  use {'andymass/vim-matchup'}
-  use {'ggandor/lightspeed.nvim'}
+  use { 'tpope/vim-surround' }
+  use { 'tpope/vim-repeat' }
+  use { 'wellle/targets.vim' }
+  use { 'andymass/vim-matchup' }
+  use { 'ggandor/lightspeed.nvim' }
   use {
     'numToStr/Comment.nvim',
     config = function()
       require('Comment').setup()
-    end
+    end,
   }
   use {
     'karb94/neoscroll.nvim',
     config = function()
-      require('neoscroll').setup({cursor_scrolls_alone = false})
-    end
+      require('neoscroll').setup({ cursor_scrolls_alone = false })
+    end,
   }
-  use {'rafamadriz/friendly-snippets'}
-  use {'mfussenegger/nvim-jdtls'}
-  use {'nvim-treesitter/nvim-treesitter-context'}
-  --[[ use {
-    "smjonas/inc-rename.nvim",
-    config = function()
-      require("inc_rename").setup()
-    end
-  } ]]
-  use {'zane-/cder.nvim'}
-  use {'ThePrimeagen/harpoon'}
-  use {"SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig"}
+  use { 'rafamadriz/friendly-snippets' }
+  use { 'mfussenegger/nvim-jdtls' }
+  use { 'nvim-treesitter/nvim-treesitter-context' }
+  use { 'zane-/cder.nvim' }
+  use { 'ThePrimeagen/harpoon' }
   use {
-    'junegunn/fzf',
-    run = function()
-      vim.fn['fzf#install']()
-    end
+    'SmiteshP/nvim-navic',
+    requires = 'neovim/nvim-lspconfig',
+    config = function()
+      require('navic-config')
+    end,
   }
   use {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     config = function()
-      require('bqf').setup({func_map = {ptogglemode = 'a'}})
-    end
+      require('bqf').setup({ func_map = { ptogglemode = 'a' } })
+    end,
   }
-  use {'moll/vim-bbye'}
+  use { 'moll/vim-bbye' }
   use {
     'goolord/alpha-nvim',
-    requires = {'kyazdani42/nvim-web-devicons'},
+    requires = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('alpha-config')
-    end
+    end,
   }
-  use {'nvim-treesitter/nvim-treesitter-textobjects'}
+  use { 'nvim-treesitter/nvim-treesitter-textobjects' }
   -- Lua
   use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-      require("trouble").setup()
-    end
+      require('trouble').setup()
+    end,
   }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end

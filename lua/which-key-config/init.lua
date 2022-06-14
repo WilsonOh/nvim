@@ -75,8 +75,6 @@ if Vapour.plugins.telescope.enabled then
   }
 end
 
-if Vapour.plugins.nvim_comment.enabled then mappings["/"] = {":CommentToggle<cr>", "Toggle Comment"} end
-
 if not Vapour.settings.always_force_write then
   mappings.W = {":w!<cr>", "Force Write"}
 else

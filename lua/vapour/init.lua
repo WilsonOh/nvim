@@ -4,33 +4,33 @@ Vapour = {
   language_servers = {
     sumneko_lua = {
       config = function(opts)
-        opts = vim.tbl_deep_extend("force", {
+        opts = vim.tbl_deep_extend('force', {
           settings = {
             Lua = {
               runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
               diagnostics = { globals = { 'vim' } },
-              workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-              telemetry = { enable = false }
-            }
-          }
+              workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+              telemetry = { enable = false },
+            },
+          },
 
         }, opts)
         return opts
-      end
+      end,
     },
     jsonls = {
       config = function(opts)
-        opts = vim.tbl_deep_extend("force", {
+        opts = vim.tbl_deep_extend('force', {
           settings = {
             json = {
               schemas = Vapour.utils.plugins.require('schemastore').json.schemas(),
-              validate = { enable = true }
-            }
-          }
+              validate = { enable = true },
+            },
+          },
         }, opts)
         return opts
-      end
-    }
+      end,
+    },
   },
   plugins = {
     zen_mode = { enabled = true, enable_rainbow_colors = false },
@@ -46,60 +46,65 @@ Vapour = {
       enabled = true,
       toggle_float = function()
         local Terminal = Vapour.utils.plugins.require('toggleterm.terminal').Terminal
-        local float = Terminal:new({ direction = "float" })
+        local float = Terminal:new({ direction = 'float' })
         return float:toggle()
       end,
       toggle_lazygit = function()
         local Terminal = require('toggleterm.terminal').Terminal
-        local lazygit = Terminal:new({ cmd = "lazygit", direction = "float" })
+        local lazygit = Terminal:new({ cmd = 'lazygit', direction = 'float' })
         return lazygit:toggle()
       end,
       toggle_ranger = function()
         local Terminal = require('toggleterm.terminal').Terminal
-        local ranger = Terminal:new({ cmd = "ranger", direction = "float" })
+        local ranger = Terminal:new({ cmd = 'ranger', direction = 'float' })
         return ranger:toggle()
       end,
       which_key = {
-        root = "t",
-        name = "Terminal",
+        root = 't',
+        name = 'Terminal',
         definitions = {
-          t = { ":ToggleTerm<cr>", "Split Below" },
-          f = { "<cmd>lua Vapour.plugins.toggleterm.toggle_float()<cr>", "Floating Terminal" },
-          l = { "<cmd>lua Vapour.plugins.toggleterm.toggle_lazygit()<cr>", "LazyGit" },
-          r = { "<cmd>lua Vapour.plugins.toggleterm.toggle_ranger()<cr>", "Ranger" }
-        }
-      }
+          t = { ':ToggleTerm<cr>', 'Split Below' },
+          f = { '<cmd>lua Vapour.plugins.toggleterm.toggle_float()<cr>', 'Floating Terminal' },
+          l = { '<cmd>lua Vapour.plugins.toggleterm.toggle_lazygit()<cr>', 'LazyGit' },
+          r = { '<cmd>lua Vapour.plugins.toggleterm.toggle_ranger()<cr>', 'Ranger' },
+        },
+      },
     },
     treesitter = {
       enabled = true,
-      ensure_installed = "all",
+      ensure_installed = 'all',
       ignore_install = { 'phpdoc' },
       indent = { enable = false },
       highlight = { enable = true },
       autotag = { enable = true },
       endwise = { enable = true },
-      rainbow = { enable = true, extended_mode = false, disable = { "html" } },
+      rainbow = { enable = true, extended_mode = false, disable = { 'html' } },
       textsubjects = {
         enable = true,
         prev_selection = ',', -- (Optional) keymap to select the previous selection
         keymaps = {
           ['.'] = 'textsubjects-smart',
           [';'] = 'textsubjects-container-outer',
-          ['i;'] = 'textsubjects-container-inner'
-        }
+          ['i;'] = 'textsubjects-container-inner',
+        },
       },
       textobjects = {
         select = {
           enable = true,
           lookahead = true,
           keymaps = {
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-          }
-        }
-      }
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+          },
+          swap = {
+            enable = true,
+            swap_next = { ['<leader>a'] = '@parameter.inner' },
+            swap_previous = { ['<leader>A'] = '@parameter.inner' },
+          },
+        },
+      },
     },
     vsnip = { enabled = true },
     telescope = { enabled = true },
@@ -110,7 +115,9 @@ Vapour = {
     presence = { enabled = true },
     lsp = {
       enabled = true,
-      cmp_sources = { { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'buffer' }, { name = 'path' } }
+      cmp_sources = {
+        { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'buffer' }, { name = 'path' },
+      },
     },
     which_key = { user_defined = {} },
 
@@ -121,14 +128,14 @@ Vapour = {
       init = {
         display = {
           open_fn = function()
-            return Vapour.utils.plugins.require('packer.util').float { border = "single" }
-          end
-        }
-      }
+            return Vapour.utils.plugins.require('packer.util').float { border = 'single' }
+          end,
+        },
+      },
     },
 
     -- User-loaded plugins
-    user = {}
+    user = {},
   },
 
   -- To update see vapour.utils
@@ -139,13 +146,13 @@ Vapour = {
     always_force_write = false,
     colorscheme = 'catppuccin',
     staline_colorscheme = 'rose-pine',
-    transparent_bg = false
-  }
+    transparent_bg = false,
+  },
 }
 
 require('vapour.utils')
 
-local user_config = vim.fn.stdpath "config" .. '/lua/vapour/user-config/init.lua'
+local user_config = vim.fn.stdpath 'config' .. '/lua/vapour/user-config/init.lua'
 
 if not Vapour.utils.file.exists(user_config) then Vapour.utils.file.create(user_config) end
 
@@ -161,7 +168,7 @@ require('vapour.keybindings')
 -- If a custom theme is wanted, require() that in user-config.init
 -- Otherwise if the default theme is not wanted change Vapour.settings.colorscheme
 -- This will return nil if it's not found
-if Vapour.settings.colorscheme ~= "custom" then
+if Vapour.settings.colorscheme ~= 'custom' then
   Vapour.utils.plugins.require('colorscheme.' .. Vapour.settings.colorscheme)
 end
 
