@@ -76,6 +76,11 @@ set('n', '<leader><leader>s', '<cmd>%so<CR>', opts)
 -- Range Formatting in Visual Mode
 set('v', '<leader>f', '<cmd>lua require(\'lsp_utils\').filtered_range_formatters(0)<cr>', opts)
 
+-- Telescope utils test
+set('n', '<leader>m', function()
+  require('telescope_utils').custom_search()
+end, opts)
+
 vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
 vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
 vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])
