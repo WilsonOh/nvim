@@ -11,15 +11,15 @@ local code_action = null_ls.builtins.code_actions
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local formatting_sources = {
-  formatting.prettier, formatting.gofmt, formatting.lua_format.with({
+  --[[ formatting.prettier, formatting.gofmt, formatting.lua_format.with({
     extra_args = {
       '--no-keep-simple-function-one-line', '--no-break-after-operator', '--column-limit=100',
       '--break-after-table-lb', '--indent-width=2'
     }
-  }), formatting.black, formatting.eslint_d
+  }), formatting.black, formatting.eslint_d ]]
 }
 
-local diagnostic_sources = { diag.codespell, diag.flake8, diag.eslint_d }
+local diagnostic_sources = { --[[  diag.codespell, diag.flake8, diag.eslint_d  ]] }
 
 local code_action_sources = { code_action.eslint_d }
 
@@ -34,9 +34,7 @@ null_ls.setup({
         group = augroup,
         buffer = bufnr,
         callback = function()
-          -- For neovim 0.8.0
-          -- vim.lsp.buf.format({ bufnr = bufnr })
-          vim.lsp.buf.formatting_seq_sync()
+          require("lsp_utils").filtered_formatters(bufnr)
         end
       })
     end

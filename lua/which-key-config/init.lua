@@ -3,6 +3,7 @@ Vapour.utils.plugins.packadd('which-key.nvim')
 local wk = Vapour.utils.plugins.require('which-key')
 
 local mappings = {
+  F = { '<cmd>lua vim.lsp.buf.range_formatting()<CR>', "Range Format File" },
   h = {
     name = "Harpoon",
     m = { "<cmd>lua require('harpoon.mark').add_file()<CR>", "Add Mark" },
@@ -34,8 +35,7 @@ local mappings = {
     n = { '<cmd>lua vim.diagnostic.goto_next()<CR>', "Go to next diagnostic" },
     N = { '<cmd>lua vim.diagnostic.goto_prev()<CR>', "Go to previous diagnostic" },
     I = { '<cmd>LspInstallInfo<cr>', 'Install language server' },
-    f = { '<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>', "Format File" },
-    F = { '<cmd>lua vim.lsp.buf.range_formatting()<CR>', "Range Format File" },
+    f = { '<cmd>lua require("lsp_utils").filtered_formatters(0)<CR>', "Format File" },
     T = { '<cmd> Telescope diagnostics bufnr=0<CR>', "Get Diagnostics" }
   },
   q = { "<cmd>copen<CR>", "Open QuickFix List" },

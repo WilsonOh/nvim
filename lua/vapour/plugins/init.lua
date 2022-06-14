@@ -50,19 +50,16 @@ return packer.startup(function(use)
     requires = 'kyazdani42/nvim-web-devicons',
     config = 'require"bufferline-config"',
     disable = not is_enabled('bufferline'),
-    event = 'BufRead'
   }
   use {
     'tamton-aquib/staline.nvim',
     disable = not is_enabled('staline'),
     config = "require'staline-config'",
-    event = 'BufRead'
   }
   use {
     'lukas-reineke/indent-blankline.nvim',
     disable = not is_enabled('indent_blankline'),
     config = "require'blankline-config'",
-    event = "BufRead"
   }
   use {
     "folke/zen-mode.nvim",
@@ -78,7 +75,6 @@ return packer.startup(function(use)
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
     disable = not is_enabled('gitsigns'),
-    event = 'BufRead',
     config = "require('gitsigns-config')"
   }
   use { 'kyazdani42/nvim-web-devicons' }
