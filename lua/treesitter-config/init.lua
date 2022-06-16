@@ -29,6 +29,8 @@ Vapour.utils.plugins.require'nvim-treesitter.configs'.setup {
         ['if'] = '@function.inner',
         ['ac'] = '@class.outer',
         ['ic'] = '@class.inner',
+        ['iC'] = '@conditional.inner',
+        ['aC'] = '@conditional.outer',
       },
     },
   },

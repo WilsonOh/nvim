@@ -90,6 +90,20 @@ local get_colors = function()
       white = '#f8f8f2',
     }
     return colors
+  elseif Vapour.settings.staline_colorscheme == 'kanagawa' then
+    local kanagawa_colors = require('kanagawa.colors').setup()
+    local colors = {
+      lightbg = kanagawa_colors.crystalBlue,
+      black = kanagawa_colors.sumiInk4,
+      red = kanagawa_colors.autumnRed,
+      green = kanagawa_colors.autumnGreen,
+      yellow = kanagawa_colors.autumnYellow,
+      blue = kanagawa_colors.crystalBlue,
+      purple = kanagawa_colors.oniViolet,
+      cyan = kanagawa_colors.winterBlue,
+      white = kanagawa_colors.fujiWhite,
+    }
+    return colors
   end
 end
 
@@ -105,30 +119,26 @@ local function get_navic()
   end
 end
 
-local function get_lsp()
-  if #vim.lsp.get_active_clients() ~= 0 then return 'LSP: ' end
-  return ''
-end
-
 require('staline').setup {
   defaults = {
+    expand_null_ls = true,
     left_separator = '',
     right_separator = '',
-    cool_symbol = ' ', -- Change this to override defult OS icon.
+    cool_symbol = ' ', -- Change this to override default OS icon.
     full_path = false,
     mod_symbol = '  ',
     lsp_client_symbol = ' ',
     line_column = '[%l/%L] 並%p%% ', -- `:h stl` to see all flags.
     fg = '#000000', -- Foreground text color.
     bg = 'none', -- Default background is transparent.
-    inactive_color = '#303030',
-    inactive_bgcolor = 'none',
+    inactive_color = colors.black, -- '#303030',
+    inactive_bgcolor = colors.lightbg,
     true_colors = false, -- true lsp colors.
     font_active = 'none', -- "bold", "italic", "bold,italic", etc
     branch_symbol = ' ',
   },
   mode_colors = {
-    n = colors.cyan,
+    n = colors.green,
     i = colors.blue,
     c = colors.yellow,
     v = colors.purple,
@@ -142,8 +152,8 @@ require('staline').setup {
     V = ' VISUAL',
   },
   sections = {
-    left = { '-mode', 'left_sep_double', ' ', 'branch', ' ', '-lsp' },
-    mid = { 'file_name', get_lsp(), 'lsp_name' },
+    left = { '-mode', 'left_sep_double', ' ', 'branch', ' ', 'lsp' },
+    mid = { 'file_name', 'lsp_name' },
     right = { get_navic, ' ', 'cool_symbol', 'right_sep_double', '-line_column' },
   },
   special_table = {

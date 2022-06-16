@@ -126,6 +126,7 @@ return packer.startup(function(use)
   use { 'dracula/vim', as = 'dracula', opt = true }
   use { 'tiagovla/tokyodark.nvim', opt = true }
   use { 'catppuccin/nvim', as = 'catppuccin', opt = true }
+  use { 'rebelot/kanagawa.nvim', as = 'kanagawa', opt = true }
 
   -- LSP and Autocomplete
   use { 'neovim/nvim-lspconfig', after = 'nvim-lsp-installer', disable = not is_enabled('lsp') }
@@ -292,6 +293,25 @@ return packer.startup(function(use)
     'theHamsta/nvim-dap-virtual-text',
     config = function()
       require('nvim-dap-virtual-text').setup()
+    end,
+  }
+  --[[ use {
+    'nvim-lua/lsp-status.nvim',
+    config = function()
+      require('lsp-status-config')
+    end,
+  } ]]
+  use { 'ellisonleao/glow.nvim', branch = 'main' }
+  use {
+    'JASONews/glow-hover',
+    config = function()
+      require'glow-hover'.setup {
+        max_width = 50,
+        padding = 10,
+        border = 'shadow',
+        glow_path = 'glow',
+      }
+      vim.cmd 'highlight! HoverFloatBorder ctermbg=None ctermfg=255'
     end,
   }
   --------------------------------------------------------

@@ -1,5 +1,7 @@
 local null_ls = Vapour.utils.plugins.require('null-ls')
 
+local lsp_utils = require('lsp_utils')
+
 if not null_ls then return end
 
 local formatting = null_ls.builtins.formatting
@@ -25,13 +27,14 @@ local sources = {
 null_ls.setup({
   sources = sources,
   on_attach = function(client, bufnr)
+    lsp_utils.get_null_ls_sources()
     if client.supports_method('textDocument/formatting') then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = augroup,
         buffer = bufnr,
         callback = function()
-          require('lsp_utils').filtered_formatters(bufnr)
+          lsp_utils.filtered_formatters(bufnr)
         end,
       })
     end

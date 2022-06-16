@@ -1,4 +1,16 @@
+local null_ls = require('null-ls')
+
 local M = {}
+
+M.get_null_ls_sources = function()
+  local filetype = vim.bo.filetype
+  local null_ls_sources = null_ls.get_sources()
+  local ret = {}
+  for _, source in ipairs(null_ls_sources) do
+    if source.filetypes[filetype] then table.insert(ret, source.name) end
+  end
+  return ret
+end
 
 M.filtered_formatters = function(bufnr)
   local clients = vim.lsp.buf_get_clients()
