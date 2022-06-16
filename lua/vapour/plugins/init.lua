@@ -266,12 +266,32 @@ return packer.startup(function(use)
     end,
   }
   use { 'nvim-treesitter/nvim-treesitter-textobjects' }
-  -- Lua
   use {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
       require('trouble').setup()
+    end,
+  }
+  -- nvim-dap
+  use { 'mfussenegger/nvim-dap' }
+  use {
+    'mfussenegger/nvim-dap-python',
+    config = function()
+      require('dap-python').setup('~/.virtualenvs/debugpy/bin/python', {})
+    end,
+  }
+  use {
+    'rcarriga/nvim-dap-ui',
+    requires = { 'mfussenegger/nvim-dap' },
+    config = function()
+      require('dapui-config')
+    end,
+  }
+  use {
+    'theHamsta/nvim-dap-virtual-text',
+    config = function()
+      require('nvim-dap-virtual-text').setup()
     end,
   }
   --------------------------------------------------------

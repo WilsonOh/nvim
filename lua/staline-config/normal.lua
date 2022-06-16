@@ -105,6 +105,11 @@ local function get_navic()
   end
 end
 
+local function get_lsp()
+  if #vim.lsp.get_active_clients() ~= 0 then return 'LSP: ' end
+  return ''
+end
+
 require('staline').setup {
   defaults = {
     left_separator = '',
@@ -138,7 +143,7 @@ require('staline').setup {
   },
   sections = {
     left = { '-mode', 'left_sep_double', ' ', 'branch', ' ', '-lsp' },
-    mid = { 'file_name', ' LSP: ', 'lsp_name' },
+    mid = { 'file_name', get_lsp(), 'lsp_name' },
     right = { get_navic, ' ', 'cool_symbol', 'right_sep_double', '-line_column' },
   },
   special_table = {
