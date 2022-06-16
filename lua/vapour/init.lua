@@ -82,6 +82,7 @@ Vapour = {
       enabled = true,
       cmp_sources = {
         { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'buffer' }, { name = 'path' },
+        { name = 'emoji' },
       },
     },
     which_key = { user_defined = {} },

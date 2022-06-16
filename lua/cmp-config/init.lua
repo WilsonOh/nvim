@@ -1,4 +1,4 @@
-vim.o.completeopt = "menu,menuone,noselect"
+vim.o.completeopt = 'menu,menuone,noselect'
 
 local luasnip = Vapour.utils.plugins.require('luasnip')
 local cmp = Vapour.utils.plugins.require('cmp')
@@ -9,12 +9,12 @@ if not cmp or not luasnip or not lspkind then return end
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col)
-      :match "%s" == nil
+             :match '%s' == nil
 end
 
 local function get_sources()
   local sources = Vapour.plugins.lsp.cmp_sources
-  table.insert(sources, { name = "dictionary", keyword_length = 2 })
+  table.insert(sources, { name = 'dictionary', keyword_length = 2 })
   return sources
 end
 
@@ -26,7 +26,7 @@ cmp.setup({
     if vim.api.nvim_get_mode().mode == 'c' then
       return true
     else
-      return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
+      return not context.in_treesitter_capture('comment') and not context.in_syntax_group('Comment')
     end
   end,
   preselect = cmp.PreselectMode.None,
@@ -35,36 +35,38 @@ cmp.setup({
       with_text = true,
       maxwidth = 50,
       menu = {
-        buffer = "[Buffer]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[LuaSnip]",
-        path = "[Path]",
-        dictionary = "[Dictionary]"
-      }
+        buffer = '[Buffer]',
+        nvim_lsp = '[LSP]',
+        luasnip = '[LuaSnip]',
+        path = '[Path]',
+        dictionary = '[Dictionary]',
+        emoji = '[Emoji]',
+      },
     }),
-    fields = { "kind", "abbr", "menu" }
+    fields = { 'kind', 'abbr', 'menu' },
   },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
-    end
+    end,
   },
+  view = { entries = { name = 'custom', selection_order = 'near_cursor' } },
   confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false },
-  window = { documentation = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } } },
+  window = { documentation = { border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' } } },
   mapping = {
-    ["<Up>"] = cmp.mapping.select_prev_item(),
-    ["<Down>"] = cmp.mapping.select_next_item(),
-    ["<C-p>"] = cmp.mapping.select_prev_item(),
-    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ['<Up>'] = cmp.mapping.select_prev_item(),
+    ['<Down>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
     --[[ ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(), ]]
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable,
-    ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
-    ["<CR>"] = cmp.mapping.confirm { select = false },
-    ["<Tab>"] = cmp.mapping(function(fallback)
+    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-1), { 'i', 'c' }),
+    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(1), { 'i', 'c' }),
+    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-y>'] = cmp.config.disable,
+    ['<C-e>'] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
+    ['<CR>'] = cmp.mapping.confirm { select = false },
+    ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expandable() then
@@ -76,8 +78,8 @@ cmp.setup({
       else
         fallback()
       end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -85,14 +87,14 @@ cmp.setup({
       else
         fallback()
       end
-    end, { "i", "s" })
+    end, { 'i', 's' }),
   },
-  sources = get_sources()
+  sources = get_sources(),
 })
 vim.cmd(
-  "autocmd FileType TelescopePrompt lua Vapour.utils.plugins.require('cmp').setup.buffer { enabled = false }")
+    'autocmd FileType TelescopePrompt lua Vapour.utils.plugins.require(\'cmp\').setup.buffer { enabled = false }')
 
-require("snippets")
+require('snippets')
 
 --[[
 cmp.setup.cmdline(':%s/', {

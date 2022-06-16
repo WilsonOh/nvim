@@ -16,7 +16,8 @@ M.filtered_formatters = function(bufnr)
   local clients = vim.lsp.buf_get_clients()
   local formatting_clients = {}
   for _, client in ipairs(clients) do
-    if client.supports_method('textDocument/formatting') then
+    if client.supports_method('textDocument/formatting')
+        or client.server_capabilities.documentFormattingProvider then
       table.insert(formatting_clients, client)
     end
   end
@@ -25,7 +26,8 @@ M.filtered_formatters = function(bufnr)
     return
   end
   local null_ls_formatter = vim.tbl_filter(function(client)
-    return client.name == 'null-ls'
+    local null_ls_sources = M.get_null_ls_sources()
+    return client.name == 'null-ls' and #null_ls_sources ~= 0
   end, formatting_clients)
   if #null_ls_formatter ~= 0 then
     vim.lsp.buf.format({ bufnr = bufnr, name = 'null-ls' })
@@ -34,40 +36,52 @@ M.filtered_formatters = function(bufnr)
     return
   end
   for _, client in ipairs(formatting_clients) do
-    vim.lsp.buf.format({ bufnr = bufnr, name = client.name })
-    vim.notify(string.format('%d lines formatted with %s.', vim.api.nvim_buf_line_count(0),
-                             client.name))
+    if client.name ~= 'null-ls' then
+      vim.lsp.buf.format({ bufnr = bufnr, name = client.name })
+      vim.notify(string.format('%d lines formatted with %s.', vim.api.nvim_buf_line_count(0),
+                               client.name))
+      return
+    end
   end
+  vim.notify('[LSP] There are no LSPs attached with formatting capabilities')
 end
 
 M.filtered_range_formatters = function(bufnr)
   local clients = vim.lsp.buf_get_clients()
   local formatting_clients = {}
   for _, client in ipairs(clients) do
-    if client.supports_method('textDocument/rangeFormatting') then
+    if client.supports_method('textDocument/rangeFormatting')
+        or client.server_capabilities.documentRangeFormattingProvider then
       table.insert(formatting_clients, client)
     end
   end
-  local start = vim.fn.getpos('v')[2]
-  local stop = vim.fn.getcurpos()[2]
+  local start = vim.list_slice(vim.fn.getpos('v'), 1, 2)
+  local stop = vim.list_slice(vim.fn.getcurpos(), 1, 2)
+  local start_row = start[2]
+  local stop_row = stop[2]
   if #formatting_clients == 0 then
     vim.notify('[LSP] There are no LSPs attached with range formatting capabilities')
     return
   end
   local null_ls_formatter = vim.tbl_filter(function(client)
-    return client.name == 'null-ls'
+    local null_ls_sources = M.get_null_ls_sources()
+    return client.name == 'null-ls' and #null_ls_sources ~= 0
   end, formatting_clients)
   if #null_ls_formatter ~= 0 then
     vim.lsp.buf.range_formatting({ bufnr = bufnr, name = 'null-ls' })
-    vim.notify(string.format('%d lines range formatted with %s.', math.abs(stop - start) + 1,
-                             'null-ls'))
+    vim.notify(string.format('%d lines range formatted with %s.',
+                             math.abs(stop_row - start_row) + 1, 'null-ls'))
     return
   end
   for _, client in ipairs(formatting_clients) do
-    vim.lsp.buf.range_formatting({ bufnr = bufnr, name = client.name })
-    vim.notify(string.format('%d lines range formatted with %s.', math.abs(stop - start) + 1,
-                             client.name))
+    if client.name ~= 'null-ls' then
+      vim.lsp.buf.range_formatting({ bufnr = bufnr, name = client.name })
+      vim.notify(string.format('%d lines range formatted with %s.',
+                               math.abs(stop_row - start_row) + 1, client.name))
+      return
+    end
   end
+  vim.notify('[LSP] There are no LSPs attached with range formatting capabilities')
 end
 
 return M

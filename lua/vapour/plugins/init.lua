@@ -295,25 +295,7 @@ return packer.startup(function(use)
       require('nvim-dap-virtual-text').setup()
     end,
   }
-  --[[ use {
-    'nvim-lua/lsp-status.nvim',
-    config = function()
-      require('lsp-status-config')
-    end,
-  } ]]
-  use { 'ellisonleao/glow.nvim', branch = 'main' }
-  use {
-    'JASONews/glow-hover',
-    config = function()
-      require'glow-hover'.setup {
-        max_width = 50,
-        padding = 10,
-        border = 'shadow',
-        glow_path = 'glow',
-      }
-      vim.cmd 'highlight! HoverFloatBorder ctermbg=None ctermfg=255'
-    end,
-  }
+  use { 'hrsh7th/cmp-emoji' }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)

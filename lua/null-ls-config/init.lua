@@ -13,7 +13,7 @@ local code_action = null_ls.builtins.code_actions
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
 local sources = {
-  formatting.prettier, formatting.gofmt, formatting.lua_format.with({
+  formatting.gofmt, formatting.lua_format.with({
     extra_args = {
       '--no-keep-simple-function-one-line', '--no-break-after-operator', '--column-limit=100',
       '--break-after-table-lb', '--indent-width=2', '--extra-sep-at-table-end',

@@ -57,6 +57,7 @@ if telescope and actions then
         },
       },
     },
+    pickers = { find_files = { theme = 'ivy' } },
   }
   telescope.load_extension('cder')
   telescope.load_extension('fzf')
