@@ -192,7 +192,7 @@ return packer.startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
     disable = not is_enabled('telescope'),
-    cmd = 'Telescope',
+    cmd = { 'Telescope', 'h Telescope' },
     module = 'telescope',
     config = function()
       require('telescope-config')
