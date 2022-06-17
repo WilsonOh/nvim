@@ -1,5 +1,8 @@
 local npairs = Vapour.utils.plugins.packadd('nvim-autopairs', true)
 
+local Rule = require('nvim-autopairs.rule')
+local cond = require('nvim-autopairs.conds')
+
 if not npairs then return end
 
 -- if remap == nil then return end
@@ -8,9 +11,7 @@ npairs.setup({
   break_line_filetype = nil,
   check_ts = true,
   enable_check_bracket_line = true,
-  fast_wrap = {
-    map = '<C-f>'
-  },
+  fast_wrap = { map = '<C-f>' },
 })
 
 local remap = vim.keymap.set
@@ -23,7 +24,7 @@ if Vapour.plugins.lsp.enabled == true then
 else
   MUtils.completion_confirm = function()
     if vim.fn.pumvisible() ~= 0 then
-      return npairs.esc("<cr>")
+      return npairs.esc('<cr>')
     else
       return npairs.autopairs_cr()
     end

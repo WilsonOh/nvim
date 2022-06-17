@@ -58,8 +58,9 @@ return packer.startup(function(use)
     disable = not is_enabled('bufferline'),
   }
   use {
-    'tamton-aquib/staline.nvim',
+    'WilsonOh/staline.nvim',
     disable = not is_enabled('staline'),
+    branch = 'dev',
     config = function()
       require('staline-config')
     end,
