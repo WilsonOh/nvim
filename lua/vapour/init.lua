@@ -141,6 +141,9 @@ end
 -- LSP and Autocomplete
 require('language-servers')
 
+-- Source all global functions
+require('globals')
+
 -- Whichkey
 require('which-key-config')
 if Vapour.settings.transparent_bg then vim.cmd('hi Normal guibg=NONE ctermbg=NONE') end
