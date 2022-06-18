@@ -7,9 +7,16 @@ M.get_null_ls_sources = function()
   local null_ls_sources = null_ls.get_sources()
   local ret = {}
   for _, source in ipairs(null_ls_sources) do
-    if source.filetypes[filetype] then table.insert(ret, source.name) end
+    if source.filetypes[filetype] then table.insert(ret, source) end
   end
   return ret
+end
+
+M.get_null_ls_source_by_method = function(method)
+  local sources = M.get_null_ls_sources()
+  local method_filter = null_ls.methods[method]
+  for _, source in pairs(sources) do if source.methods[method_filter] then return source.name end end
+  vim.notify('There\'s no null-ls source for the method: ' .. method)
 end
 
 M.filtered_formatters = function(bufnr)
@@ -32,7 +39,7 @@ M.filtered_formatters = function(bufnr)
   if #null_ls_formatter ~= 0 then
     vim.lsp.buf.format({ bufnr = bufnr, name = 'null-ls' })
     vim.notify(string.format('%d lines formatted with %s.', vim.api.nvim_buf_line_count(0),
-                             'null-ls'))
+                             M.get_null_ls_source_by_method('FORMATTING')))
     return
   end
   for _, client in ipairs(formatting_clients) do
@@ -70,7 +77,8 @@ M.filtered_range_formatters = function(bufnr)
   if #null_ls_formatter ~= 0 then
     vim.lsp.buf.range_formatting({ bufnr = bufnr, name = 'null-ls' })
     vim.notify(string.format('%d lines range formatted with %s.',
-                             math.abs(stop_row - start_row) + 1, 'null-ls'))
+                             math.abs(stop_row - start_row) + 1,
+                             M.get_null_ls_source_by_method('FORMATTING')))
     return
   end
   for _, client in ipairs(formatting_clients) do
