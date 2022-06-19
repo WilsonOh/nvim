@@ -76,11 +76,18 @@ local mappings = {
 
 if Vapour.plugins.nvim_tree.enabled then mappings.e = { ':NvimTreeToggle<cr>', 'File Explorer' } end
 
+-- Alternative method to telescope.builtin.git_files for searching the project
+--[[ vim.keymap.set('n', '<leader>fx', function()
+  local project_root = vim.lsp.get_active_clients()[1].config.root_dir
+  require('telescope.builtin').find_files({ cwd = project_root })
+end) ]]
+
 if Vapour.plugins.telescope.enabled then
   mappings.f = {
     name = 'Telescope',
     f = { '<cmd>Telescope find_files theme=ivy<cr>', 'Find Files' },
     c = { '<cmd>Telescope find_files cwd=~/.config/nvim/lua/ theme=ivy<cr>', 'Search Config' },
+    g = { '<cmd>Telescope git_files theme=ivy<CR>', 'Search Project' },
     r = { '<cmd>Telescope live_grep grep_open_files=true<cr>', 'Live Grep' },
     b = { '<cmd>Telescope buffers bufnr=0<cr>', 'Buffers' },
     o = { '<cmd>Telescope oldfiles<cr>', 'Recent Files' },
