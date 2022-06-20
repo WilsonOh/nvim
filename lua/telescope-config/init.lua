@@ -10,9 +10,6 @@ if telescope and actions then
         horizontal = { mirror = false },
         vertical = { mirror = false },
       },
-      find_command = {
-        'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case',
-      },
       prompt_prefix = ' ',
       selection_caret = ' ',
       entry_prefix = '  ',
@@ -57,7 +54,9 @@ if telescope and actions then
         },
       },
     },
-    pickers = { find_files = { theme = 'ivy' } },
+    pickers = {
+      find_files = { theme = 'ivy', find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' } },
+    },
   }
   telescope.load_extension('cder')
   telescope.load_extension('fzf')
