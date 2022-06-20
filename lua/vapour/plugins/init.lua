@@ -198,8 +198,18 @@ return packer.startup(function(use)
       require('telescope-config')
     end,
   }
-  use {
+  --[[ use {
     'kyazdani42/nvim-tree.lua',
+    cmd = 'NvimTreeToggle',
+    disable = not is_enabled('nvim_tree'),
+    config = function()
+      require('nvimtree-config')
+    end,
+  } ]]
+
+  use {
+    'lixvbnet/nvim-tree.lua',
+    branch = 'hotfix-1363',
     cmd = 'NvimTreeToggle',
     disable = not is_enabled('nvim_tree'),
     config = function()
@@ -297,6 +307,12 @@ return packer.startup(function(use)
     end,
   }
   use { 'hrsh7th/cmp-emoji' }
+  use {
+    'lewis6991/satellite.nvim',
+    config = function()
+      require('satellite').setup()
+    end,
+  }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)
