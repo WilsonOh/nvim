@@ -88,9 +88,10 @@ if Vapour.plugins.telescope.enabled then
     f = { '<cmd>Telescope find_files theme=ivy<cr>', 'Find Files' },
     c = { '<cmd>Telescope find_files cwd=~/.config/nvim/lua/ theme=ivy<cr>', 'Search Config' },
     g = { '<cmd>Telescope git_files theme=ivy<CR>', 'Search Project' },
-    r = { '<cmd>Telescope live_grep grep_open_files=true<cr>', 'Live Grep' },
+    r = { '<cmd>Telescope live_grep<cr>', 'Live Grep' },
     b = { '<cmd>Telescope buffers bufnr=0<cr>', 'Buffers' },
     o = { '<cmd>Telescope oldfiles<cr>', 'Recent Files' },
+    R = { '<cmd>Telescope resume<cr>', 'Resume Previous Picker' },
   }
 end
 

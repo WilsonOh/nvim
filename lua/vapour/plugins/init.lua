@@ -18,13 +18,16 @@ packer.init(Vapour.plugins.packer.init)
 ---------------------------------------------------------------------------------------------
 
 --------------------------------Autocommand for PackerSync-----------------------------------
---[[ local packer_augroup = vim.api.nvim_create_augroup("packer_user_config", {})
+
+local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
+
+local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
 vim.api.nvim_clear_autocmds({ group = packer_augroup, buffer = 0 })
-vim.api.nvim_create_autocmd("BufWritePost ", {
-  pattern = "plugins/init.lua",
+vim.api.nvim_create_autocmd('BufWritePost ', {
+  pattern = plugin_path,
   group = packer_augroup,
-  command = "PackerSync"
-}) ]]
+  command = 'PackerSync',
+})
 ---------------------------------------------------------------------------------------------
 
 local function is_enabled(plugin)
