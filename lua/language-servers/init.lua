@@ -9,12 +9,9 @@ if Vapour.plugins.lsp.enabled then
                                                                          .make_client_capabilities())
     -- Attach nvim-navic if client supports document symbols
     local on_attach = function(client, bufnr)
-      if client.supports_method('textDocument/documentSymbol') then navic.attach(client, bufnr) end
+      if client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
       -- Highlight symbol under cursor
       if client.server_capabilities.documentHighlightProvider then
-        -- vim.cmd [[ hi! LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-        --            hi! LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-        --            hi! LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow ]]
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
         vim.api.nvim_clear_autocmds({ buffer = bufnr, group = 'lsp_document_highlight' })
         vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -92,6 +89,6 @@ require('vim.lsp.protocol').CompletionItemKind = {
 vim.lsp.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
       underline = true,
-      virtual_text = { spacing = 5, severity_limit = 'Warning' },
+      virtual_text = { source = 'always', 'spacing = 5', severity_limit = 'Warning' },
       update_in_insert = true,
     })

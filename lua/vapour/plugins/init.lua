@@ -21,7 +21,7 @@ packer.init(Vapour.plugins.packer.init)
 
 local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
 
-local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
+--[[ local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
 vim.api.nvim_clear_autocmds({ group = packer_augroup, buffer = 0 })
 vim.api.nvim_create_autocmd('BufWritePost ', {
   pattern = plugin_path,
@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd('BufWritePost ', {
     vim.cmd '%so'
     vim.cmd 'PackerSync'
   end,
-})
+}) ]]
 ---------------------------------------------------------------------------------------------
 
 local function is_enabled(plugin)
@@ -232,12 +232,12 @@ return packer.startup(function(use)
   }
   use { 'folke/which-key.nvim', event = 'BufWinEnter' }
   ----------My Personal Plugins-------------------------
-  use {
+  --[[ use {
     'ray-x/lsp_signature.nvim',
     config = function()
       require('lsp_signature').setup({ toggle_key = '<C-x>' })
     end,
-  }
+  } ]]
   use { 'tpope/vim-surround' }
   use { 'tpope/vim-repeat' }
   use { 'wellle/targets.vim' }
@@ -319,12 +319,30 @@ return packer.startup(function(use)
     end,
   }
   use {
-    'TimUntersberger/neogit',
-    requires = 'nvim-lua/plenary.nvim',
+    'j-hui/fidget.nvim',
     config = function()
-      require('neogit').setup()
+      require'fidget'.setup({ text = { spinner = 'dots' } })
     end,
   }
+
+  -- Hydra.nvim stuff
+  use {
+    'anuvyklack/hydra.nvim',
+    config = function()
+      require('hydra-config')
+    end,
+  }
+  use { 'anuvyklack/keymap-layer.nvim' }
+  use { 'jlanzarotta/bufexplorer' }
+  use { 'sindrets/winshift.nvim' }
+  --------------------------------
+  --[[ use {
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+    config = function()
+      require('ufo-config')
+    end,
+  } ]]
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)

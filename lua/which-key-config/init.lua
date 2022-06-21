@@ -72,6 +72,12 @@ local mappings = {
     z = { ':ZenMode<cr>', 'Toggle Zen Mode' },
     t = { ':Twilight<cr>', 'Toggle Twilight' },
   },
+  b = {
+    name = 'Bufferline Options',
+    c = { ':BufferLinePick<CR>', 'Choose Buffer' },
+    n = { ':BufferLineMoveNext<CR>', 'Move buffer to the right' },
+    p = { ':BufferLineMovePrev<CR>', 'Move buffer to the left' },
+  },
 }
 
 if Vapour.plugins.nvim_tree.enabled then mappings.e = { ':NvimTreeToggle<cr>', 'File Explorer' } end
@@ -130,4 +136,4 @@ mappings = Vapour.utils.tables.copy(mappings, Vapour.plugins.which_key.user_defi
 
 local opts = { prefix = '<leader>' }
 
-wk.register(mappings, opts)
+if wk then wk.register(mappings, opts) end
