@@ -318,6 +318,13 @@ return packer.startup(function(use)
       require('satellite').setup()
     end,
   }
+  use {
+    'TimUntersberger/neogit',
+    requires = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('neogit').setup()
+    end,
+  }
   --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)
