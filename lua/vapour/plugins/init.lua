@@ -26,7 +26,10 @@ vim.api.nvim_clear_autocmds({ group = packer_augroup, buffer = 0 })
 vim.api.nvim_create_autocmd('BufWritePost ', {
   pattern = plugin_path,
   group = packer_augroup,
-  command = 'PackerSync',
+  callback = function()
+    vim.cmd '%so'
+    vim.cmd 'PackerSync'
+  end,
 })
 ---------------------------------------------------------------------------------------------
 
@@ -61,9 +64,8 @@ return packer.startup(function(use)
     disable = not is_enabled('bufferline'),
   }
   use {
-    'WilsonOh/staline.nvim',
+    'tamton-aquib/staline.nvim',
     disable = not is_enabled('staline'),
-    branch = 'dev',
     config = function()
       require('staline-config')
     end,
