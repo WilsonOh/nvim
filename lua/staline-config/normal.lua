@@ -111,7 +111,7 @@ local colors = get_colors()
 
 vim.o.winbar = '%!v:lua.require(\'lsp_utils\').get_navic()'
 
-vim.api.nvim_set_hl(0, 'WinBar', { fg = '#ff2200', default = false, bold = true })
+vim.api.nvim_set_hl(0, 'WinBar', { fg = colors.white, default = false, bold = true })
 
 require('staline').setup {
   defaults = {
