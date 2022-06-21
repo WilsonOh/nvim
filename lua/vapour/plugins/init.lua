@@ -335,14 +335,5 @@ return packer.startup(function(use)
   use { 'anuvyklack/keymap-layer.nvim' }
   use { 'jlanzarotta/bufexplorer' }
   use { 'sindrets/winshift.nvim' }
-  --------------------------------
-  --[[ use {
-    'kevinhwang91/nvim-ufo',
-    requires = 'kevinhwang91/promise-async',
-    config = function()
-      require('ufo-config')
-    end,
-  } ]]
-  --------------------------------------------------------
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)

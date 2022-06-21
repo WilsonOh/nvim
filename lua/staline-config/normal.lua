@@ -109,15 +109,9 @@ end
 
 local colors = get_colors()
 
-local navic = require('nvim-navic')
+vim.o.winbar = '%!v:lua.require(\'lsp_utils\').get_navic()'
 
-local function get_navic()
-  if navic.is_available() then
-    return navic.get_location()
-  else
-    return ''
-  end
-end
+vim.api.nvim_set_hl(0, 'WinBar', { fg = '#ff2200', default = false, bold = true })
 
 require('staline').setup {
   defaults = {
@@ -154,7 +148,7 @@ require('staline').setup {
   sections = {
     left = { '-mode', 'left_sep_double', ' ', 'branch', ' ', 'lsp' },
     mid = { 'file_name', 'lsp_name' },
-    right = { get_navic, ' ', 'cool_symbol', 'right_sep_double', '-line_column' },
+    right = { 'cool_symbol', 'right_sep_double', '-line_column' },
   },
   special_table = {
     NvimTree = { 'NvimTree', ' ' },

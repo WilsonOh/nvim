@@ -19,6 +19,16 @@ M.get_null_ls_source_by_method = function(method)
   vim.notify('There\'s no null-ls source for the method: ' .. method)
 end
 
+local navic = require('nvim-navic')
+
+M.get_navic = function()
+  if navic.is_available() then
+    return '%=' .. navic.get_location()
+  else
+    return ''
+  end
+end
+
 M.filtered_formatters = function(bufnr)
   local clients = vim.lsp.buf_get_clients()
   local formatting_clients = {}
