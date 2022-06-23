@@ -241,7 +241,12 @@ return packer.startup(function(use)
   use { 'tpope/vim-surround' }
   use { 'tpope/vim-repeat' }
   use { 'wellle/targets.vim' }
-  use { 'andymass/vim-matchup' }
+  use {
+    'andymass/vim-matchup',
+    config = function()
+      require('matchup-config')
+    end,
+  }
   use { 'ggandor/lightspeed.nvim' }
   use {
     'numToStr/Comment.nvim',
