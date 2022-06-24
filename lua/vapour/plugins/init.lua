@@ -1,13 +1,12 @@
 --------------------------------------Bootstrapping Packer----------------------------------
-local execute = vim.api.nvim_command
-
 local fn = vim.fn
 
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
-  execute 'packadd packer.nvim'
+  Packer_bootstrap = fn.system({
+    'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path,
+  })
 end
 
 local packer = Vapour.utils.plugins.require('packer')
@@ -19,9 +18,9 @@ packer.init(Vapour.plugins.packer.init)
 
 --------------------------------Autocommand for PackerSync-----------------------------------
 
-local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
+--[[ local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
 
---[[ local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
+local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
 vim.api.nvim_clear_autocmds({ group = packer_augroup, buffer = 0 })
 vim.api.nvim_create_autocmd('BufWritePost ', {
   pattern = plugin_path,
@@ -197,7 +196,7 @@ return packer.startup(function(use)
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
     disable = not is_enabled('telescope'),
-    cmd = { 'Telescope', 'h Telescope' },
+    cmd = { 'Telescope', 'h telescope' },
     module = 'telescope',
     config = function()
       require('telescope-config')
@@ -340,5 +339,10 @@ return packer.startup(function(use)
   use { 'anuvyklack/keymap-layer.nvim' }
   use { 'jlanzarotta/bufexplorer' }
   use { 'sindrets/winshift.nvim' }
+  use { 'preservim/vim-markdown' }
+
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
+
+  if Packer_bootstrap then require('packer').sync() end
+
 end)
