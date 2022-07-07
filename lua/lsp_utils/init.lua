@@ -17,9 +17,10 @@ M.get_null_ls_source_by_method = function(method)
   local method_filter = null_ls.methods[method]
   for _, source in pairs(sources) do if source.methods[method_filter] then return source.name end end
   vim.notify('There\'s no null-ls source for the method: ' .. method)
+  return 'NONE'
 end
 
-local navic = require('nvim-navic')
+--[[ local navic = require('nvim-navic')
 
 M.get_navic = function()
   if navic.is_available() then
@@ -27,7 +28,7 @@ M.get_navic = function()
   else
     return ''
   end
-end
+end ]]
 
 M.filtered_formatters = function(bufnr)
   local clients = vim.lsp.get_active_clients()

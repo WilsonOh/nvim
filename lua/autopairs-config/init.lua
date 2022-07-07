@@ -1,8 +1,5 @@
 local npairs = Vapour.utils.plugins.packadd('nvim-autopairs', true)
 
-local Rule = require('nvim-autopairs.rule')
-local cond = require('nvim-autopairs.conds')
-
 if not npairs then return end
 
 -- if remap == nil then return end
@@ -11,7 +8,7 @@ npairs.setup({
   break_line_filetype = nil,
   check_ts = true,
   enable_check_bracket_line = true,
-  fast_wrap = { map = '<C-f>' },
+  map_bs = false,
 })
 
 local remap = vim.keymap.set

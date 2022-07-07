@@ -92,6 +92,7 @@ Vapour = {
       enabled = true,
       -- See vapour/user-config/README.md for an example use of this
       init = {
+        max_jobs = 20,
         display = {
           open_fn = function()
             return Vapour.utils.plugins.require('packer.util').float { border = 'single' }

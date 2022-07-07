@@ -45,6 +45,7 @@ vim.o.expandtab = true
 vim.bo.expandtab = true
 
 vim.g.c_syntax_for_h = 1
+vim.g.vim_markdown_folding_disabled = true
 
 -- Disable various builtin plugins in Vim that bog down speed
 vim.g.loaded_matchparen = 1
