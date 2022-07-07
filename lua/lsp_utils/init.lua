@@ -20,7 +20,7 @@ M.get_null_ls_source_by_method = function(method)
   return 'NONE'
 end
 
-local navic = require('nvim-navic')
+--[[ local navic = require('nvim-navic')
 
 M.get_navic = function()
   if navic.is_available() then
@@ -28,7 +28,7 @@ M.get_navic = function()
   else
     return ''
   end
-end
+end ]]
 
 M.filtered_formatters = function(bufnr)
   local clients = vim.lsp.buf_get_clients()

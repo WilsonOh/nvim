@@ -1,5 +1,3 @@
-local navic = require('nvim-navic')
-
 if Vapour.plugins.lsp.enabled then
   local lsp_installer = Vapour.utils.plugins.require('nvim-lsp-installer')
   if not lsp_installer then return end
@@ -9,7 +7,7 @@ if Vapour.plugins.lsp.enabled then
                                                                          .make_client_capabilities())
     -- Attach nvim-navic if client supports document symbols
     local on_attach = function(client, bufnr)
-      if client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
+      -- if client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
       -- Highlight symbol under cursor
       if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
@@ -26,7 +24,7 @@ if Vapour.plugins.lsp.enabled then
         })
       end
 
-      vim.api.nvim_create_autocmd('CursorHold', {
+      --[[ vim.api.nvim_create_autocmd('CursorHold', {
         buffer = bufnr,
         callback = function()
           local opts = {
@@ -37,9 +35,9 @@ if Vapour.plugins.lsp.enabled then
             prefix = ' ',
             scope = 'cursor',
           }
-          vim.diagnostic.open_float(nil, opts)
+          require("lspsaga.diagnostic").show_line_diagnostics()
         end,
-      })
+      }) ]]
     end
     local opts = { capabilities = capabilities, on_attach = on_attach }
     if Vapour.language_servers[server.name] then

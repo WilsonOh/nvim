@@ -1,53 +1,76 @@
 Vapour.utils.plugins.packadd('which-key.nvim')
 
 local wk = Vapour.utils.plugins.require('which-key')
+local saga_diag = require('lspsaga.diagnostic')
+local saga_hover = require('lspsaga.hover')
+local saga_rename = require('lspsaga.rename')
+local dap = require('dap')
+local harpoon_ui = require('harpoon.ui')
+local harpoon_mark = require('harpoon.mark')
 
 local mappings = {
   F = { '<cmd>lua vim.lsp.buf.range_formatting()<CR>', 'Range Format File' },
   h = {
     name = 'Harpoon',
-    m = { '<cmd>lua require(\'harpoon.mark\').add_file()<CR>', 'Add Mark' },
-    M = { '<cmd>lua require(\'harpoon.ui\').toggle_quick_menu()<CR>', 'Toggle Quick Menu' },
-    n = { '<cmd>lua require(\'harpoon.ui\').nav_next()<CR>', 'Go To Next Mark' },
-    ['1'] = { '<cmd>lua require(\'harpoon.ui\').nav_file(1)<CR>', 'Go To Mark 1' },
-    ['2'] = { '<cmd>lua require(\'harpoon.ui\').nav_file(2)<CR>', 'Go To Mark 2' },
-    ['3'] = { '<cmd>lua require(\'harpoon.ui\').nav_file(3)<CR>', 'Go To Mark 3' },
-    ['4'] = { '<cmd>lua require(\'harpoon.ui\').nav_file(4)<CR>', 'Go To Mark 4' },
-    p = { '<cmd>lua require(\'harpoon.ui\').nav_prev()<CR>', 'Go To Previous Mark' },
+    m = { harpoon_mark.add_file, 'Add Mark' },
+    M = { harpoon_ui.toggle_quick_menu, 'Toggle Quick Menu' },
+    n = { harpoon_ui.nav_next, 'Go To Next Mark' },
+    ['1'] = {
+      function()
+        harpoon_ui.nav_file(1)
+      end, 'Go To Mark 1',
+    },
+    ['2'] = {
+      function()
+        harpoon_ui.nav_file(2)
+      end, 'Go To Mark 2',
+    },
+    ['3'] = {
+      function()
+        harpoon_ui.nav_file(3)
+      end, 'Go To Mark 3',
+    },
+    ['4'] = {
+      function()
+        harpoon_ui.nav_file(4)
+      end, 'Go To Mark 4',
+    },
+    p = { harpoon_ui.nav_prev, 'Go To Previous Mark' },
   },
   d = {
     name = 'Debug',
-    b = { '<cmd>lua require(\'dap\').toggle_breakpoint()<CR>', 'Toggle Breakpoint' },
+    b = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
     B = {
-      '<cmd>lua require(\'dap\').set_breakpoint(vim.fn.input(\'Breakpoint condition: \'))()<CR>',
-      'Set Conditional Breakpoint',
+      function()
+        dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+      end, 'Set Conditional Breakpoint',
     },
-    c = { '<cmd>lua require(\'dap\').continue()<CR>', 'Continue' },
-    s = { '<cmd>lua require(\'dap\').step_into()<CR>', 'Step Into' },
-    S = { '<cmd>lua require(\'dap\').step_over()<CR>', 'Step Over' },
-    o = { '<cmd>lua require(\'dap\').step_out()<CR>', 'Step Out' },
-    l = { '<cmd>lua require(\'dap\').run_last()<CR>', 'Run Last' },
-    r = { '<cmd>lua require(\'dap\').repl.toggle()<CR>', 'Repl Open' },
+    c = { dap.continue, 'Continue' },
+    s = { dap.step_into, 'Step Into' },
+    S = { dap.step_over, 'Step Over' },
+    o = { dap.step_out, 'Step Out' },
+    l = { dap.run_last, 'Run Last' },
+    r = { dap.repl.toggle, 'Repl Open' },
   },
   l = {
     name = 'LSP',
     i = { ':LspInfo<cr>', 'Connected Language Servers' },
-    k = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature help' },
-    K = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
-    w = { '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', 'Add workspace folder' },
-    W = { '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', 'Remove workspace folder' },
+    k = { vim.lsp.buf.signature_help, 'Signature help' },
+    K = { saga_hover.render_hover_doc, 'Hover' },
+    w = { vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
+    W = { vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
     l = {
       '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>',
       'List workspace folder',
     },
-    t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition' },
-    d = { '<cmd>lua vim.lsp.buf.definition()<CR>', 'Go to definition' },
+    t = { vim.lsp.buf.type_definition, 'Type definition' },
+    d = { vim.lsp.buf.definition, 'Go to definition' },
     r = { '<cmd>Trouble lsp_references<CR>', 'References' },
-    R = { '<cmd>lua vim.lsp.buf.rename()<CR>', 'Rename' },
-    a = { '<cmd>lua vim.lsp.buf.code_action()<CR>', 'Code actions' },
-    e = { '<cmd>lua vim.diagnostic.open_float()<CR>', 'Show line diagnostics' },
-    n = { '<cmd>lua vim.diagnostic.goto_next()<CR>', 'Go to next diagnostic' },
-    N = { '<cmd>lua vim.diagnostic.goto_prev()<CR>', 'Go to previous diagnostic' },
+    R = { saga_rename.lsp_rename, 'Rename' },
+    a = { vim.lsp.buf.code_action, 'Code actions' },
+    e = { saga_diag.show_line_diagnostics, 'Show line diagnostics' },
+    n = { saga_diag.goto_next, 'Go to next diagnostic' },
+    N = { saga_diag.goto_prev, 'Go to previous diagnostic' },
     I = { '<cmd>LspInstallInfo<cr>', 'Install language server' },
     f = { '<cmd>lua require("lsp_utils").filtered_formatters(0)<CR>', 'Format File' },
     T = { '<cmd>Trouble<CR>', 'Get Diagnostics' },
@@ -98,6 +121,7 @@ if Vapour.plugins.telescope.enabled then
     b = { '<cmd>Telescope buffers bufnr=0<cr>', 'Buffers' },
     o = { '<cmd>Telescope oldfiles<cr>', 'Recent Files' },
     R = { '<cmd>Telescope resume<cr>', 'Resume Previous Picker' },
+    n = { '<cmd>Telescope neoclip<cr>', 'Open Clipboard' },
   }
 end
 

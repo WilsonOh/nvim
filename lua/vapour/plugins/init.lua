@@ -264,13 +264,13 @@ return packer.startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter-context' }
   use { 'zane-/cder.nvim' }
   use { 'ThePrimeagen/harpoon' }
-  use {
+  --[[ use {
     'SmiteshP/nvim-navic',
     requires = 'neovim/nvim-lspconfig',
     config = function()
       require('navic-config')
     end,
-  }
+  } ]]
   use {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
@@ -340,6 +340,35 @@ return packer.startup(function(use)
   use { 'jlanzarotta/bufexplorer' }
   use { 'sindrets/winshift.nvim' }
   use { 'preservim/vim-markdown' }
+  ----------------------------------
+
+  use {
+    'mg979/vim-visual-multi',
+    config = function()
+      require('vim-visual-multi-config')
+    end,
+  }
+
+  use {
+    'AckslD/nvim-neoclip.lua',
+    config = function()
+      require('neoclip').setup()
+    end,
+  }
+
+  use {
+    'ziontee113/color-picker.nvim',
+    config = function()
+      require('color-picker')
+    end,
+  }
+
+  use {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      require('lspsaga-config')
+    end,
+  }
 
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 
