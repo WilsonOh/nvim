@@ -20,8 +20,10 @@ return {
     -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
     i(1, 'cond'), t(' ? '), i(2, 'then'), t(' : '), i(3, 'else'),
   }), s('std', {
-    c(1, { t({ 'int main(void) {', '\t' }), t({ 'int main(int argc, char **argv) {', '\t' }) }, {}),
-    i(2), t({ '', '}' }),
+    c(1, {
+      t({ '#include <stdio.h>', '', 'int main(void) {', '\t' }),
+      t({ '#include <stdio.h>', '', 'int main(int argc, char **argv) {', '\t' }),
+    }, {}), i(2), t({ '', '}' }),
   }), s('inc', {
     t('#include '),
     c(1, { sn(nil, { t('<'), i(1), t('>') }), sn(nil, { t('"'), i(1), t('"') }) }, {}),

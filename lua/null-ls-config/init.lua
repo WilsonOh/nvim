@@ -19,7 +19,7 @@ local sources = {
       '--break-after-table-lb', '--indent-width=2', '--extra-sep-at-table-end',
       '--double-quote-to-single-quote', '--spaces-inside-table-braces',
     },
-  }), formatting.black, formatting.eslint_d, diag.flake8, diag.eslint_d, code_action.eslint_d,
+  }), formatting.black, diag.flake8,
 }
 
 null_ls.setup({

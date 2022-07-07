@@ -30,7 +30,7 @@ M.get_navic = function()
 end
 
 M.filtered_formatters = function(bufnr)
-  local clients = vim.lsp.buf_get_clients()
+  local clients = vim.lsp.get_active_clients()
   local formatting_clients = {}
   for _, client in ipairs(clients) do
     if client.supports_method('textDocument/formatting')
@@ -64,7 +64,7 @@ M.filtered_formatters = function(bufnr)
 end
 
 M.filtered_range_formatters = function(bufnr)
-  local clients = vim.lsp.buf_get_clients()
+  local clients = vim.lsp.get_active_clients()
   local formatting_clients = {}
   for _, client in ipairs(clients) do
     if client.supports_method('textDocument/rangeFormatting')

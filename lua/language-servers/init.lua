@@ -46,6 +46,11 @@ if Vapour.plugins.lsp.enabled then
       opts = Vapour.language_servers[server.name].config(opts)
     end
     server:setup(opts)
+    if server.name == 'rust_analyzer' then
+      require('rust-tools').setup({ server = opts })
+    elseif server.name == 'clangd' then
+      require('clangd_extensions').setup({ server = opts })
+    end
   end)
 end
 

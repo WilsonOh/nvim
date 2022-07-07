@@ -19,7 +19,7 @@ packer.init(Vapour.plugins.packer.init)
 
 --------------------------------Autocommand for PackerSync-----------------------------------
 
-local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
+-- local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
 
 --[[ local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
 vim.api.nvim_clear_autocmds({ group = packer_augroup, buffer = 0 })
@@ -316,6 +316,7 @@ return packer.startup(function(use)
       require('nvim-dap-virtual-text').setup()
     end,
   }
+  --------------------
   use { 'hrsh7th/cmp-emoji' }
   use {
     'lewis6991/satellite.nvim',
@@ -330,6 +331,13 @@ return packer.startup(function(use)
     end,
   }
 
+  use({
+    'ziontee113/color-picker.nvim',
+    config = function()
+      require('color-picker')
+    end,
+  })
+
   -- Hydra.nvim stuff
   use {
     'anuvyklack/hydra.nvim',
@@ -340,5 +348,8 @@ return packer.startup(function(use)
   use { 'anuvyklack/keymap-layer.nvim' }
   use { 'jlanzarotta/bufexplorer' }
   use { 'sindrets/winshift.nvim' }
+  use { 'simrat39/rust-tools.nvim' }
+  use { 'p00f/clangd_extensions.nvim' }
+
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 end)
