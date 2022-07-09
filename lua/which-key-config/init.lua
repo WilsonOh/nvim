@@ -37,7 +37,7 @@ local mappings = {
     },
     p = { harpoon_ui.nav_prev, 'Go To Previous Mark' },
   },
-  d = {
+  --[[ d = {
     name = 'Debug',
     b = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
     B = {
@@ -51,7 +51,7 @@ local mappings = {
     o = { dap.step_out, 'Step Out' },
     l = { dap.run_last, 'Run Last' },
     r = { dap.repl.toggle, 'Repl Open' },
-  },
+  }, ]]
   l = {
     name = 'LSP',
     i = { ':LspInfo<cr>', 'Connected Language Servers' },

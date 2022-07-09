@@ -1,3 +1,6 @@
+local jdtls = require('jdtls')
+local jdtls_dap = require('jdtls.dap')
+
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local workspace_dir = '/home/wilsonoh/java/workspaces/' .. project_name
 
@@ -19,6 +22,9 @@ local config = {
     '-configuration', home .. '/.local/jdtls/' .. config_dir, '-data', workspace_dir,
   },
   on_attach = function(_, bufnr)
+    jdtls.setup_dap({ hotcodereplace = 'auto' })
+    jdtls_dap.setup_dap_main_class_configs()
+
     vim.api.nvim_create_autocmd('CursorHold', {
       buffer = bufnr,
       callback = function()
@@ -34,6 +40,12 @@ local config = {
       end,
     })
   end,
+  init_options = {
+    bundles = {
+      vim.fn.glob(
+          '/home/wilsonoh/.m2/repository/com/microsoft/java/com.microsoft.java.debug.plugin/0.38.0/com.microsoft.java.debug.plugin-*.jar'),
+    },
+  },
 }
 
-require('jdtls').start_or_attach(config)
+jdtls.start_or_attach(config)

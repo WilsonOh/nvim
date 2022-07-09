@@ -83,3 +83,28 @@ Hydra({
     { '<Esc>', nil, { exit = true } },
   },
 })
+
+local dap = require('dap')
+
+Hydra({
+  name = 'Debug',
+  hint = [[
+                                 Debug Mode
+ _b_: Toggle Breakpoint   _c_: Continue        _S_: Step Into   _o_: Step Out
+ _B_: Toggle Condition Breakpoint   _s_: Step Over   _l_: Run Last   _r_: Repl Open 
+ _q_: Terminate Debugging Session _R_: Run To Cursor
+                              _<Esc>_: Exit Debug Mode
+]],
+  config = { color = 'pink', hint = { border = 'rounded' }, invoke_on_body = true },
+  mode = 'n',
+  body = '<leader>d',
+  heads = {
+    { 'b', dap.toggle_breakpoint }, {
+      'B', function()
+        dap.set_breakpoint(vim.fn.input('Breakpoint Condition: '))
+      end,
+    }, { 'c', dap.continue }, { 's', dap.step_over }, { 'S', dap.step_into }, { 'o', dap.step_out },
+    { 'l', dap.run_last }, { 'r', dap.repl.toggle }, { '<Esc>', nil, { exit = true } },
+    { 'q', dap.terminate }, { 'R', dap.run_to_cursor },
+  },
+})

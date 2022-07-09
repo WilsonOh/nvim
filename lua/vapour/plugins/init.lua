@@ -331,13 +331,6 @@ return packer.startup(function(use)
     end,
   }
 
-  use({
-    'ziontee113/color-picker.nvim',
-    config = function()
-      require('color-picker')
-    end,
-  })
-
   -- Hydra.nvim stuff
   use {
     'anuvyklack/hydra.nvim',
@@ -357,13 +350,6 @@ return packer.startup(function(use)
     'mg979/vim-visual-multi',
     config = function()
       require('vim-visual-multi-config')
-    end,
-  }
-
-  use {
-    'AckslD/nvim-neoclip.lua',
-    config = function()
-      require('neoclip').setup()
     end,
   }
 
