@@ -18,7 +18,6 @@ packer.init(Vapour.plugins.packer.init)
 
 --------------------------------Autocommand for PackerSync-----------------------------------
 
--- local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
 --[[ local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
 
 local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
