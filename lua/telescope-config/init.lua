@@ -60,5 +60,4 @@ if telescope and actions then
   }
   telescope.load_extension('cder')
   telescope.load_extension('fzf')
-  telescope.load_extension('neoclip')
 end
