@@ -340,10 +340,12 @@ return packer.startup(function(use)
   use { 'anuvyklack/keymap-layer.nvim' }
   use { 'jlanzarotta/bufexplorer' }
   use { 'sindrets/winshift.nvim' }
-  use { 'simrat39/rust-tools.nvim' }
-  use { 'p00f/clangd_extensions.nvim' }
   use { 'preservim/vim-markdown' }
   ----------------------------------
+
+  -- LSP Extensions
+  use { 'simrat39/rust-tools.nvim' }
+  -- use { 'p00f/clangd_extensions.nvim' }
 
   use {
     'mg979/vim-visual-multi',
