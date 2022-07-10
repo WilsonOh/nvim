@@ -264,13 +264,7 @@ return packer.startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter-context' }
   use { 'zane-/cder.nvim' }
   use { 'ThePrimeagen/harpoon' }
-  --[[ use {
-    'SmiteshP/nvim-navic',
-    requires = 'neovim/nvim-lspconfig',
-    config = function()
-      require('navic-config')
-    end,
-  } ]]
+
   use {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',

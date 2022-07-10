@@ -89,10 +89,11 @@ local dap = require('dap')
 Hydra({
   name = 'Debug',
   hint = [[
-                                 Debug Mode
- _b_: Toggle Breakpoint   _c_: Continue        _S_: Step Into   _o_: Step Out
- _B_: Toggle Condition Breakpoint   _s_: Step Over   _l_: Run Last   _r_: Repl Open 
- _q_: Terminate Debugging Session _R_: Run To Cursor
+                                    Debug Mode
+ _b_: Toggle Breakpoint            _c_: Continue        _S_: Step Into   _o_: Step Out
+ _B_: Toggle Condition Breakpoint  _s_: Step Over       _l_: Run Last    _r_: Repl Open 
+ _q_: Terminate Debugging Session  _R_: Run To Cursor
+ 
                               _<Esc>_: Exit Debug Mode
 ]],
   config = { color = 'pink', hint = { border = 'rounded' }, invoke_on_body = true },
