@@ -5,6 +5,10 @@ if Vapour.plugins.lsp.enabled then
 
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
                                                                          .make_client_capabilities())
+
+    local lsp_utils = require('lsp_utils')
+    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+
     -- Attach nvim-navic if client supports document symbols
     local on_attach = function(client, bufnr)
       -- if client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
@@ -21,6 +25,18 @@ if Vapour.plugins.lsp.enabled then
           group = 'lsp_document_highlight',
           buffer = bufnr,
           callback = vim.lsp.buf.clear_references,
+        })
+      end
+
+      lsp_utils.get_null_ls_sources()
+      if client.supports_method('textDocument/formatting') then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          group = augroup,
+          buffer = bufnr,
+          callback = function()
+            lsp_utils.filtered_formatters(bufnr)
+          end,
         })
       end
 

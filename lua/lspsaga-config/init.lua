@@ -37,7 +37,8 @@ local events = {
   'CursorHold', 'BufEnter', 'BufWinEnter', 'CursorMoved', 'WinLeave', 'User LspasgaUpdateSymbol',
 }
 
-local exclude = { ['teminal'] = true, ['prompt'] = true, ['NvimTree'] = true }
+local exclude =
+    { ['teminal'] = true, ['prompt'] = true, ['NvimTree'] = true, ['toggleterm'] = true }
 
 vim.api.nvim_create_autocmd(events, {
   pattern = '*',
