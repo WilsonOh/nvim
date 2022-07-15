@@ -1,5 +1,8 @@
-vim.cmd [[let g:VM_maps = {}]]
-vim.cmd [[let g:VM_maps["Add Cursor Down"] = '<C-j>']]
-vim.cmd [[let g:VM_maps["Add Cursor Up"] = '<C-k>']]
-vim.cmd [[let g:VM_maps["Add Cursor At Pos"] = '<C-Space>']]
-vim.cmd [[let g:VM_leader = '<Bslash>']]
+vim.g.VM_leader = '<Bslash>'
+
+vim.g.VM_maps = {
+  ['Add Cursor Down'] = '<C-j>',
+  ['Add Cursor Up'] = '<C-k>',
+  ['Add Cursor At Pos'] = '<C-Space>',
+  ['I BS'] = '',
+}

@@ -8,7 +8,7 @@ npairs.setup({
   break_line_filetype = nil,
   check_ts = true,
   enable_check_bracket_line = true,
-  map_bs = false,
+  map_bs = true,
 })
 
 local remap = vim.keymap.set
