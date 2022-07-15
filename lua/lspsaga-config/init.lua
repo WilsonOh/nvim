@@ -1,4 +1,8 @@
-require('lspsaga').init_lsp_saga { border_style = 'double', symbol_in_winbar = { in_custom = true } }
+require('lspsaga').init_lsp_saga {
+  border_style = 'double',
+  code_action_lightbulb = { enable = false },
+  symbol_in_winbar = { in_custom = false },
+}
 local action = require('lspsaga.action')
 vim.keymap.set('n', '<C-p>', function()
   action.smart_scroll_with_saga(1)
@@ -37,8 +41,13 @@ local events = {
   'CursorHold', 'BufEnter', 'BufWinEnter', 'CursorMoved', 'WinLeave', 'User LspasgaUpdateSymbol',
 }
 
-local exclude =
-    { ['teminal'] = true, ['prompt'] = true, ['NvimTree'] = true, ['toggleterm'] = true }
+local exclude = {
+  ['teminal'] = true,
+  ['prompt'] = true,
+  ['NvimTree'] = true,
+  ['toggleterm'] = true,
+  ['fish'] = true,
+}
 
 vim.api.nvim_create_autocmd(events, {
   pattern = '*',

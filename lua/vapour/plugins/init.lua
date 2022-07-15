@@ -237,7 +237,13 @@ return packer.startup(function(use)
       require('lsp_signature').setup({ toggle_key = '<C-x>' })
     end,
   } ]]
-  use { 'tpope/vim-surround' }
+  -- use { 'tpope/vim-surround' }
+  use({
+    'kylechui/nvim-surround',
+    config = function()
+      require('nvim-surround').setup()
+    end,
+  })
   use { 'tpope/vim-repeat' }
   use { 'wellle/targets.vim' }
   use {
@@ -361,6 +367,8 @@ return packer.startup(function(use)
       require('lspsaga-config')
     end,
   }
+
+  use { 'nvim-treesitter/playground' }
 
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 
