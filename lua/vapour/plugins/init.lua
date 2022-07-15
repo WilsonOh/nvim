@@ -202,18 +202,8 @@ return packer.startup(function(use)
       require('telescope-config')
     end,
   }
-  --[[ use {
-    'kyazdani42/nvim-tree.lua',
-    cmd = 'NvimTreeToggle',
-    disable = not is_enabled('nvim_tree'),
-    config = function()
-      require('nvimtree-config')
-    end,
-  } ]]
-
   use {
-    'lixvbnet/nvim-tree.lua',
-    branch = 'hotfix-1363',
+    'kyazdani42/nvim-tree.lua',
     cmd = 'NvimTreeToggle',
     disable = not is_enabled('nvim_tree'),
     config = function()
