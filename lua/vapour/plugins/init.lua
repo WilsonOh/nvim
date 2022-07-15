@@ -295,7 +295,12 @@ return packer.startup(function(use)
     end,
   }
   -- nvim-dap
-  use { 'mfussenegger/nvim-dap' }
+  use {
+    'mfussenegger/nvim-dap',
+    config = function()
+      require('dap-config')
+    end,
+  }
   use {
     'mfussenegger/nvim-dap-python',
     config = function()
