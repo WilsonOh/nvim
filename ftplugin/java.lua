@@ -2,7 +2,7 @@ local jdtls = require('jdtls')
 local jdtls_dap = require('jdtls.dap')
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = '/home/wilsonoh/java/workspaces/' .. project_name
+local workspace_dir = '/home/wilsonoh/java/workspace/' .. project_name
 
 local home = os.getenv('HOME')
 

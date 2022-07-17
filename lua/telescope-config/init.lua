@@ -58,6 +58,5 @@ if telescope and actions then
       find_files = { theme = 'ivy', find_command = { 'fd', '--type', 'f', '--strip-cwd-prefix' } },
     },
   }
-  telescope.load_extension('cder')
   telescope.load_extension('fzf')
 end

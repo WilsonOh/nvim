@@ -1,8 +1,4 @@
-require('lspsaga').init_lsp_saga {
-  border_style = 'double',
-  code_action_lightbulb = { enable = false },
-  symbol_in_winbar = { in_custom = false },
-}
+require('lspsaga').init_lsp_saga { code_action_lightbulb = { enable = false } }
 local action = require('lspsaga.action')
 vim.keymap.set('n', '<C-p>', function()
   action.smart_scroll_with_saga(1)

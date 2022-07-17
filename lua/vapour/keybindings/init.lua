@@ -81,6 +81,20 @@ set('n', '<leader>m', function()
   require('telescope_utils').custom_search()
 end, opts)
 
+-- smart dd
+local smart_dd = function()
+  if vim.api.nvim_get_current_line():match('^%s*$') then
+    return '"_dd'
+  else
+    return 'dd'
+  end
+end
+set('n', 'dd', smart_dd, { expr = true })
+
+-- blackhole delete/change
+set('n', 'dD', '"_dd')
+set('n', 'cC', '"_cc')
+
 vim.cmd('inoremap <expr> <c-j> (\"\\<C-n>\")')
 vim.cmd('inoremap <expr> <c-k> (\"\\<C-p>\")')
 vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])

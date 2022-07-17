@@ -1,10 +1,6 @@
 Vapour.utils.plugins.packadd('which-key.nvim')
 
 local wk = Vapour.utils.plugins.require('which-key')
-local saga_diag = require('lspsaga.diagnostic')
-local saga_hover = require('lspsaga.hover')
-local saga_rename = require('lspsaga.rename')
-local dap = require('dap')
 local harpoon_ui = require('harpoon.ui')
 local harpoon_mark = require('harpoon.mark')
 
@@ -56,7 +52,7 @@ local mappings = {
     name = 'LSP',
     i = { ':LspInfo<cr>', 'Connected Language Servers' },
     k = { vim.lsp.buf.signature_help, 'Signature help' },
-    K = { saga_hover.render_hover_doc, 'Hover' },
+    K = { vim.lsp.buf.hover, 'Hover' },
     w = { vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
     W = { vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder' },
     l = {
@@ -66,11 +62,11 @@ local mappings = {
     t = { vim.lsp.buf.type_definition, 'Type definition' },
     d = { vim.lsp.buf.definition, 'Go to definition' },
     r = { '<cmd>Trouble lsp_references<CR>', 'References' },
-    R = { saga_rename.lsp_rename, 'Rename' },
+    R = { vim.lsp.buf.rename, 'Rename' },
     a = { vim.lsp.buf.code_action, 'Code actions' },
-    e = { saga_diag.show_line_diagnostics, 'Show line diagnostics' },
-    n = { saga_diag.goto_next, 'Go to next diagnostic' },
-    N = { saga_diag.goto_prev, 'Go to previous diagnostic' },
+    e = { vim.lsp.diagnostic.get_line_diagnostics, 'Show line diagnostics' },
+    n = { vim.lsp.diagnostic.goto_next, 'Go to next diagnostic' },
+    N = { vim.lsp.diagnostic.goto_prev, 'Go to previous diagnostic' },
     I = { '<cmd>LspInstallInfo<cr>', 'Install language server' },
     f = { '<cmd>lua require("lsp_utils").filtered_formatters(0)<CR>', 'Format File' },
     T = { '<cmd>Trouble<CR>', 'Get Diagnostics' },
