@@ -414,8 +414,6 @@ return packer.startup(function(use)
     end,
   }
   use { 'anuvyklack/keymap-layer.nvim' }
-  use { 'jlanzarotta/bufexplorer' }
-  use { 'sindrets/winshift.nvim' }
   use { 'preservim/vim-markdown' }
   ----------------------------------
 
