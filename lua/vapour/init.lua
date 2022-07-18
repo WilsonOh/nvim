@@ -111,8 +111,7 @@ Vapour = {
   settings = {
     -- If true, :w -> :w!
     always_force_write = false,
-    colorscheme = 'kanagawa',
-    staline_colorscheme = 'kanagawa',
+    colorscheme = 'catppuccin',
     transparent_bg = false,
   },
 }

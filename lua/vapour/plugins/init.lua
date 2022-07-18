@@ -70,11 +70,19 @@ return packer.startup(function(use)
   }
 
   -- Highly configurable statusine plugin
-  use {
+  --[[ use {
     'tamton-aquib/staline.nvim',
     disable = not is_enabled('staline'),
     config = function()
       require('staline-config')
+    end,
+  } ]]
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+      require('lualine-config')
     end,
   }
 
@@ -158,7 +166,7 @@ return packer.startup(function(use)
   use { 'folke/tokyonight.nvim', opt = true }
   use { 'dracula/vim', as = 'dracula', opt = true }
   use { 'tiagovla/tokyodark.nvim', opt = true }
-  use { 'catppuccin/nvim', as = 'catppuccin', opt = true }
+  use { 'catppuccin/nvim', as = 'catppuccin', opt = true, run = 'CatppuccinCompile' }
   use { 'rebelot/kanagawa.nvim', as = 'kanagawa', opt = true }
   -------------------------------------------------------------
 
@@ -413,7 +421,6 @@ return packer.startup(function(use)
       require('hydra-config')
     end,
   }
-  use { 'anuvyklack/keymap-layer.nvim' }
   use { 'preservim/vim-markdown' }
   ----------------------------------
 
