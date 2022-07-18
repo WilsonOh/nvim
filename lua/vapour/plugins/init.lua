@@ -460,6 +460,8 @@ return packer.startup(function(use)
     end,
   } ]]
 
+  use { 'lewis6991/impatient.nvim' }
+
   for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
 
   if Packer_bootstrap then require('packer').sync() end

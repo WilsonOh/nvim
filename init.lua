@@ -9,4 +9,5 @@
 --
 -- Sane defaults and global helpers
 -- Load all Vapour packages first
+require('impatient')
 require('vapour')
