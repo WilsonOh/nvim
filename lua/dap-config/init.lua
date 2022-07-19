@@ -1,7 +1,21 @@
--- 💀 Adjust the path to your executable
-local cmd = '/home/wilsonoh/codelldb/extension/adapter/codelldb'
-
 local dap = require('dap')
+
+local dap_signs = {
+  breakpoint = { text = '', texthl = 'LspDiagnosticsSignError', linehl = '', numhl = '' },
+  breakpoint_rejected = { text = '', texthl = 'LspDiagnosticsSignHint', linehl = '', numhl = '' },
+  stopped = {
+    text = '',
+    texthl = 'LspDiagnosticsSignInformation',
+    linehl = 'DiagnosticUnderlineInfo',
+    numhl = 'LspDiagnosticsSignInformation',
+  },
+}
+
+vim.fn.sign_define('DapBreakpoint', dap_signs.breakpoint)
+vim.fn.sign_define('DapBreakpointRejected', dap_signs.breakpoint_rejected)
+vim.fn.sign_define('DapStopped', dap_signs.stopped)
+
+local cmd = '/home/wilsonoh/codelldb/extension/adapter/codelldb'
 
 dap.adapters.codelldb = function(on_adapter)
   -- This asks the system for a free port

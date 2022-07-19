@@ -1,3 +1,5 @@
+local tabwidth = 2
+
 vim.cmd('filetype plugin indent on')
 vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.hidden = true
@@ -16,7 +18,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.updatetime = 300
 vim.o.timeoutlen = 100
-vim.o.clipboard = 'unnamedplus'
+-- vim.o.clipboard = 'unnamedplus'
 vim.o.hlsearch = false
 vim.o.ignorecase = true
 vim.o.scrolloff = 3
@@ -33,12 +35,12 @@ vim.wo.signcolumn = 'yes'
 --[[ vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()' ]]
 
-vim.o.tabstop = Vapour.options.tabwidth
-vim.bo.tabstop = Vapour.options.tabwidth
-vim.o.softtabstop = Vapour.options.tabwidth
-vim.bo.softtabstop = Vapour.options.tabwidth
-vim.o.shiftwidth = Vapour.options.tabwidth
-vim.bo.shiftwidth = Vapour.options.tabwidth
+vim.o.tabstop = tabwidth
+vim.bo.tabstop = tabwidth
+vim.o.softtabstop = tabwidth
+vim.bo.softtabstop = tabwidth
+vim.o.shiftwidth = tabwidth
+vim.bo.shiftwidth = tabwidth
 vim.o.autoindent = true
 vim.bo.autoindent = true
 vim.o.expandtab = true

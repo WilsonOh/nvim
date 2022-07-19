@@ -9,53 +9,27 @@ if fn.empty(fn.glob(install_path)) > 0 then
   })
 end
 
-local packer = Vapour.utils.plugins.require('packer')
+require('packer').init({
+  max_jobs = 20,
+  display = {
+    open_fn = function()
+      return require('packer.util').float { border = 'single' }
+    end,
+  },
+})
 
-if not packer then return end
-
-packer.init(Vapour.plugins.packer.init)
----------------------------------------------------------------------------------------------
-
---------------------------------Autocommand for PackerSync-----------------------------------
-
---[[ local plugin_path = fn.stdpath('config') .. '/lua/vapour/plugins/init.lua'
-
-local packer_augroup = vim.api.nvim_create_augroup('packer_user_config', {})
-vim.api.nvim_clear_autocmds({ group = packer_augroup, buffer = 0 })
-vim.api.nvim_create_autocmd('BufWritePost ', {
-  pattern = plugin_path,
-  group = packer_augroup,
-  callback = function()
-    vim.cmd '%so'
-    vim.cmd 'PackerSync'
-  end,
-}) ]]
----------------------------------------------------------------------------------------------
-
-local function is_enabled(plugin)
-  return Vapour.plugins[plugin].enabled
-end
-
-local function get_cmp()
-  if Vapour.plugins.lsp.enabled == true then
-    return 'nvim-cmp'
-  else
-    return
-  end
-end
-
-return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'
+return require('packer').startup(function(use)
+  use { 'wbthomason/packer.nvim' }
   -- Syntax Highlighting and Visual Plugins
 
   -- Enables color highlights within the buffer
   -- when a valid color string is input e.g. #123
   use {
     'norcalli/nvim-colorizer.lua',
-    disable = not is_enabled('colorizer'),
     config = function()
       require('colorizer-config')
     end,
+    ft = { 'html', 'css' },
   }
 
   -- Adds a lot of functionality to the buffer tabs at the top
@@ -66,17 +40,8 @@ return packer.startup(function(use)
     config = function()
       require('bufferline-config')
     end,
-    disable = not is_enabled('bufferline'),
+    event = 'BufWinEnter',
   }
-
-  -- Highly configurable statusine plugin
-  --[[ use {
-    'tamton-aquib/staline.nvim',
-    disable = not is_enabled('staline'),
-    config = function()
-      require('staline-config')
-    end,
-  } ]]
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -90,7 +55,6 @@ return packer.startup(function(use)
   -- Additionally adds listchars for eol and whitespace
   use {
     'lukas-reineke/indent-blankline.nvim',
-    disable = not is_enabled('indent_blankline'),
     config = function()
       require('blankline-config')
     end,
@@ -102,14 +66,14 @@ return packer.startup(function(use)
     config = function()
       require('zen-mode-config')
     end,
-    disable = not is_enabled('zen_mode'),
+    cmd = 'ZenMode',
   }
   use {
     'folke/twilight.nvim',
     config = function()
       require('twilight-config')
     end,
-    disable = not is_enabled('twilight'),
+    cmd = { 'Twilight', 'TwilightEnable' },
   }
   ------------------------------
 
@@ -117,10 +81,10 @@ return packer.startup(function(use)
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    disable = not is_enabled('gitsigns'),
     config = function()
-      require('gitsigns-config')
+      require('gitsigns').setup()
     end,
+    event = 'BufRead',
   }
 
   -- Nice icons for different filetypes
@@ -130,30 +94,24 @@ return packer.startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    disable = not is_enabled('treesitter'),
     config = function()
       require('treesitter-config')
     end,
   }
+
   -- Rainbow colors for nested brackets
-  use { 'p00f/nvim-ts-rainbow', disable = not is_enabled('treesitter'), after = 'nvim-treesitter' }
+  use { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
+
   -- Auto close/delete tags in HTML
-  use { 'windwp/nvim-ts-autotag', disable = not is_enabled('treesitter'), after = 'nvim-treesitter' }
+  use { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' }
+
   -- Auto complete the relevant syntax e.g. in lua: function() -> <CR> end
-  use {
-    'RRethy/nvim-treesitter-endwise',
-    disable = not is_enabled('treesitter'),
-    after = 'nvim-treesitter',
-  }
+  use { 'RRethy/nvim-treesitter-endwise', after = 'nvim-treesitter' }
+
   -- Make everything a textobject - e.g. functions, classes, comments, conditionals etc.
   -- VERY useful but functionality is limited for some languages
   use { 'nvim-treesitter/nvim-treesitter-textobjects' }
-  -- More general version of treesitter-objects, limited to visual mode only
-  --[[ use {
-    'RRethy/nvim-treesitter-textsubjects',
-    disable = not is_enabled('treesitter'),
-    after = 'nvim-treesitter',
-  } ]]
+
   -- Explore the treesitter-generated AST of the current buffer
   use { 'nvim-treesitter/playground' }
   -----------------------------------------------------------
@@ -173,45 +131,51 @@ return packer.startup(function(use)
   -- LSP and Autocomplete
 
   -- Make configuring the native LSP easy
-  use { 'neovim/nvim-lspconfig', after = 'nvim-lsp-installer', disable = not is_enabled('lsp') }
+  use { 'neovim/nvim-lspconfig' }
+
+  -- LSP Extensions
+  use { 'simrat39/rust-tools.nvim' }
+  use { 'p00f/clangd_extensions.nvim' }
+  use { 'mfussenegger/nvim-jdtls' }
+  use { 'b0o/schemastore.nvim' }
+
   -- Make configuring the natice LSP even easier
-  use { 'williamboman/nvim-lsp-installer', disable = not is_enabled('lsp') }
+  use { 'williamboman/nvim-lsp-installer', cmd = 'LspInstall*' }
+
   -- Provide nice vscode-like icons for autocomplete
   use {
     'onsails/lspkind-nvim',
     config = function()
       require('lspkind-config')
     end,
-    disable = not is_enabled('lsp'),
   }
+
   -- autocomplete engine + completion source plugins
   use {
     'hrsh7th/nvim-cmp',
     config = function()
       require('cmp-config')
     end,
-    disable = not is_enabled('lsp'),
   }
+
   -- Provide completion source from the LSP
-  use { 'hrsh7th/cmp-nvim-lsp', disable = not is_enabled('lsp') }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+
   -- Provide completion source from buffer
-  use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', disable = not is_enabled('lsp') }
+  use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
+
   -- Provide path completion
-  use { 'hrsh7th/cmp-path', after = 'nvim-cmp', disable = not is_enabled('lsp') }
-  -- Provide completion source for the command line
-  -- use { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', disable = not is_enabled('lsp') }
+  use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
+
   -- Provide completion source from system dictionary (have to install it yourself)
   use {
     'uga-rosa/cmp-dictionary',
     after = 'nvim-cmp',
-    disable = not is_enabled('lsp'),
     config = function()
       require('cmp_dictionary').setup({ dic = { ['text,markdown'] = { '/usr/share/dict/words' } } })
     end,
   }
   use { 'hrsh7th/cmp-emoji' }
-  --[[ use { 'tzachar/fuzzy.nvim', requires = { 'nvim-telescope/telescope-fzf-native.nvim' } }
-  use { 'tzachar/cmp-fuzzy-buffer', requires = { 'hrsh7th/nvim-cmp', 'tzachar/fuzzy.nvim' } } ]]
   --------------------------------------------------------------------------------
 
   -- Snippet engine + related plugins
@@ -228,31 +192,26 @@ return packer.startup(function(use)
   -- Autocomplete/delete brackets and quotes
   use {
     'windwp/nvim-autopairs',
-    after = get_cmp(),
+    after = 'nvim-cmp',
     config = function()
       require('autopairs-config')
     end,
-    disable = not is_enabled('autopairs'),
   }
-
-  -- Provide JSON schemas
-  use { 'b0o/schemastore.nvim', after = 'nvim-lsp-installer', disable = not is_enabled('lsp') }
 
   -- Terminal Integration
   use {
     'akinsho/nvim-toggleterm.lua',
-    disable = not is_enabled('toggleterm'),
     config = function()
       require('toggleterm-config')
     end,
   }
 
   -- Navigation
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', disable = not is_enabled('lsp') }
+  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
   use {
     'nvim-telescope/telescope.nvim',
     requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } },
-    disable = not is_enabled('telescope'),
     cmd = { 'Telescope', 'h telescope' },
     module = 'telescope',
     config = function()
@@ -264,7 +223,6 @@ return packer.startup(function(use)
   use {
     'kyazdani42/nvim-tree.lua',
     cmd = 'NvimTreeToggle',
-    disable = not is_enabled('nvim_tree'),
     config = function()
       require('nvimtree-config')
     end,
@@ -273,7 +231,6 @@ return packer.startup(function(use)
   -- Aggregate LSP provider - very useful for formatters
   use {
     'jose-elias-alvarez/null-ls.nvim',
-    disable = not is_enabled('null_ls'),
     config = function()
       require('null-ls-config')
     end,
@@ -281,14 +238,6 @@ return packer.startup(function(use)
 
   -- VERY useful plugin for keymaps, especially multi-key keymaps
   use { 'folke/which-key.nvim', event = 'BufWinEnter' }
-  ----------My Personal Plugins-------------------------
-  --[[ use {
-    'ray-x/lsp_signature.nvim',
-    config = function()
-      require('lsp_signature').setup({ toggle_key = '<C-x>' })
-    end,
-  } ]]
-  -- use { 'tpope/vim-surround' }
 
   -- Modern vim-surround replacement which supports lua functions
   use({
@@ -300,8 +249,10 @@ return packer.startup(function(use)
 
   -- Extend dot-repeat functionality to plugins
   use { 'tpope/vim-repeat' }
+
   -- Make extent vim motions e.g. c2ib to change in the *outer* bracket
   use { 'wellle/targets.vim' }
+
   -- Extend % functionality based on the language e.g. function() -> end in lua
   -- Also gives a nice highlight when hovering over pairs
   use {
@@ -319,6 +270,7 @@ return packer.startup(function(use)
     config = function()
       require('Comment').setup({ mappings = { extended = true } })
     end,
+    event = 'BufRead',
   }
 
   -- Nice smooth scrolling use ctrl-d and ctrl-u etc.
@@ -332,14 +284,11 @@ return packer.startup(function(use)
   -- Provide a good bit of vscode-style snippets, to be used with luasnip
   use { 'rafamadriz/friendly-snippets' }
 
-  -- Java specific LSP plugin, provides more code actions and debugger functionality
-  use { 'mfussenegger/nvim-jdtls' }
-
   -- Show the context of the function/class at the top when you're in a long function
   use { 'nvim-treesitter/nvim-treesitter-context' }
 
   -- Project specific marks with a handy UI
-  use { 'ThePrimeagen/harpoon' }
+  use { 'ThePrimeagen/harpoon', module_pattern = { 'harpoon', 'harpoon.ui', 'harpoon.mark' } }
 
   -- Adds functionality to the quickfix list, such as a "magic window"
   use {
@@ -369,6 +318,7 @@ return packer.startup(function(use)
     config = function()
       require('trouble').setup()
     end,
+    cmd = 'Trouble*',
   }
 
   -- nvim-dap + related plugins
@@ -378,12 +328,14 @@ return packer.startup(function(use)
       require('dap-config')
     end,
   }
+
   use {
     'mfussenegger/nvim-dap-python',
     config = function()
       require('dap-python').setup('~/.virtualenvs/debugpy/bin/python', {})
     end,
   }
+
   use {
     'rcarriga/nvim-dap-ui',
     requires = { 'mfussenegger/nvim-dap' },
@@ -391,20 +343,14 @@ return packer.startup(function(use)
       require('dapui-config')
     end,
   }
+
   use {
     'theHamsta/nvim-dap-virtual-text',
     config = function()
       require('nvim-dap-virtual-text').setup()
     end,
   }
-  --------------------
-  --
-  --[[ use {
-    'lewis6991/satellite.nvim',
-    config = function()
-      require('satellite').setup()
-    end,
-  } ]]
+  ----------------------------------------------------
 
   -- Nice loading spinner to indicate LSP startup progress (esp. for sumneko lua)
   use {
@@ -420,13 +366,12 @@ return packer.startup(function(use)
     config = function()
       require('hydra-config')
     end,
+    keys = { '<leader>d', '<leader>g' },
   }
-  use { 'preservim/vim-markdown' }
-  ----------------------------------
 
-  -- LSP Extensions
-  use { 'simrat39/rust-tools.nvim' }
-  -- use { 'p00f/clangd_extensions.nvim' }
+  -- Adds extra concealment for markdown files i.e. conceal links
+  use { 'preservim/vim-markdown', ft = { 'markdown' } }
+  ----------------------------------
 
   -- VERY useful multicursor plugin
   use {
@@ -442,6 +387,7 @@ return packer.startup(function(use)
     config = function()
       require('color-picker')
     end,
+    cmd = { 'PickColor', 'PickColorInsert' },
   }
 
   -- Nice highlighting and icons for todos and notes etc.
@@ -453,17 +399,9 @@ return packer.startup(function(use)
     end,
   }
 
-  --[[ use {
-    'glepnir/lspsaga.nvim',
-    config = function()
-      require('lspsaga-config')
-    end,
-  } ]]
-
   use { 'lewis6991/impatient.nvim' }
 
-  for _, plugin in pairs(Vapour.plugins.user) do use(plugin) end
+  use { 'dstein64/vim-startuptime' }
 
   if Packer_bootstrap then require('packer').sync() end
-
 end)

@@ -1,4 +1,4 @@
-Vapour.utils.plugins.packadd('kanagawa')
+vim.cmd [[ packadd kanagawa ]]
 
 -- Default options:
 require('kanagawa').setup({

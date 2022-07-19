@@ -1,56 +1,86 @@
-Vapour.utils.plugins.packadd('which-key.nvim')
-
-local wk = Vapour.utils.plugins.require('which-key')
-local harpoon_ui = require('harpoon.ui')
-local harpoon_mark = require('harpoon.mark')
-
 local mappings = {
-  F = { '<cmd>lua vim.lsp.buf.range_formatting()<CR>', 'Range Format File' },
+  e = { ':NvimTreeToggle<cr>', 'File Explorer' },
+  f = {
+    name = 'Telescope',
+    f = { ':Telescope find_files theme=ivy<CR>', 'Find Files' },
+    c = { ':Telescope find_files cwd=~/.config/nvim/lua/ theme=ivy<CR>', 'Search Config' },
+    g = { ':Telescope git_files theme=ivy<CR>', 'Search Project' },
+    r = { ':Telescope live_grep<CR>', 'Live Grep' },
+    b = { ':Telescope buffers bufnr=0<CR>', 'Buffers' },
+    o = { ':Telescope oldfiles<CR>', 'Recent Files' },
+    R = { ':Telescope resume<CR>', 'Resume Previous Picker' },
+    n = { ':Telescope neoclip<CR>', 'Open Clipboard' },
+  },
+  t = {
+    name = 'Termimal',
+    f = {
+      function()
+        local Terminal = require('toggleterm.terminal').Terminal
+        local float = Terminal:new({ direction = 'float' })
+        return float:toggle()
+      end, 'Floating Terminal',
+    },
+    l = {
+      function()
+        local Terminal = require('toggleterm.terminal').Terminal
+        local lazygit = Terminal:new({ cmd = 'lazygit', direction = 'float' })
+        return lazygit:toggle()
+      end, 'LazyGit',
+    },
+    r = {
+      function()
+        local Terminal = require('toggleterm.terminal').Terminal
+        local ranger = Terminal:new({ cmd = 'ranger', direction = 'float' })
+        return ranger:toggle()
+      end, 'Ranger',
+    },
+  },
   h = {
     name = 'Harpoon',
-    m = { harpoon_mark.add_file, 'Add Mark' },
-    M = { harpoon_ui.toggle_quick_menu, 'Toggle Quick Menu' },
-    n = { harpoon_ui.nav_next, 'Go To Next Mark' },
+    m = {
+      function()
+        require('harpoon.mark').add_file()
+      end, 'Add Mark',
+    },
+    M = {
+      function()
+        require('harpoon.ui').toggle_quick_menu()
+      end, 'Toggle Quick Menu',
+    },
+    n = {
+      function()
+        require('harpoon.ui').nav_next()
+      end, 'Go To Next Mark',
+    },
     ['1'] = {
       function()
-        harpoon_ui.nav_file(1)
+        require('harpoon.ui').nav_file(1)
       end, 'Go To Mark 1',
     },
     ['2'] = {
       function()
-        harpoon_ui.nav_file(2)
+        require('harpoon.ui').nav_file(2)
       end, 'Go To Mark 2',
     },
     ['3'] = {
       function()
-        harpoon_ui.nav_file(3)
+        require('harpoon.ui').nav_file(3)
       end, 'Go To Mark 3',
     },
     ['4'] = {
       function()
-        harpoon_ui.nav_file(4)
+        require('harpoon.ui').nav_file(4)
       end, 'Go To Mark 4',
     },
-    p = { harpoon_ui.nav_prev, 'Go To Previous Mark' },
-  },
-  --[[ d = {
-    name = 'Debug',
-    b = { dap.toggle_breakpoint, 'Toggle Breakpoint' },
-    B = {
+    p = {
       function()
-        dap.set_breakpoint(vim.fn.input('Breakpoint condition: '))
-      end, 'Set Conditional Breakpoint',
+        require('harpoon.ui').nav_prev()
+      end, 'Go To Previous Mark',
     },
-    c = { dap.continue, 'Continue' },
-    s = { dap.step_into, 'Step Into' },
-    S = { dap.step_over, 'Step Over' },
-    o = { dap.step_out, 'Step Out' },
-    l = { dap.run_last, 'Run Last' },
-    r = { dap.repl.toggle, 'Repl Open' },
-  }, ]]
+  },
   l = {
     name = 'LSP',
-    i = { ':LspInfo<cr>', 'Connected Language Servers' },
+    i = { ':LspInfo<CR>', 'Connected Language Servers' },
     k = { vim.lsp.buf.signature_help, 'Signature help' },
     K = { vim.lsp.buf.hover, 'Hover' },
     w = { vim.lsp.buf.add_workspace_folder, 'Add workspace folder' },
@@ -61,21 +91,24 @@ local mappings = {
     },
     t = { vim.lsp.buf.type_definition, 'Type definition' },
     d = { vim.lsp.buf.definition, 'Go to definition' },
-    r = { '<cmd>Trouble lsp_references<CR>', 'References' },
+    r = { ':Trouble lsp_reference<CR>', 'References' },
     R = { vim.lsp.buf.rename, 'Rename' },
     a = { vim.lsp.buf.code_action, 'Code actions' },
     e = { vim.diagnostic.open_float, 'Show line diagnostics' },
     n = { vim.diagnostic.goto_next, 'Go to next diagnostic' },
     N = { vim.diagnostic.goto_prev, 'Go to previous diagnostic' },
     I = { '<cmd>LspInstallInfo<cr>', 'Install language server' },
-    f = { '<cmd>lua require("lsp_utils").filtered_formatters(0)<CR>', 'Format File' },
-    T = { '<cmd>Trouble<CR>', 'Get Diagnostics' },
+    f = {
+      function()
+        require('language-servers.utils').filtered_formatters(0)
+      end, 'Format File',
+    },
+    T = { ':Trouble<CR>', 'Get Diagnostics' },
   },
-  q = { '<cmd>copen<CR>', 'Open QuickFix List' },
+  q = { ':copen<CR>', 'Open QuickFix List' },
   a = { 'ggVG', 'Select Entire Buffer' },
   x = { ':Bdelete<cr>', 'Close Buffer' },
   X = { ':Bdelete!<cr>', 'Force Close Buffer' },
-  E = { ':e ~/.config/nvim/lua/vapour/user-config/init.lua<cr>', 'Edit User Config' },
   p = {
     name = 'Packer',
     r = { ':PackerClean<cr>', 'Remove Unused Plugins' },
@@ -99,61 +132,6 @@ local mappings = {
   },
 }
 
-if Vapour.plugins.nvim_tree.enabled then mappings.e = { ':NvimTreeToggle<cr>', 'File Explorer' } end
-
--- Alternative method to telescope.builtin.git_files for searching the project
---[[ vim.keymap.set('n', '<leader>fx', function()
-  local project_root = vim.lsp.get_active_clients()[1].config.root_dir
-  require('telescope.builtin').find_files({ cwd = project_root })
-end) ]]
-
-if Vapour.plugins.telescope.enabled then
-  mappings.f = {
-    name = 'Telescope',
-    f = { '<cmd>Telescope find_files theme=ivy<cr>', 'Find Files' },
-    c = { '<cmd>Telescope find_files cwd=~/.config/nvim/lua/ theme=ivy<cr>', 'Search Config' },
-    g = { '<cmd>Telescope git_files theme=ivy<CR>', 'Search Project' },
-    r = { '<cmd>Telescope live_grep<cr>', 'Live Grep' },
-    b = { '<cmd>Telescope buffers bufnr=0<cr>', 'Buffers' },
-    o = { '<cmd>Telescope oldfiles<cr>', 'Recent Files' },
-    R = { '<cmd>Telescope resume<cr>', 'Resume Previous Picker' },
-    n = { '<cmd>Telescope neoclip<cr>', 'Open Clipboard' },
-  }
-end
-
-if not Vapour.settings.always_force_write then
-  mappings.W = { ':w!<cr>', 'Force Write' }
-else
-  -- map n mode w to w!
-end
-
-for plugin, plugin_options in pairs(Vapour.plugins) do
-  if plugin_options.which_key ~= nil and plugin_options.enabled then
-    local whichkey_opts = plugin_options.which_key
-
-    local whichkey_mappings = {}
-
-    if mappings[whichkey_opts.root] ~= nil then
-      whichkey_mappings = mappings[whichkey_opts.root]
-
-      for key, actions in pairs(mappings[whichkey_opts.root]) do
-        whichkey_mappings[key] = actions
-      end
-    else
-      whichkey_mappings = {
-        -- Give a special name if provided otherwise just use the plugin name
-        name = whichkey_opts.name or plugin,
-      }
-    end
-
-    for key, actions in pairs(whichkey_opts.definitions) do whichkey_mappings[key] = actions end
-
-    mappings[whichkey_opts.root] = whichkey_mappings
-  end
-end
-
-mappings = Vapour.utils.tables.copy(mappings, Vapour.plugins.which_key.user_defined)
-
 local opts = { prefix = '<leader>' }
 
-if wk then wk.register(mappings, opts) end
+require('which-key').register(mappings, opts)

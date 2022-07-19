@@ -1,8 +1,6 @@
-local nvimtree = Vapour.utils.plugins.require 'nvim-tree'
-
 local nvimtree_width = math.ceil(vim.api.nvim_win_get_width(0) * 0.2)
 
-nvimtree.setup {
+require('nvim-tree').setup {
   filters = { custom = { '*.tmp', '.git' } },
   disable_netrw = true,
   hijack_netrw = true,

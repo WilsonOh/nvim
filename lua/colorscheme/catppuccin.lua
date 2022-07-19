@@ -1,14 +1,13 @@
-Vapour.utils.plugins.packadd('catppuccin')
-local catppuccin = require('catppuccin')
+vim.cmd [[packadd catppuccin]]
 
-catppuccin.setup({
+require('catppuccin').setup({
   dim_inactive = { enabled = true, shade = 'dark', percentage = 0.15 },
-  transparent_background = Vapour.settings.transparent_bg,
+  transparent_background = false,
   term_colors = true,
   compile = { enabled = true, path = vim.fn.stdpath 'cache' .. '/catppuccin', suffix = '_compiled' },
   styles = {
-    comments = { 'italic' },
-    conditionals = { 'italic' },
+    comments = {},
+    conditionals = {},
     loops = {},
     functions = {},
     keywords = {},
@@ -25,10 +24,10 @@ catppuccin.setup({
     native_lsp = {
       enabled = true,
       virtual_text = {
-        errors = { 'italic' },
-        hints = { 'italic' },
-        warnings = { 'italic' },
-        information = { 'italic' },
+        errors = { 'bold' },
+        hints = { 'bold' },
+        warnings = { 'bold' },
+        information = { 'bold' },
       },
       underlines = {
         errors = { 'underline' },

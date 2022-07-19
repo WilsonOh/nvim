@@ -1,2 +1,2 @@
-Vapour.utils.plugins.packadd('tokyodark.nvim')
+vim.cmd [[ packadd tokyodark.nvim ]]
 vim.cmd('colorscheme tokyodark')

@@ -1,109 +1,76 @@
-if Vapour.plugins.lsp.enabled then
-  local lsp_installer = Vapour.utils.plugins.require('nvim-lsp-installer')
-  if not lsp_installer then return end
-  lsp_installer.on_server_ready(function(server)
+require('nvim-lsp-installer').setup({})
 
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
-                                                                         .make_client_capabilities())
+local lspconfig = require('lspconfig')
 
-    local lsp_utils = require('lsp_utils')
-    local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-
-    -- Attach nvim-navic if client supports document symbols
-    local on_attach = function(client, bufnr)
-      -- if client.server_capabilities.documentSymbolProvider then navic.attach(client, bufnr) end
-      -- Highlight symbol under cursor
-      if client.server_capabilities.documentHighlightProvider then
-        vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
-        vim.api.nvim_clear_autocmds({ buffer = bufnr, group = 'lsp_document_highlight' })
-        vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-          group = 'lsp_document_highlight',
-          buffer = bufnr,
-          callback = vim.lsp.buf.document_highlight,
-        })
-        vim.api.nvim_create_autocmd('CursorMoved', {
-          group = 'lsp_document_highlight',
-          buffer = bufnr,
-          callback = vim.lsp.buf.clear_references,
-        })
-      end
-
-      lsp_utils.get_null_ls_sources()
-      if client.supports_method('textDocument/formatting') then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          group = augroup,
-          buffer = bufnr,
-          callback = function()
-            lsp_utils.filtered_formatters(bufnr)
-          end,
-        })
-      end
-
-      --[[ vim.api.nvim_create_autocmd('CursorHold', {
-        buffer = bufnr,
-        callback = function()
-          local opts = {
-            focusable = false,
-            close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-            border = 'rounded',
-            source = 'always',
-            prefix = ' ',
-            scope = 'cursor',
-          }
-          require("lspsaga.diagnostic").show_line_diagnostics()
-        end,
-      }) ]]
-    end
-    local opts = { capabilities = capabilities, on_attach = on_attach }
-    if Vapour.language_servers[server.name] then
-      opts = Vapour.language_servers[server.name].config(opts)
-    end
-    server:setup(opts)
-    if server.name == 'rust_analyzer' then require('rust-tools').setup({ server = opts }) end
-  end)
-end
-
-local border = {
-  { '╭', 'FloatBorder' }, { '─', 'FloatBorder' }, { '╮', 'FloatBorder' },
-  { '│', 'FloatBorder' }, { '╯', 'FloatBorder' }, { '─', 'FloatBorder' },
-  { '╰', 'FloatBorder' }, { '│', 'FloatBorder' },
+-- LSPs which take in general settings
+local lsps = {
+  'clangd', 'cmake', 'cssls', 'denols', 'emmet_ls', 'gopls', 'hls', 'html', 'marksman', 'pyright',
+  'rust_analyzer', 'tsserver',
 }
 
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or border
-  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
+                                                                     .make_client_capabilities())
+
+local utils = require('language-servers.utils')
+local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+
+local on_attach = function(client, bufnr)
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_augroup('lsp_document_highlight', { clear = false })
+    vim.api.nvim_clear_autocmds({ buffer = bufnr, group = 'lsp_document_highlight' })
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = 'lsp_document_highlight',
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd('CursorMoved', {
+      group = 'lsp_document_highlight',
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
+
+  utils.get_null_ls_sources()
+  if client.supports_method('textDocument/formatting') then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        utils.filtered_formatters(bufnr)
+      end,
+    })
+  end
 end
 
--- Diagnostics
+local opts = { capabilities = capabilities, on_attach = on_attach }
 
-local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+for _, lsp in ipairs(lsps) do lspconfig[lsp].setup(opts) end
 
-vim.diagnostic.config({
-  virtual_text = {
-    source = 'always', -- Or "if_many"
-  },
-  float = {
-    source = 'always', -- Or "if_many"
+-- LSPs with special settings
+lspconfig.sumneko_lua.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    Lua = {
+      runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
+      diagnostics = { globals = { 'vim' } },
+      workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+      telemetry = { enable = false },
+    },
   },
 })
 
-for type, icon in pairs(signs) do
-  local hl = 'DiagnosticSign' .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-end
+lspconfig.jsonls.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    json = { schemas = require('schemastore').json.schemas(), validate = { enable = true } },
+  },
+})
 
--- Show icons in autocomplete
-require('vim.lsp.protocol').CompletionItemKind = {
-  '', '', 'ƒ', ' ', '', '', '', 'ﰮ', '', '', '', '', '了', ' ',
-  '﬌ ', ' ', ' ', '', ' ', ' ', ' ', ' ', '', '', '<>',
-}
+-- Calling the setup function through language specific plugins
+require('rust-tools').setup()
+require('clangd_extensions').setup()
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-      underline = true,
-      virtual_text = { source = 'always', 'spacing = 5', severity_limit = 'Warning' },
-      update_in_insert = true,
-    })
+require('language-servers.settings')

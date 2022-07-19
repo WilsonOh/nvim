@@ -1,2 +1,2 @@
-Vapour.utils.plugins.packadd('nord.nvim')
+vim.cmd [[ packadd nord.nvim ]]
 require('nord').set()

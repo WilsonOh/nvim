@@ -1,6 +1,6 @@
-local null_ls = Vapour.utils.plugins.require('null-ls')
+local null_ls = require('null-ls')
 
-local lsp_utils = require('lsp_utils')
+local lsp_utils = require('language-servers.utils')
 
 if not null_ls then return end
 

@@ -73,9 +73,6 @@ set('n', 'gC', '0C', opts)
 -- Source Current Buffer
 set('n', '<leader><leader>s', '<cmd>%so<CR>', opts)
 
--- Range Formatting in Visual Mode
-set('v', '<leader>f', '<cmd>lua require(\'lsp_utils\').filtered_range_formatters(0)<cr>', opts)
-
 -- Telescope utils test
 set('n', '<leader>m', function()
   require('telescope_utils').custom_search()

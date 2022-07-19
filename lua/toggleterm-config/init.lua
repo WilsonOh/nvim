@@ -1,8 +1,6 @@
-local toggleterm = Vapour.utils.plugins.require 'toggleterm'
-
 local toggleterm_height = math.ceil(vim.api.nvim_win_get_height(0) * 0.45)
 
-toggleterm.setup {
+require('toggleterm').setup {
   size = toggleterm_height,
   open_mapping = [[<c-\>]],
   shade_filetypes = {},

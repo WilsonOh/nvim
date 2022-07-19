@@ -1,8 +1,6 @@
-Vapour.utils.plugins.packadd('nvim-treesitter')
+require('nvim-treesitter.install').compilers = { 'clang' }
 
-Vapour.utils.plugins.require'nvim-treesitter.install'.compilers = { 'clang' }
-
-Vapour.utils.plugins.require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   enabled = true,
   ensure_installed = 'all',
   ignore_install = { 'phpdoc' },
@@ -11,7 +9,7 @@ Vapour.utils.plugins.require'nvim-treesitter.configs'.setup {
   autotag = { enable = true },
   endwise = { enable = true },
   rainbow = { enable = true, extended_mode = false, disable = { 'html' } },
-  textsubjects = {
+  --[[ textsubjects = {
     enable = true,
     prev_selection = ',', -- (Optional) keymap to select the previous selection
     keymaps = {
@@ -19,7 +17,7 @@ Vapour.utils.plugins.require'nvim-treesitter.configs'.setup {
       [';'] = 'textsubjects-container-outer',
       ['i;'] = 'textsubjects-container-inner',
     },
-  },
+  }, ]]
   textobjects = {
     select = {
       enable = true,

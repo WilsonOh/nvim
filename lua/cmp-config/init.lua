@@ -1,8 +1,8 @@
 vim.o.completeopt = 'menu,menuone,noselect'
 
-local luasnip = Vapour.utils.plugins.require('luasnip')
-local cmp = Vapour.utils.plugins.require('cmp')
-local lspkind = Vapour.utils.plugins.require('lspkind')
+local luasnip = require('luasnip')
+local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 if not cmp or not luasnip or not lspkind then return end
 
@@ -12,11 +12,10 @@ local function has_words_before()
              :match '%s' == nil
 end
 
-local function get_sources()
-  local sources = Vapour.plugins.lsp.cmp_sources
-  table.insert(sources, { name = 'dictionary', keyword_length = 2 })
-  return sources
-end
+local cmp_sources = {
+  { name = 'nvim_lsp' }, { name = 'luasnip' }, { name = 'buffer' }, { name = 'path' },
+  { name = 'emoji' }, { name = 'dictionary', keyword_length = 2 },
+}
 
 cmp.setup({
   enabled = function()
@@ -89,15 +88,8 @@ cmp.setup({
       end
     end, { 'i', 's' }),
   },
-  sources = get_sources(),
+  sources = cmp_sources,
 })
-vim.cmd(
-    'autocmd FileType TelescopePrompt lua Vapour.utils.plugins.require(\'cmp\').setup.buffer { enabled = false }')
+vim.cmd('autocmd FileType TelescopePrompt lua require(\'cmp\').setup.buffer { enabled = false }')
 
 require('snippets')
-
---[[
-cmp.setup.cmdline(':%s/', {
-  view = { entries = { name = 'custom', selection_order = 'near_cursor' } },
-  sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }, { { name = 'fuzzy_buffer' } })
-}) ]]

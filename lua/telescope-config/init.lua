@@ -1,5 +1,5 @@
-local actions = Vapour.utils.plugins.require('telescope.actions')
-local telescope = Vapour.utils.plugins.require('telescope')
+local actions = require('telescope.actions')
+local telescope = require('telescope')
 if telescope and actions then
   telescope.setup {
     defaults = {
