@@ -140,7 +140,7 @@ return require('packer').startup(function(use)
   use { 'b0o/schemastore.nvim' }
 
   -- Make configuring the natice LSP even easier
-  use { 'williamboman/nvim-lsp-installer', cmd = 'LspInstall*' }
+  use { 'williamboman/nvim-lsp-installer' }
 
   -- Provide nice vscode-like icons for autocomplete
   use {
@@ -237,7 +237,7 @@ return require('packer').startup(function(use)
   }
 
   -- VERY useful plugin for keymaps, especially multi-key keymaps
-  use { 'folke/which-key.nvim', event = 'BufWinEnter' }
+  use { 'folke/which-key.nvim' }
 
   -- Modern vim-surround replacement which supports lua functions
   use({
