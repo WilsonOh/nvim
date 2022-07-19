@@ -22,7 +22,7 @@ dashboard.section.buttons.val = {
   dashboard.button('c', '  > Search Configs',
                    ':Telescope find_files cwd=~/.config/nvim/lua/<CR>', opts),
   dashboard.button('r', '  > Recent', ':Telescope oldfiles<CR>', opts),
-  dashboard.button('s', '  > Settings', ':e ~/.config/nvim/lua/vapour/init.lua<CR>', opts),
+  dashboard.button('s', '  > Settings', ':e ~/.config/nvim/lua/core/init.lua<CR>', opts),
   dashboard.button('q', '  > Quit NVIM', ':qa<CR>', opts),
 }
 
