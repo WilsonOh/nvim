@@ -70,7 +70,7 @@ lspconfig.jsonls.setup({
 })
 
 -- Calling the setup function through language specific plugins
-require('rust-tools').setup()
-require('clangd_extensions').setup()
+require('rust-tools').setup({ server = opts })
+require('clangd_extensions').setup({ server = opts })
 
 require('language-servers.settings')

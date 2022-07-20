@@ -78,8 +78,12 @@ local config = {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = {
-      'branch', 'diff', 'diagnostics', { 'filetype', icon_only = true, separator = '' },
-      { 'filename', symbols = { modified = ' ', readonly = '[RO]' }, separator = '' },
+      'branch', 'diff', 'diagnostics', { 'filetype', icon_only = true, separator = '' }, {
+        'filename',
+        symbols = { modified = ' ', readonly = '[RO]' },
+        separator = '',
+        padding = { left = 0, right = 1 },
+      },
     },
     lualine_c = {},
     lualine_x = {},
@@ -87,7 +91,7 @@ local config = {
     lualine_z = {
       {
         function()
-          return '[%l/%L] C:%c並%p%% '
+          return '[%l/%L] C:%c 並%p%% '
         end,
       },
     },
