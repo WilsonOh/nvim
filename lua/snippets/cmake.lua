@@ -17,7 +17,6 @@ local function get_cmake_sources(path)
     local ext = file:match('^.+(%..+)$')
     return vim.tbl_contains(exts, ext)
   end, files)
-  P(files)
   if #files == 0 then return '' end
   local ret = ''
   for _, file in ipairs(files) do ret = ret .. ' ' .. file end
