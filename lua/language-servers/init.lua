@@ -30,7 +30,6 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  utils.get_null_ls_sources()
   if client.supports_method('textDocument/formatting') then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd('BufWritePre', {
@@ -41,6 +40,7 @@ local on_attach = function(client, bufnr)
       end,
     })
   end
+  utils.hover_function_on_hold(client, bufnr)
 end
 
 local opts = { capabilities = capabilities, on_attach = on_attach }

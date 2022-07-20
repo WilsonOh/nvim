@@ -2,6 +2,24 @@ local null_ls = require('null-ls')
 
 local M = {}
 
+M.hover_function_on_hold = function(_, bufnr)
+
+  vim.api.nvim_create_augroup('lsp_hover', { clear = true })
+  vim.api.nvim_clear_autocmds({ buffer = bufnr, group = 'lsp_hover' })
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+    group = 'lsp_hover',
+    buffer = bufnr,
+    callback = function()
+      local ts_utils = require('nvim-treesitter.ts_utils')
+      local cur_node = ts_utils.get_node_at_cursor()
+      if not cur_node or (cur_node:type() ~= 'identifier') then return end
+      while (cur_node and cur_node:type() ~= 'function_call') do cur_node = cur_node:parent() end
+      if not cur_node then return end
+      vim.lsp.buf.hover()
+    end,
+  })
+end
+
 M.get_null_ls_sources = function()
   local filetype = vim.bo.filetype
   local null_ls_sources = null_ls.get_sources()
