@@ -237,7 +237,12 @@ return require('packer').startup(function(use)
   }
 
   -- VERY useful plugin for keymaps, especially multi-key keymaps
-  use { 'folke/which-key.nvim' }
+  use {
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key-config')
+    end,
+  }
 
   -- Modern vim-surround replacement which supports lua functions
   use({
