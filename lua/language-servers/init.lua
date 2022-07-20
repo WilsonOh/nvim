@@ -40,7 +40,7 @@ local on_attach = function(client, bufnr)
       end,
     })
   end
-  utils.hover_function_on_hold(client, bufnr)
+  -- utils.hover_function_on_hold(client, bufnr)
 end
 
 local opts = { capabilities = capabilities, on_attach = on_attach }
