@@ -91,7 +91,7 @@ local mappings = {
     },
     t = { vim.lsp.buf.type_definition, 'Type definition' },
     d = { vim.lsp.buf.definition, 'Go to definition' },
-    r = { ':Trouble lsp_reference<CR>', 'References' },
+    r = { ':Trouble lsp_references<CR>', 'References' },
     R = { vim.lsp.buf.rename, 'Rename' },
     a = { vim.lsp.buf.code_action, 'Code actions' },
     e = { vim.diagnostic.open_float, 'Show line diagnostics' },
