@@ -1,8 +1,6 @@
 local colorscheme = 'catppuccin'
 local transparent_bg = false
 
--- Whichkey
-require('which-key-config')
 -- General
 require('core.options')
 require('core.plugins')
