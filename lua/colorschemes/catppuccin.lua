@@ -1,5 +1,3 @@
-vim.cmd [[packadd catppuccin]]
-
 require('catppuccin').setup({
   dim_inactive = { enabled = true, shade = 'dark', percentage = 0.15 },
   transparent_background = false,
@@ -66,4 +64,3 @@ require('catppuccin').setup({
 })
 
 vim.g.catppuccin_flavour = 'macchiato' -- latte, frappe, macchiato, mocha
-vim.cmd [[colorscheme catppuccin]]

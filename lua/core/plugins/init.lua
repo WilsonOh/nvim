@@ -118,12 +118,7 @@ return require('packer').startup(function(use)
 
   -- Colorschemes
   use { 'rose-pine/neovim', as = 'rose-pine', opt = true }
-  use { 'joshdick/onedark.vim', opt = true }
-  use { 'gruvbox-community/gruvbox', opt = true }
-  use { 'shaunsingh/nord.nvim', opt = true }
-  use { 'folke/tokyonight.nvim', opt = true }
-  use { 'dracula/vim', as = 'dracula', opt = true }
-  use { 'tiagovla/tokyodark.nvim', opt = true }
+  use { 'ellisonleao/gruvbox.nvim', as = 'gruvbox', opt = true }
   use { 'catppuccin/nvim', as = 'catppuccin', opt = true, run = 'CatppuccinCompile' }
   use { 'rebelot/kanagawa.nvim', as = 'kanagawa', opt = true }
   -------------------------------------------------------------
@@ -140,7 +135,24 @@ return require('packer').startup(function(use)
   use { 'b0o/schemastore.nvim' }
 
   -- Make configuring the natice LSP even easier
-  use { 'williamboman/nvim-lsp-installer' }
+  use {
+    'williamboman/mason.nvim',
+    config = function()
+      require('mason').setup({
+        ui = {
+          border = 'single',
+          icons = { package_installed = '✓', package_pending = '➜', package_uninstalled = '✗' },
+        },
+      })
+
+    end,
+  }
+  use {
+    'williamboman/mason-lspconfig.nvim',
+    config = function()
+      require('mason-lspconfig').setup({ ensure_installed = { 'sumneko_lua', 'clangd', 'pyright' } })
+    end,
+  }
 
   -- Provide nice vscode-like icons for autocomplete
   use {

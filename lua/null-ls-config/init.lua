@@ -8,8 +8,6 @@ local formatting = null_ls.builtins.formatting
 
 local diag = null_ls.builtins.diagnostics
 
-local code_action = null_ls.builtins.code_actions
-
 local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
 local sources = {

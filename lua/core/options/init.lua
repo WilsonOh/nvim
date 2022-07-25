@@ -18,6 +18,7 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.updatetime = 300
 vim.o.timeoutlen = 100
+vim.o.background = 'dark'
 -- vim.o.clipboard = 'unnamedplus'
 vim.o.hlsearch = false
 vim.o.ignorecase = true

@@ -18,8 +18,8 @@ local header = {
   '                                                     ',
 }
 
-local alpha_header_hl = vim.api.nvim_set_hl(0, 'AlphaHeader', { fg = '#1b63a6', bold = true })
-local alpha_info_hl = vim.api.nvim_set_hl(0, 'AlphaInfo', { fg = '#8aa61b', bold = true })
+vim.api.nvim_set_hl(0, 'AlphaHeader', { fg = '#1b63a6', bold = true })
+vim.api.nvim_set_hl(0, 'AlphaInfo', { fg = '#8aa61b', bold = true })
 
 dashboard.section.header.type = 'text';
 dashboard.section.header.val = header;
@@ -76,19 +76,6 @@ dashboard.section.buttons.val = {
 -- │ Footer                                                   │
 -- ╰──────────────────────────────────────────────────────────╯
 
-local function file_exists(file)
-  local f = io.open(file, 'rb')
-  if f then f:close() end
-  return f ~= nil
-end
-
-local function line_from(file)
-  if not file_exists(file) then return {} end
-  local lines = {}
-  for line in io.lines(file) do lines[#lines + 1] = line end
-  return lines
-end
-
 local function footer()
   local plugins = #vim.tbl_keys(packer_plugins)
   local v = vim.version()
@@ -111,7 +98,8 @@ local opts = {
   layout = {
     { type = 'padding', val = 5 }, section.header, { type = 'padding', val = 1 },
     section.hi_top_section, section.hi_middle_section, section.hi_bottom_section,
-    { type = 'padding', val = 2 }, section.buttons, { type = 'padding', val = 5 }, section.footer,
+    { type = 'padding', val = 2 }, section.buttons, --[[ { type = 'padding', val = 5 } ]]
+    section.footer,
   },
   opts = { margin = 5 },
 }

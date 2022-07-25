@@ -2,11 +2,15 @@ local jdtls = require('jdtls')
 local jdtls_dap = require('jdtls.dap')
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local workspace_dir = '/home/wilsonoh/java/workspace/' .. project_name
+
+local current_os = io.popen('uname'):read('*a'):gsub('%s', '')
 
 local home = os.getenv('HOME')
 
-local current_os = io.popen('uname'):read('*a')
+local workspace_root = current_os == 'Darwin' and '/coding_stuff/java_projects/workspaces/'
+                           or '/java/workspaces/'
+
+local workspace_dir = home .. workspace_root .. project_name
 
 local config_dir = current_os == 'Darwin' and 'config_mac' or 'config_linux'
 
@@ -16,8 +20,6 @@ local config = {
     '-Dosgi.bundles.defaultStartLevel=4', '-Declipse.product=org.eclipse.jdt.ls.core.product',
     '-Dlog.protocol=true', '-Dlog.level=ALL', '-Xms1g', '--add-modules=ALL-SYSTEM', '--add-opens',
     'java.base/java.util=ALL-UNNAMED', '--add-opens', 'java.base/java.lang=ALL-UNNAMED', '-jar',
-    '/home/wilsonoh/.local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
-    '-configuration', '/home/wilsonoh/.local/jdtls/config_linux', '-data', workspace_dir,
     home .. '/.local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
     '-configuration', home .. '/.local/jdtls/' .. config_dir, '-data', workspace_dir,
   },
@@ -43,7 +45,7 @@ local config = {
   init_options = {
     bundles = {
       vim.fn.glob(
-          '/home/wilsonoh/.m2/repository/com/microsoft/java/com.microsoft.java.debug.plugin/0.38.0/com.microsoft.java.debug.plugin-*.jar'),
+          '/Users/wilsonoh/.m2/repository/com/microsoft/java/com.microsoft.java.debug.plugin/0.38.0/com.microsoft.java.debug.plugin-0.38.0.jar'),
     },
   },
 }

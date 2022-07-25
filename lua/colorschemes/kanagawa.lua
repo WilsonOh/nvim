@@ -1,5 +1,3 @@
-vim.cmd [[ packadd kanagawa ]]
-
 -- Default options:
 require('kanagawa').setup({
   undercurl = true, -- enable undercurls
@@ -17,6 +15,3 @@ require('kanagawa').setup({
   colors = {},
   overrides = {},
 })
-
--- setup must be called before loading
-vim.cmd('colorscheme kanagawa')

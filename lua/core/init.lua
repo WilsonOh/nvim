@@ -1,12 +1,7 @@
-local colorscheme = 'catppuccin'
-local transparent_bg = false
-
 -- General
 require('core.options')
 require('core.plugins')
 require('core.keybindings')
-
-require('colorschemes.' .. colorscheme)
 
 -- LSP and Autocomplete
 require('language-servers')
@@ -14,4 +9,6 @@ require('language-servers')
 -- Source all global functions
 require('globals')
 
-if transparent_bg then vim.cmd('hi Normal guibg=NONE ctermbg=NONE') end
+-- Global helper function for setting colorschemes (calling packadd and colorscheme cmds)
+-- Second optional parameter sets transparent background if true
+set_colorscheme('catppuccin')

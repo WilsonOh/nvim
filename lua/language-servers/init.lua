@@ -1,12 +1,4 @@
-require('nvim-lsp-installer').setup({})
-
 local lspconfig = require('lspconfig')
-
--- LSPs which take in general settings
-local lsps = {
-  'clangd', 'cmake', 'cssls', 'denols', 'emmet_ls', 'gopls', 'hls', 'html', 'marksman', 'pyright',
-  'rust_analyzer', 'tsserver',
-}
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol
                                                                      .make_client_capabilities())
@@ -45,32 +37,42 @@ end
 
 local opts = { capabilities = capabilities, on_attach = on_attach }
 
-for _, lsp in ipairs(lsps) do lspconfig[lsp].setup(opts) end
-
--- LSPs with special settings
-lspconfig.sumneko_lua.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
-      diagnostics = { globals = { 'vim' } },
-      workspace = { library = vim.api.nvim_get_runtime_file('', true) },
-      telemetry = { enable = false },
-    },
-  },
+require('mason-lspconfig').setup_handlers({
+  -- Generic lspconfig setup
+  function(server_name)
+    lspconfig[server_name].setup(opts)
+  end,
+  -- Calling the setup function through language specific plugins
+  ['rust_analyzer'] = function()
+    require('rust-tools').setup({ server = opts })
+  end,
+  ['clangd'] = function()
+    require('clangd_extensions').setup({ server = opts })
+  end,
+  -- LSPs with special settings
+  ['sumneko_lua'] = function()
+    lspconfig.sumneko_lua.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        Lua = {
+          runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
+          diagnostics = { globals = { 'vim' } },
+          workspace = { library = vim.api.nvim_get_runtime_file('', true) },
+          telemetry = { enable = false },
+        },
+      },
+    })
+  end,
+  ['jsonls'] = function()
+    lspconfig.jsonls.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = {
+        json = { schemas = require('schemastore').json.schemas(), validate = { enable = true } },
+      },
+    })
+  end,
 })
-
-lspconfig.jsonls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  settings = {
-    json = { schemas = require('schemastore').json.schemas(), validate = { enable = true } },
-  },
-})
-
--- Calling the setup function through language specific plugins
-require('rust-tools').setup({ server = opts })
-require('clangd_extensions').setup({ server = opts })
 
 require('language-servers.settings')
