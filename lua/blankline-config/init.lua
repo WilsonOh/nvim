@@ -24,7 +24,7 @@ local show_rainbow = false
 require("indent_blankline").setup({
 	show_end_of_line = false,
 	space_char_blankline = " ",
-	filetype_exclude = { "alpha", "packer", "NvimTree", "mason.nvim" },
+	filetype_exclude = { "alpha", "packer", "NvimTree", "mason.nvim", "help" },
 	buftype_exclude = { "terminal" },
 	show_current_context = true,
 	char_highlight_list = show_rainbow and get_char_highlights() or {},
