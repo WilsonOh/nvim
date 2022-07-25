@@ -1,4 +1,4 @@
-local nvimtree_width = math.ceil(vim.api.nvim_win_get_width(0) * 0.2)
+local nvimtree_width = math.ceil(vim.api.nvim_win_get_width(0) * 0.3)
 
 require('nvim-tree').setup {
   filters = { custom = { '*.tmp', '.git' } },

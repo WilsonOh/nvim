@@ -35,5 +35,7 @@ return {
     t('{PROJECT_NAME}'), f(function(_, _, _)
       return get_cmake_sources('.')
     end, {}, {}),
-  })),
+  })), s('fetchd', fmt('FetchContent_Declare(\n\t{}\n\tGIT_REPOSITORY {}\n\tGIT_TAG {}\n)',
+                       { i(1, 'target_name'), i(2, 'repo'), i(3, 'tag') })),
+  s('fetchm', fmt('FetchContent_MakeAvailable({})', { i(1) })),
 }
