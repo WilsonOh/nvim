@@ -1,4 +1,4 @@
-local ls = require "luasnip"
+local ls = require("luasnip")
 local s = ls.snippet
 local sn = ls.snippet_node
 local isn = ls.indent_snippet_node
@@ -16,28 +16,31 @@ local lambda = require("luasnip.extras").l
 local rep = require("luasnip.extras").rep
 
 return {
-  s("test", fmt(
-    [[
+	s(
+		"test",
+		fmt(
+			[[
       #[test]
       fn {}(){}{{
           {}
       }}
     ]],
-    {
-      i(1, "testname"),
-      d(2, function ()
-        local nodes = {}
-        table.insert(nodes, t(""))
-        table.insert(nodes, t(" -> Result<Ok(), Error> "))
-        local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-        for _, line in ipairs(lines) do
-          if line:match("anyhow::Result") then
-            table.insert(nodes, t(" -> Result<()> "))
-          end
-        end
-        return sn(nil, c(1, nodes))
-      end),
-      i(0),
-    }
-  ))
+			{
+				i(1, "testname"),
+				d(2, function()
+					local nodes = {}
+					table.insert(nodes, t(""))
+					table.insert(nodes, t(" -> Result<Ok(), Error> "))
+					local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+					for _, line in ipairs(lines) do
+						if line:match("anyhow::Result") then
+							table.insert(nodes, t(" -> Result<()> "))
+						end
+					end
+					return sn(nil, c(1, nodes))
+				end),
+				i(0),
+			}
+		)
+	),
 }
