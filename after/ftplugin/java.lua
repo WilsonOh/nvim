@@ -13,6 +13,14 @@ local workspace_dir = home .. workspace_root .. project_name
 
 local config_dir = current_os == "Darwin" and "config_mac" or "config_linux"
 
+local jdtls_path = require("mason-registry").get_package("jdtls"):get_install_path()
+
+local jdtls_jar = jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+
+local jdtls_config = jdtls_path .. "/" .. config_dir
+
+local utils = require("language-servers.utils")
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local config = {
 	cmd = {
 		"java",
@@ -28,38 +36,49 @@ local config = {
 		"--add-opens",
 		"java.base/java.lang=ALL-UNNAMED",
 		"-jar",
-		home .. "/.local/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar",
+		jdtls_jar,
 		"-configuration",
-		home .. "/.local/jdtls/" .. config_dir,
+		jdtls_config,
 		"-data",
 		workspace_dir,
 	},
-	on_attach = function(_, bufnr)
-		jdtls.setup_dap({ hotcodereplace = "auto" })
-		jdtls_dap.setup_dap_main_class_configs()
+	on_attach = function(client, bufnr)
+		-- jdtls.setup_dap({ hotcodereplace = "auto" })
+		-- jdtls_dap.setup_dap_main_class_configs()
 
-		vim.api.nvim_create_autocmd("CursorHold", {
-			buffer = bufnr,
-			callback = function()
-				local opts = {
-					focusable = false,
-					close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-					border = "rounded",
-					source = "always",
-					prefix = " ",
-					scope = "cursor",
-				}
-				vim.diagnostic.open_float(nil, opts)
-			end,
-		})
+		if client.server_capabilities.documentHighlightProvider then
+			vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+			vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
+			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+				group = "lsp_document_highlight",
+				buffer = bufnr,
+				callback = vim.lsp.buf.document_highlight,
+			})
+			vim.api.nvim_create_autocmd("CursorMoved", {
+				group = "lsp_document_highlight",
+				buffer = bufnr,
+				callback = vim.lsp.buf.clear_references,
+			})
+		end
+
+		if client.supports_method("textDocument/formatting") then
+			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = augroup,
+				buffer = bufnr,
+				callback = function()
+					utils.filtered_formatters(bufnr)
+				end,
+			})
+		end
 	end,
-	init_options = {
+	--[[ init_options = {
 		bundles = {
 			vim.fn.glob(
 				"/Users/wilsonoh/.m2/repository/com/microsoft/java/com.microsoft.java.debug.plugin/0.38.0/com.microsoft.java.debug.plugin-0.38.0.jar"
 			),
 		},
-	},
+	} ]]
 }
 
 jdtls.start_or_attach(config)

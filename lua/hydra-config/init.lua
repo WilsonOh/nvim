@@ -133,7 +133,14 @@ Hydra({
 		{ "l", dap.run_last },
 		{ "r", dap.repl.toggle },
 		{ "<Esc>", nil, { exit = true } },
-		{ "q", dap.terminate },
+		{
+			"q",
+			function()
+				dap.disconnect()
+				dap.terminate()
+				dap.close()
+			end,
+		},
 		{ "R", dap.run_to_cursor },
 	},
 })

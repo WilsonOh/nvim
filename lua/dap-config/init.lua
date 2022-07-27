@@ -15,9 +15,9 @@ vim.fn.sign_define("DapBreakpoint", dap_signs.breakpoint)
 vim.fn.sign_define("DapBreakpointRejected", dap_signs.breakpoint_rejected)
 vim.fn.sign_define("DapStopped", dap_signs.stopped)
 
-local codelldb_path = require("mason-registry").get_package("cpptools"):get_install_path()
+local cpptools_path = require("mason-registry").get_package("cpptools"):get_install_path()
 
-local cmd = codelldb_path .. "/extension/debugAdapters/bin/OpenDebugAD7"
+local cmd = cpptools_path .. "/extension/debugAdapters/bin/OpenDebugAD7"
 
 dap.adapters.cppdbg = { id = "cppdbg", type = "executable", command = cmd }
 
@@ -38,7 +38,7 @@ dap.configurations.cpp = {
 		request = "launch",
 		MIMode = "gdb",
 		miDebuggerServerAddress = "localhost:1234",
-		miDebuggerPath = "/usr/bin/gdb",
+		miDebuggerPath = "/usr/sbin/gdb",
 		cwd = "${workspaceFolder}",
 		program = function()
 			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")

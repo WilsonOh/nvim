@@ -60,7 +60,7 @@ M.get_navic = function()
 end ]]
 
 M.filtered_formatters = function(bufnr)
-	local clients = vim.lsp.get_active_clients()
+	local clients = vim.lsp.get_active_clients({ bufnr = 0 })
 	local formatting_clients = {}
 	for _, client in ipairs(clients) do
 		if

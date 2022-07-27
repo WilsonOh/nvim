@@ -72,6 +72,7 @@ require("mason-lspconfig").setup_handlers({
 			},
 		})
 	end,
+	["jdtls"] = function() end,
 })
 
 require("language-servers.settings")
