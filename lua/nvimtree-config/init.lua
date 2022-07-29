@@ -5,7 +5,7 @@ require("nvim-tree").setup({
 	disable_netrw = true,
 	hijack_netrw = true,
 	open_on_setup = true,
-	ignore_ft_on_setup = { "dashboard" },
+	ignore_ft_on_setup = { "alpha" },
 	open_on_tab = false,
 	hijack_cursor = true,
 	update_cwd = true,
@@ -20,6 +20,7 @@ require("nvim-tree").setup({
 	renderer = {
 		indent_markers = { enable = true, icons = { corner = "└ ", edge = "│ ", none = "  " } },
 	},
+	diagnostics = { enable = true },
 })
 vim.cmd([[
 autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
