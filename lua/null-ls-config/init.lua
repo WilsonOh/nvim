@@ -24,6 +24,7 @@ local sources = {
 	formatting.black,
 	diag.flake8,
 	formatting.cmake_format,
+	formatting.cbfmt,
 }
 
 null_ls.setup({
