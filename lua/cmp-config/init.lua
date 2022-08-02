@@ -24,6 +24,10 @@ local cmp_sources = {
 
 cmp.setup({
 	enabled = function()
+		-- disable if in telescope
+		if vim.bo.filetype == "TelescopePrompt" then
+			return
+		end
 		-- disable completion in comments
 		local context = require("cmp.config.context")
 		-- keep command mode completion enabled when cursor is in a comment
@@ -95,6 +99,5 @@ cmp.setup({
 	},
 	sources = cmp_sources,
 })
-vim.cmd("autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }")
 
 require("snippets")

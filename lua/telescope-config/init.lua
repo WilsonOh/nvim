@@ -10,7 +10,7 @@ if telescope and actions then
 				horizontal = { mirror = false },
 				vertical = { mirror = false },
 			},
-			prompt_prefix = " ",
+			prompt_prefix = " ",
 			selection_caret = " ",
 			entry_prefix = "  ",
 			initial_mode = "insert",
@@ -36,7 +36,6 @@ if telescope and actions then
 					["<C-j>"] = actions.move_selection_next,
 					["<C-k>"] = actions.move_selection_previous,
 					["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-					["<esc>"] = actions.close,
 					["<CR>"] = actions.select_default + actions.center,
 				},
 				n = {
