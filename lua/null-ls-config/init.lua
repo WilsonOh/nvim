@@ -12,23 +12,30 @@ local diag = null_ls.builtins.diagnostics
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
+local ca = null_ls.builtins.code_actions
+
 local sources = {
-	formatting.gofmt, --[[ formatting.lua_format.with({
-    extra_args = {
-      '--no-keep-simple-function-one-line', '--no-break-after-operator', '--column-limit=100',
-      '--break-after-table-lb', '--indent-width=2', '--extra-sep-at-table-end',
-      '--double-quote-to-single-quote', '--spaces-inside-table-braces',
-    },
-  }) ]]
+	formatting.gofmt,
 	formatting.stylua,
 	formatting.black,
 	diag.flake8,
 	formatting.cmake_format,
 	formatting.cbfmt,
+	formatting.prettier,
+	diag.eslint,
+	ca.eslint,
 }
 
 null_ls.setup({
 	sources = sources,
+	root_dir = require("null-ls.utils").root_pattern(
+		".null-ls-root",
+		"Makefile",
+		".git",
+		"package.json",
+		"deno.json",
+		"Cargo.toml"
+	),
 	on_attach = function(client, bufnr)
 		lsp_utils.get_null_ls_sources()
 		if client.supports_method("textDocument/formatting") then

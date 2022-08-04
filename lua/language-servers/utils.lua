@@ -2,6 +2,34 @@ local null_ls = require("null-ls")
 
 local M = {}
 
+M.find_project_root = function()
+	local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+	local non_null_ls_clients = vim.tbl_filter(function(client)
+		return client.name ~= null_ls
+	end, clients)
+	for _, client in ipairs(non_null_ls_clients) do
+		if client.config.root_dir ~= nil then
+			return client.config.root_dir
+		end
+	end
+	return nil
+end
+
+M.format_json = function(bufnr, compact)
+	local curr_buf = bufnr or 0
+	local is_compact = compact == nil and false or compact
+	local compact_cmd = is_compact and "-c" or ""
+	vim.fn.jobstart({ "jq", compact_cmd, ".", vim.fn.expand("%:p") }, {
+		stdout_buffered = true,
+		on_stdout = function(_, data)
+			if data then
+				vim.api.nvim_buf_set_lines(curr_buf, 0, -1, false, data)
+				vim.api.nvim_buf_set_lines(curr_buf, -2, -1, false, {})
+			end
+		end,
+	})
+end
+
 M.hover_function_on_hold = function(_, bufnr)
 	vim.api.nvim_create_augroup("lsp_hover", { clear = true })
 	vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_hover" })
