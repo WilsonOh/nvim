@@ -71,7 +71,7 @@ local map_opts = { silent = true }
 dashboard.section.buttons.val = {
 	dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>", map_opts),
 	dashboard.button("f", "  > Find file", ":Telescope find_files<CR>", map_opts),
-	dashboard.button("c", "  > Search Configs", ":Telescope find_files cwd=~/.config/nvim/lua/<CR>", map_opts),
+	dashboard.button("c", "  > Search Configs", ":Telescope find_files cwd=~/.config/<CR>", map_opts),
 	dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>", map_opts),
 	dashboard.button("s", "  > Settings", ":e ~/.config/nvim/lua/core/init.lua<CR>", map_opts),
 	dashboard.button("q", "  > Quit NVIM", ":qa<CR>", map_opts),

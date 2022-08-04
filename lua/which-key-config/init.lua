@@ -4,7 +4,13 @@ local mappings = {
 		name = "Telescope",
 		f = { ":Telescope find_files theme=ivy<CR>", "Find Files" },
 		c = { ":Telescope find_files cwd=~/.config/nvim/ theme=ivy<CR>", "Search Config" },
-		g = { ":Telescope git_files theme=ivy<CR>", "Search Project" },
+		g = { ":Telescope git_files theme=ivy<CR>", "Search Git Files" },
+		p = {
+			function()
+				require("telescope_utils").project_search()
+			end,
+			"Search Project",
+		},
 		r = { ":Telescope live_grep<CR>", "Live Grep" },
 		b = { ":Telescope buffers bufnr=0<CR>", "Buffers" },
 		o = { ":Telescope oldfiles<CR>", "Recent Files" },
