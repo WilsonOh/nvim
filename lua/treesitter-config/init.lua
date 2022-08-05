@@ -9,6 +9,7 @@ require("nvim-treesitter.configs").setup({
 	autotag = { enable = true },
 	endwise = { enable = true },
 	rainbow = { enable = true, extended_mode = false, disable = { "html" } },
+	context_commentstring = { enable = true, enable_autocmd = false },
 	--[[ textsubjects = {
     enable = true,
     prev_selection = ',', -- (Optional) keymap to select the previous selection

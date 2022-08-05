@@ -290,7 +290,7 @@ return require("packer").startup(function(use)
 	use({
 		"numToStr/Comment.nvim",
 		config = function()
-			require("Comment").setup({ mappings = { extended = true } })
+			require("comment-config")
 		end,
 		event = "BufRead",
 	})
@@ -424,6 +424,8 @@ return require("packer").startup(function(use)
 	use({ "lewis6991/impatient.nvim" })
 
 	use({ "dstein64/vim-startuptime" })
+
+	use({ "JoosepAlviste/nvim-ts-context-commentstring" })
 
 	if Packer_bootstrap then
 		require("packer").sync()
