@@ -1,14 +1,18 @@
 require("nvim-surround").buffer_setup({
-	delimiters = {
-		pairs = {
-			["i"] = function()
-				return { "#include <", ">" }
+	surrounds = {
+		["i"] = {
+			add = function()
+				return { { "#include <" }, { ">" } }
 			end,
-			["I"] = function()
-				return { '#include "', '"' }
+		},
+		["I"] = {
+			add = function()
+				return { { '#include "' }, { '"' } }
 			end,
-			["p"] = function()
-				return { "std::cout << ", [[ << '\n';]] }
+		},
+		["p"] = {
+			add = function()
+				return { { "std::cout << " }, { [[ << '\n';]] } }
 			end,
 		},
 	},
