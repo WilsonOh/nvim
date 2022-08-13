@@ -1,10 +1,11 @@
-local utils = require("nvim-surround.utils")
-
 require("nvim-surround").buffer_setup({
-	delimiters = {
-		pairs = {
-			["f"] = function()
-				return { "def " .. utils.get_input("Enter Function Name: ") .. "(", { "):", "" } }
+	surrounds = {
+		["f"] = {
+			add = function()
+				return {
+					{ "def " .. require("nvim-surround.config").get_input("Enter Function Name: ") .. "(" },
+					{ "):", "" },
+				}
 			end,
 		},
 	},
