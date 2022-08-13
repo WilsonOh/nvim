@@ -427,8 +427,6 @@ return require("packer").startup(function(use)
 
 	use({ "JoosepAlviste/nvim-ts-context-commentstring" })
 
-	use({ "sheerun/vim-polyglot" })
-
 	if Packer_bootstrap then
 		require("packer").sync()
 	end
