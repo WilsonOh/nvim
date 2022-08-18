@@ -75,16 +75,16 @@ set("n", "<leader><leader>s", "<cmd>%so<CR>", opts)
 
 -- Telescope utils test
 set("n", "<leader>m", function()
-	require("telescope_utils").custom_search()
+  require("telescope_utils").custom_search()
 end, opts)
 
 -- smart dd
 local smart_dd = function()
-	if vim.api.nvim_get_current_line():match("^%s*$") then
-		return '"_dd'
-	else
-		return "dd"
-	end
+  if vim.api.nvim_get_current_line():match("^%s*$") then
+    return '"_dd'
+  else
+    return "dd"
+  end
 end
 set("n", "dd", smart_dd, { expr = true })
 

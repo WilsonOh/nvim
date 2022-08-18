@@ -4,9 +4,9 @@ local set = vim.keymap.set
 local opts = { silent = true }
 
 set("i", "<c-l>", function()
-	if ls.choice_active() then
-		ls.change_choice(1)
-	end
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
 end, opts)
 
 ls.add_snippets("c", require("snippets.c"))
