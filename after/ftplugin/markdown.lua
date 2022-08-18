@@ -1,8 +1,8 @@
 require("nvim-surround").buffer_setup({
-  delimiters = {
-    pairs = {
-      ["l"] = function()
-        return { "[", "](" .. vim.fn.getreg("*") .. ")" }
+  surrounds = {
+    ["l"] = {
+      add = function()
+        return { { "[" }, { "](" .. vim.fn.getreg("*") .. ")" } }
       end,
     },
   },
