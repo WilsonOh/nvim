@@ -18,3 +18,7 @@ _G.set_colorscheme = function(colorscheme, transparent_bg)
     vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
   end
 end
+
+_G.get_char_at_cursor = function()
+  return vim.fn.strcharpart(vim.fn.getline("."), vim.api.nvim_win_get_cursor(0)[2], 1)
+end
