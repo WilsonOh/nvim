@@ -428,6 +428,13 @@ return require("packer").startup(function(use)
 
   use({ "sheerun/vim-polyglot" })
 
+  use({
+    "WilsonOh/emoji_picker-nvim",
+    config = function()
+      require("emoji_picker").setup({})
+    end,
+  })
+
   if Packer_bootstrap then
     require("packer").sync()
   end

@@ -17,7 +17,7 @@ return {
     i(3, "else"),
   }),
   s({ name = "Main Function Template for C", trig = "main", dscr = "The main function template" }, {
-    c(1, { t({ "int main(void) {", "\t" }), t({ "int main(int argc, char **argv) {", "\t" }) }, {}),
+    c(1, { t({ "int main() {", "\t" }), t({ "int main(int argc, char **argv) {", "\t" }) }, {}),
     i(0),
     t({ "", "}" }),
   }),

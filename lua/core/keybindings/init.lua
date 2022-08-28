@@ -92,6 +92,8 @@ set("n", "dd", smart_dd, { expr = true })
 set("n", "dD", '"_dd')
 set("n", "cC", '"_cc')
 
+set("i", "<M-e>", "<cmd>EmojiPicker<CR>")
+
 vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
 vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')
 vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])

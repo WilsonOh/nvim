@@ -19,6 +19,6 @@ _G.set_colorscheme = function(colorscheme, transparent_bg)
   end
 end
 
-_G.get_char_at_cursor = function()
-  return vim.fn.strcharpart(vim.fn.getline("."), vim.api.nvim_win_get_cursor(0)[2], 1)
-end
+--[[ _G.get_char_at_cursor = function()
+  return vim.fn.strcharpart(vim.fn.strpart(vim.fn.getline("."), vim.fn.col(".") - 1), 0, 1)
+end ]]

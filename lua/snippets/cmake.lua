@@ -18,7 +18,7 @@ local function get_cmake_sources(path)
     return vim.tbl_contains(exts, ext)
   end, files)
   if #files == 0 then
-    return ""
+    return " main.cpp"
   end
   local ret = ""
   for _, file in ipairs(files) do
