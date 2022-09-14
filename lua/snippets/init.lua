@@ -11,7 +11,7 @@ end, opts)
 
 ls.add_snippets("c", require("snippets.c"))
 
-ls.add_snippets("cpp", vim.tbl_extend("force", require("snippets.c"), require("snippets.cpp")))
+ls.add_snippets("cpp", vim.list_extend(require("snippets.c"), require("snippets.cpp")))
 
 ls.add_snippets("python", require("snippets.python"))
 
