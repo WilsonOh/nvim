@@ -1,3 +1,13 @@
+function file_exists(name)
+  local f = io.open(name, "r")
+  if f ~= nil then
+    io.close(f)
+    return true
+  else
+    return false
+  end
+end
+
 local mappings = {
   r = {
     function()
@@ -6,7 +16,11 @@ local mappings = {
       local cmd = ""
       local clean_up = ""
       if filetype == "cpp" or filetype == "c" then
-        cmd = string.format("make %s && ./%s", filename, filename)
+        if file_exists("CMakeLists.txt") then
+          cmd = string.format("cmake --build build && build/%s", filename)
+        else
+          cmd = string.format("make %s && ./%s", filename, filename)
+        end
         clean_up = string.format("!rm %s", filename)
       elseif filetype == "python" then
         cmd = string.format("python %s.py", filename)
