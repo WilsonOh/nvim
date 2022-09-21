@@ -21,4 +21,5 @@ return {
     { name = "const for loop", trig = "cfor", dscr = "choice snippet for const range based for loop" },
     fmt("for (const auto &{} : {}) {{\n\t{}\n}}", { i(1, "init"), i(2, "end"), i(3) })
   ),
+  s("st", t("std::size_t ")),
 }

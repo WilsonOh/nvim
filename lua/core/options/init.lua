@@ -43,6 +43,7 @@ vim.bo.softtabstop = tabwidth
 vim.o.shiftwidth = tabwidth
 vim.bo.shiftwidth = tabwidth
 vim.o.autoindent = true
+vim.o.smartindent = true
 vim.bo.autoindent = true
 vim.o.expandtab = true
 vim.bo.expandtab = true
