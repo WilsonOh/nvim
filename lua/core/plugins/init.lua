@@ -286,7 +286,7 @@ return require("packer").startup(function(use)
     end,
   })
   -- Zoom around the file
-  use({ "ggandor/lightspeed.nvim" })
+  -- use({ "ggandor/lightspeed.nvim" })
 
   -- Modern comment plugin which leverages Treesitter to do cool stuff like commenting out a function
   use({
