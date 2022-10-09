@@ -99,5 +99,3 @@ cmp.setup({
   },
   sources = cmp_sources,
 })
-
-require("snippets")

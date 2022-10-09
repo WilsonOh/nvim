@@ -66,7 +66,7 @@ return require("packer").startup(function(use)
   })
 
   -- vscode-like zen-mode
-  use({
+  --[[ use({
     "folke/zen-mode.nvim",
     config = function()
       require("zen-mode-config")
@@ -79,7 +79,7 @@ return require("packer").startup(function(use)
       require("twilight-config")
     end,
     cmd = { "Twilight", "TwilightEnable" },
-  })
+  }) ]]
   ------------------------------
 
   -- Useful indicators at the columnsign to show git changes
@@ -192,14 +192,16 @@ return require("packer").startup(function(use)
       require("cmp_dictionary").setup({ dic = { ["text,markdown"] = { "/usr/share/dict/words" } } })
     end,
   })
-  use({ "hrsh7th/cmp-emoji" })
+  -- use({ "hrsh7th/cmp-emoji" })
   --------------------------------------------------------------------------------
 
   -- Snippet engine + related plugins
   use({
     "L3MON4D3/LuaSnip",
+    after = "nvim-cmp",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
+      require("snippets")
     end,
   })
   -- completion source from luasnip
