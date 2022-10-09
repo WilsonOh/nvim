@@ -21,13 +21,13 @@ local sources = {
   diag.flake8,
   formatting.cmake_format,
   formatting.cbfmt,
-  formatting.prettier.with({
+  formatting.prettierd.with({
     prefer_local = "node_modules/.bin",
   }),
-  diag.eslint.with({
+  diag.eslint_d.with({
     prefer_local = "node_modules/.bin",
   }),
-  ca.eslint.with({
+  ca.eslint_d.with({
     prefer_local = "node_modules/.bin",
   }),
 }
