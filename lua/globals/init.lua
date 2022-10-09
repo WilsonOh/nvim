@@ -19,9 +19,9 @@ _G.set_colorscheme = function(colorscheme, transparent_bg)
   end
 end
 
---[[ _G.get_char_at_cursor = function()
+_G.get_char_at_cursor = function()
   return vim.fn.strcharpart(vim.fn.strpart(vim.fn.getline("."), vim.fn.col(".") - 1), 0, 1)
-end ]]
+end
 
 _G.get_word_under_cursor = function()
   local curr_reg = vim.fn.getreg("a")
