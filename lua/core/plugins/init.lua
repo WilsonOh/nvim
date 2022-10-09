@@ -406,11 +406,10 @@ return require("packer").startup(function(use)
 
   -- Color picker in Neovim
   use({
-    "ziontee113/color-picker.nvim",
+    "uga-rosa/ccc.nvim",
     config = function()
-      require("color-picker")
+      require("ccc").setup()
     end,
-    cmd = { "PickColor", "PickColorInsert" },
   })
 
   -- Nice highlighting and icons for todos and notes etc.
@@ -428,7 +427,7 @@ return require("packer").startup(function(use)
 
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
 
-  use({ "sheerun/vim-polyglot" })
+  -- use({ "sheerun/vim-polyglot" })
 
   use({
     "WilsonOh/emoji_picker-nvim",
