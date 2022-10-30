@@ -18,6 +18,8 @@ local mappings = {
       if filetype == "cpp" or filetype == "c" then
         if file_exists("CMakeLists.txt") then
           cmd = string.format("cmake --build build && build/%s", filename)
+        elseif file_exists("input.txt") then
+          cmd = string.format("make %s && ./%s < input.txt", filename, filename)
         else
           cmd = string.format("make %s && ./%s", filename, filename)
         end
