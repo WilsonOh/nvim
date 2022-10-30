@@ -436,6 +436,23 @@ return require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "folke/noice.nvim",
+    config = function()
+      require("noice").setup({
+        lsp = {
+          progress = {
+            enabled = false,
+          },
+        },
+      })
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+  })
+
   if Packer_bootstrap then
     require("packer").sync()
   end
