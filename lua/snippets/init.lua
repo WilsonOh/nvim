@@ -3,7 +3,7 @@ local ls = require("luasnip")
 local set = vim.keymap.set
 local opts = { silent = true }
 
-set("i", "<c-l>", function()
+set("i", "<c-p>", function()
   if ls.choice_active() then
     ls.change_choice(1)
   end
