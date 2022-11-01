@@ -65,7 +65,7 @@ cmp.setup({
     ["<Up>"] = cmp.mapping.select_prev_item(),
     ["<Down>"] = cmp.mapping.select_next_item(),
     ["<C-l>"] = cmp.mapping(function(fallback)
-      if luasnip.expand_or_jumpable() then
+      if luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
       else
         fallback()
