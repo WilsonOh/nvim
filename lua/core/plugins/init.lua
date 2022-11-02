@@ -446,13 +446,7 @@ return require("packer").startup(function(use)
   use({
     "folke/noice.nvim",
     config = function()
-      require("noice").setup({
-        lsp = {
-          progress = {
-            enabled = false,
-          },
-        },
-      })
+      require("noice-config")
     end,
     requires = {
       "MunifTanjim/nui.nvim",
