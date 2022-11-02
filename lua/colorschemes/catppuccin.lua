@@ -1,5 +1,5 @@
 require("catppuccin").setup({
-  flavour = "macchiato",
+  flavour = "frappe",
   dim_inactive = { enabled = true, shade = "dark", percentage = 0.15 },
   transparent_background = false,
   term_colors = true,
@@ -63,3 +63,5 @@ require("catppuccin").setup({
     mini = false,
   },
 })
+
+vim.cmd("Catppuccin macchiato")
