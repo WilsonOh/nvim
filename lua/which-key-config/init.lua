@@ -33,7 +33,7 @@ local mappings = {
     n = { ":Telescope neoclip<CR>", "Open Clipboard" },
   },
   t = {
-    name = "Termimal",
+    name = "Terminal",
     f = {
       function()
         local Terminal = require("toggleterm.terminal").Terminal
