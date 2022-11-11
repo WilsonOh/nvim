@@ -1,54 +1,18 @@
-local function file_exists(name)
-  local f = io.open(name, "r")
-  if f ~= nil then
-    io.close(f)
-    return true
-  else
-    return false
-  end
-end
-
 local mappings = {
   r = {
-    function()
-      local filename = vim.fn.expand("%:r")
-      local filetype = vim.bo.filetype
-      local cmd = ""
-      local clean_up = ""
-      if filetype == "cpp" or filetype == "c" then
-        if file_exists("CMakeLists.txt") then
-          cmd = string.format("cmake --build build && build/%s", filename)
-        elseif file_exists("input.txt") then
-          cmd = string.format("make %s && ./%s < input.txt", filename, filename)
-        else
-          cmd = string.format("make %s && ./%s", filename, filename)
-        end
-        clean_up = string.format("!rm %s", filename)
-      elseif filetype == "python" then
-        cmd = string.format("python %s.py", filename)
-      elseif filetype == "rust" then
-        cmd = "cargo run"
-      elseif filetype == "java" then
-        cmd = string.format("javac %s.java && java %s", filename, filename, filename)
-        clean_up = "!rm *.class"
-      else
-        return
-      end
-      vim.cmd(":w")
-      local Terminal = require("toggleterm.terminal").Terminal
-      Terminal:new({
-        direction = "float",
-        cmd = cmd,
-        close_on_exit = false,
-        on_exit = function(_)
-          vim.cmd("silent " .. clean_up)
-        end,
-        float_opts = {
-          border = "single",
-        },
-      }):toggle()
-    end,
-    "h",
+    name = "Run File",
+    r = {
+      function()
+        require("globals").run_file()
+      end,
+      "From File",
+    },
+    c = {
+      function()
+        require("globals").run_file(true)
+      end,
+      "From Clipboard",
+    },
   },
   e = { ":NvimTreeToggle<cr>", "File Explorer" },
   f = {

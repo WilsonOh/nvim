@@ -14,4 +14,4 @@ require("autocmds")
 
 -- Global helper function for setting colorschemes (calling packadd and colorscheme cmds)
 -- Second optional parameter sets transparent background if true
-set_colorscheme("catppuccin")
+require("globals").set_colorscheme("catppuccin")
