@@ -1,3 +1,24 @@
+local function enable_transparent_mode()
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*",
+    callback = function()
+      local hl_groups = {
+        "Normal",
+        "SignColumn",
+        "NormalNC",
+        "TelescopeBorder",
+        "NvimTreeNormal",
+        "EndOfBuffer",
+        "MsgArea",
+      }
+      print("activated")
+      for _, name in ipairs(hl_groups) do
+        vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+      end
+    end,
+  })
+  vim.opt.fillchars = "eob: "
+end
 _G.P = function(s)
   vim.pretty_print(s)
 end
@@ -14,8 +35,20 @@ _G.set_colorscheme = function(colorscheme, transparent_bg)
   vim.cmd.packadd(colorscheme)
   pcall(require, "colorschemes." .. colorscheme)
   vim.cmd.colorscheme(colorscheme)
+
   if transparent_bg then
-    vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+    local hl_groups = {
+      "Normal",
+      "SignColumn",
+      "NormalNC",
+      "TelescopeBorder",
+      "NvimTreeNormal",
+      "EndOfBuffer",
+      "MsgArea",
+    }
+    for _, name in ipairs(hl_groups) do
+      vim.cmd(string.format("highlight %s ctermbg=none guibg=none", name))
+    end
   end
 end
 
