@@ -3,6 +3,12 @@ local mappings = {
     name = "Run File",
     r = {
       function()
+        require("globals").run_file(false, true)
+      end,
+      "Without Input",
+    },
+    f = {
+      function()
         require("globals").run_file()
       end,
       "From File",
