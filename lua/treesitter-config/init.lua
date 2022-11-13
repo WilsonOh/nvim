@@ -1,9 +1,6 @@
-require("nvim-treesitter.install").compilers = { "clang" }
-
 require("nvim-treesitter.configs").setup({
   enabled = true,
-  ensure_installed = "all",
-  ignore_install = { "phpdoc" },
+  ensure_installed = { "c", "cpp", "rust", "python", "java", "lua" },
   indent = { enable = false },
   highlight = { enable = true },
   autotag = { enable = true },
