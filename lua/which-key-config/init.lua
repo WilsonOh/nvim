@@ -3,6 +3,12 @@ local mappings = {
     name = "Run File",
     r = {
       function()
+        require("globals").run_file(false, true)
+      end,
+      "Without Input",
+    },
+    f = {
+      function()
         require("globals").run_file()
       end,
       "From File",
@@ -33,7 +39,7 @@ local mappings = {
     n = { ":Telescope neoclip<CR>", "Open Clipboard" },
   },
   t = {
-    name = "Termimal",
+    name = "Terminal",
     f = {
       function()
         local Terminal = require("toggleterm.terminal").Terminal
@@ -110,34 +116,6 @@ local mappings = {
       "Go To Previous Mark",
     },
   },
-  l = {
-    name = "LSP",
-    i = { ":LspInfo<CR>", "Connected Language Servers" },
-    k = { vim.lsp.buf.signature_help, "Signature help" },
-    K = { vim.lsp.buf.hover, "Hover" },
-    w = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
-    W = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
-    l = {
-      "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-      "List workspace folder",
-    },
-    t = { vim.lsp.buf.type_definition, "Type definition" },
-    d = { vim.lsp.buf.definition, "Go to definition" },
-    r = { ":Trouble lsp_references<CR>", "References" },
-    R = { vim.lsp.buf.rename, "Rename" },
-    a = { vim.lsp.buf.code_action, "Code actions" },
-    e = { vim.diagnostic.open_float, "Show line diagnostics" },
-    n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
-    N = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-    I = { "<cmd>Mason<cr>", "Open Up Mason Package Manager" },
-    f = {
-      function()
-        require("language-servers.utils").filtered_formatters(0)
-      end,
-      "Format File",
-    },
-    T = { ":Trouble<CR>", "Get Diagnostics" },
-  },
   q = { ":copen<CR>", "Open QuickFix List" },
   a = { "ggVG", "Select Entire Buffer" },
   x = { ":Bdelete<cr>", "Close Buffer" },
@@ -152,11 +130,11 @@ local mappings = {
     S = { ":PackerStatus<cr>", "Packer Status" },
     u = { ":PackerUpdate<cr>", "Update Plugins" },
   },
-  z = {
+  --[[ z = {
     name = "Focus",
     z = { ":ZenMode<cr>", "Toggle Zen Mode" },
     t = { ":Twilight<cr>", "Toggle Twilight" },
-  },
+  }, ]]
   b = {
     name = "Bufferline Options",
     c = { ":BufferLinePick<CR>", "Choose Buffer" },
@@ -166,5 +144,41 @@ local mappings = {
 }
 
 local opts = { prefix = "<leader>" }
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function()
+    local lsp_mappings = {
+      l = {
+        name = "LSP",
+        i = { ":LspInfo<CR>", "Connected Language Servers" },
+        k = { vim.lsp.buf.signature_help, "Signature help" },
+        K = { vim.lsp.buf.hover, "Hover" },
+        w = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
+        W = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
+        l = {
+          "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+          "List workspace folder",
+        },
+        t = { vim.lsp.buf.type_definition, "Type definition" },
+        d = { vim.lsp.buf.definition, "Go to definition" },
+        r = { ":Trouble lsp_references<CR>", "References" },
+        R = { vim.lsp.buf.rename, "Rename" },
+        a = { vim.lsp.buf.code_action, "Code actions" },
+        e = { vim.diagnostic.open_float, "Show line diagnostics" },
+        n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
+        N = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
+        I = { "<cmd>Mason<cr>", "Open Up Mason Package Manager" },
+        f = {
+          function()
+            require("language-servers.utils").filtered_formatters(0)
+          end,
+          "Format File",
+        },
+        T = { ":Trouble<CR>", "Get Diagnostics" },
+      },
+    }
+    require("which-key").register(lsp_mappings, opts)
+  end,
+})
 
 require("which-key").register(mappings, opts)

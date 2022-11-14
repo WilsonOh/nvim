@@ -10,7 +10,7 @@ local function file_exists(name)
   end
 end
 
-M.run_file = function(from_clipboard)
+M.run_file = function(from_clipboard, no_input)
   local filename = vim.fn.expand("%:r")
   local filetype = vim.bo.filetype
   local cmd = ""
@@ -36,18 +36,22 @@ M.run_file = function(from_clipboard)
   else
     return
   end
-  if from_clipboard then
-    local reg = vim.fn.getreg("*")
-    local tmpname = os.tmpname()
-    local tmp = io.open(tmpname, "w")
-    if tmp then
-      tmp:write(reg)
-      cmd = cmd .. string.format(" < %s", tmpname)
-      tmp:close()
-      clean_up = clean_up .. string.format(" && rm %s", tmpname)
+  if not no_input then
+    if from_clipboard then
+      local reg = vim.fn.getreg("*")
+      local tmpname = os.tmpname()
+      local tmp = io.open(tmpname, "w")
+      if tmp then
+        tmp:write(reg)
+        cmd = cmd .. string.format(" < %s", tmpname)
+        tmp:close()
+        clean_up = clean_up .. string.format(" && rm %s", tmpname)
+      end
+    elseif file_exists("input.txt") then
+      cmd = cmd .. " < input.txt"
+    else
+      return
     end
-  elseif file_exists("input.txt") then
-    cmd = cmd .. " < input.txt"
   end
   vim.cmd(":w")
   local Terminal = require("toggleterm.terminal").Terminal
