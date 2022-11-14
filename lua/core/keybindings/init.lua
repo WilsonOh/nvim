@@ -73,6 +73,9 @@ set("n", "gC", "0C", opts)
 -- Source Current Buffer
 set("n", "<leader><leader>s", "<cmd>%so<CR>", opts)
 
+-- Copy entire buffer to system clipboard
+set("n", "<leader>y", "<cmd>%y+<CR>")
+
 -- Telescope utils test
 set("n", "<leader>m", function()
   require("telescope_utils").custom_search()
