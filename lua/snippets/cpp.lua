@@ -22,4 +22,5 @@ return {
     fmt("for (const auto &{} : {}) {{\n\t{}\n}}", { i(1, "init"), i(2, "end"), i(3) })
   ),
   s("st", t("std::size_t ")),
+  s("ifmt", fmt("#include <fmt/core.h>\n#include <fmt/ranges.h>", {})),
 }
