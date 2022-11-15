@@ -181,4 +181,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
+require("which-key").setup({
+  ignore_missing = true,
+  show_help = false,
+  show_keys = false,
+  layout = {
+    align = "center",
+  },
+})
+
 require("which-key").register(mappings, opts)
