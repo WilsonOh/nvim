@@ -139,6 +139,8 @@ Hydra({
         dap.disconnect()
         dap.terminate()
         dap.close()
+        require("dapui").close()
+        dap.repl.close()
       end,
     },
     { "R", dap.run_to_cursor },

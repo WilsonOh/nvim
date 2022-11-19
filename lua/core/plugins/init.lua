@@ -454,6 +454,8 @@ return require("packer").startup(function(use)
     },
   })
 
+  use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+
   if Packer_bootstrap then
     require("packer").sync()
   end
