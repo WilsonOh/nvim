@@ -126,6 +126,7 @@ return require("packer").startup(function(use)
   use({ "ellisonleao/gruvbox.nvim", as = "gruvbox", opt = true })
   use({ "catppuccin/nvim", as = "catppuccin", opt = true, run = "CatppuccinCompile" })
   use({ "rebelot/kanagawa.nvim", as = "kanagawa", opt = true })
+  use({ "sam4llis/nvim-tundra", as = "tundra", opt = true })
   -------------------------------------------------------------
 
   -- LSP and Autocomplete
