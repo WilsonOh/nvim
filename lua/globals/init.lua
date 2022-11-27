@@ -33,6 +33,8 @@ M.run_file = function(from_clipboard, no_input)
   elseif filetype == "java" then
     cmd = string.format("javac %s.java && java %s", filename, filename, filename)
     clean_up = "!rm *.class"
+  elseif filetype == "zig" then
+    cmd = "zig build run"
   else
     return
   end

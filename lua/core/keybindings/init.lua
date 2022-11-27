@@ -97,6 +97,18 @@ set("n", "cC", '"_cc')
 
 set("i", "<M-e>", "<cmd>EmojiPicker<CR>")
 
+set("n", "<c-f>", function()
+  if not require("noice.lsp").scroll(4) then
+    return "<c-f>"
+  end
+end, { silent = true, expr = true })
+
+set("n", "<c-b>", function()
+  if not require("noice.lsp").scroll(-4) then
+    return "<c-b>"
+  end
+end, { silent = true, expr = true })
+
 vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
 vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')
 vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])
