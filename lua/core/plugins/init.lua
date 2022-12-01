@@ -141,24 +141,9 @@ return require("packer").startup(function(use)
   use({ "b0o/schemastore.nvim" })
 
   -- Make configuring the natice LSP even easier
-  use({
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup({
-        ui = {
-          border = "single",
-          icons = { package_installed = "✓", package_pending = "➜", package_uninstalled = "✗" },
-        },
-      })
-    end,
-  })
+  use({ "williamboman/mason.nvim" })
 
-  use({
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({ ensure_installed = { "sumneko_lua", "clangd", "pyright" } })
-    end,
-  })
+  use({ "williamboman/mason-lspconfig.nvim" })
 
   -- Provide nice vscode-like icons for autocomplete
   use({
