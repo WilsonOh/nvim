@@ -45,6 +45,10 @@ end
 
 local opts = { capabilities = capabilities, on_attach = on_attach }
 
+local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
+local codelldb_path = extension_path .. "adapter/codelldb"
+local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
 require("mason-lspconfig").setup_handlers({
   -- Generic lspconfig setup
   function(server_name)
@@ -52,7 +56,12 @@ require("mason-lspconfig").setup_handlers({
   end,
   -- Calling the setup function through language specific plugins
   ["rust_analyzer"] = function()
-    require("rust-tools").setup({ server = opts })
+    require("rust-tools").setup({
+      dap = {
+        adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+      },
+      server = opts,
+    })
   end,
   ["clangd"] = function()
     require("clangd_extensions").setup({ server = opts })
