@@ -224,8 +224,6 @@ return require("packer").startup(function(use)
   use({
     "nvim-telescope/telescope.nvim",
     requires = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
-    cmd = { "Telescope", "h telescope" },
-    module = "telescope",
     config = function()
       require("telescope-config")
     end,
@@ -234,7 +232,6 @@ return require("packer").startup(function(use)
   -- Highly functional directory tree viewer
   use({
     "kyazdani42/nvim-tree.lua",
-    cmd = "NvimTreeToggle",
     config = function()
       require("nvimtree-config")
     end,
