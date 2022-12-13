@@ -19,7 +19,6 @@ local sources = {
   formatting.stylua,
   formatting.black,
   diag.flake8,
-  formatting.cmake_format,
   formatting.cbfmt,
   formatting.prettierd.with({
     prefer_local = "node_modules/.bin",
@@ -44,7 +43,7 @@ null_ls.setup({
   ),
   on_attach = function(client, bufnr)
     lsp_utils.get_null_ls_sources()
-    if client.supports_method("textDocument/formatting") then
+    if client.supports_method("textDocument/formatting") or client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
       vim.api.nvim_create_autocmd("BufWritePre", {
         group = augroup,
