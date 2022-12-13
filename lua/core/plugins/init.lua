@@ -29,12 +29,22 @@ return require("packer").startup(function(use)
 
   -- Enables color highlights within the buffer
   -- when a valid color string is input e.g. #123
-  use({
+  --[[ use({
     "norcalli/nvim-colorizer.lua",
     config = function()
       require("colorizer-config")
     end,
     ft = { "html", "css" },
+  }) ]]
+  use({
+    "uga-rosa/ccc.nvim",
+    config = function()
+      require("ccc").setup({
+        highlighter = {
+          auto_enable = true,
+        },
+      })
+    end,
   })
 
   -- Adds a lot of functionality to the buffer tabs at the top
@@ -391,14 +401,6 @@ return require("packer").startup(function(use)
     "mg979/vim-visual-multi",
     config = function()
       require("vim-visual-multi-config")
-    end,
-  })
-
-  -- Color picker in Neovim
-  use({
-    "uga-rosa/ccc.nvim",
-    config = function()
-      require("ccc").setup()
     end,
   })
 
