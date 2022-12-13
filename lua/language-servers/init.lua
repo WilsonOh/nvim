@@ -5,6 +5,17 @@ require("mason").setup({
   },
 })
 
+require("mason-nvim-dap").setup({
+  ensure_installed = { "python", "codelldb" },
+  automatic_setup = true,
+})
+
+require("mason-nvim-dap").setup_handlers({
+  function(source_name)
+    require("mason-nvim-dap.automatic_setup")(source_name)
+  end,
+})
+
 require("mason-lspconfig").setup({ ensure_installed = { "sumneko_lua", "clangd", "pyright" } })
 
 local lspconfig = require("lspconfig")

@@ -352,12 +352,7 @@ return require("packer").startup(function(use)
     end,
   })
 
-  use({
-    "mfussenegger/nvim-dap-python",
-    config = function()
-      require("dap-python").setup("~/.virtualenvs/debugpy/bin/python", {})
-    end,
-  })
+  use({ "jayp0521/mason-nvim-dap.nvim" })
 
   use({
     "rcarriga/nvim-dap-ui",

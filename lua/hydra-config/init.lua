@@ -138,6 +138,7 @@ Hydra({
       function()
         dap.disconnect()
         dap.terminate()
+        dap.repl.close()
         dap.close()
         require("dapui").close()
         dap.repl.close()
