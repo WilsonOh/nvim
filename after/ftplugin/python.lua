@@ -1,5 +1,3 @@
-require("dap-python").setup("~/.virtualenvs/debugpy/bin/python")
-
 require("nvim-surround").buffer_setup({
   surrounds = {
     ["f"] = {
