@@ -90,7 +90,9 @@ return require("packer").startup(function(use)
   -- Tree-Sitter + related plugins
   use({
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
+    run = function()
+      pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+    end,
     config = function()
       require("treesitter-config")
     end,
