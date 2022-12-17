@@ -127,7 +127,7 @@ local mappings = {
       "Go To Previous Mark",
     },
   },
-  s = { ":%so", "Source Current File" },
+  s = { ":%so<CR>", "Source Current File" },
   q = { ":copen<CR>", "Open QuickFix List" },
   a = { "ggVG", "Select Entire Buffer" },
   x = { ":Bdelete<cr>", "Close Buffer" },
