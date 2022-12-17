@@ -3,6 +3,13 @@ local opts = { silent = true }
 
 vim.g.mapleader = " "
 
+set("n", "<Esc>", function()
+  require("notify").dismiss({
+    pending = true,
+    silent = true,
+  })
+end)
+
 set("n", "<Space>", "<NOP>", opts)
 
 set("i", "jk", "<ESC>")
@@ -70,16 +77,7 @@ set("i", "<C-a>", "<esc>I", opts)
 set("n", "gd", "0D", opts)
 set("n", "gC", "0C", opts)
 
--- Source Current Buffer
-set("n", "<leader><leader>s", "<cmd>%so<CR>", opts)
-
 -- Copy entire buffer to system clipboard
-set("n", "<leader>y", "<cmd>%y+<CR>")
-
--- Telescope utils test
-set("n", "<leader>m", function()
-  require("telescope_utils").custom_search()
-end, opts)
 
 -- smart dd
 local smart_dd = function()
@@ -96,18 +94,6 @@ set("n", "dD", '"_dd')
 set("n", "cC", '"_cc')
 
 set("i", "<M-e>", "<cmd>EmojiPicker<CR>")
-
-set("n", "<c-f>", function()
-  if not require("noice.lsp").scroll(4) then
-    return "<c-f>"
-  end
-end, { silent = true, expr = true })
-
-set("n", "<c-b>", function()
-  if not require("noice.lsp").scroll(-4) then
-    return "<c-b>"
-  end
-end, { silent = true, expr = true })
 
 vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
 vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')

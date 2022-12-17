@@ -3,8 +3,11 @@ local fn = vim.fn
 
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
+local packer_bootstrap = false
+
 if fn.empty(fn.glob(install_path)) > 0 then
-  Packer_bootstrap = fn.system({
+  packer_bootstrap = true
+  fn.system({
     "git",
     "clone",
     "--depth",
@@ -12,6 +15,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
     "https://github.com/wbthomason/packer.nvim",
     install_path,
   })
+  vim.cmd.packadd("packer.nvim")
 end
 
 require("packer").init({
@@ -29,13 +33,6 @@ return require("packer").startup(function(use)
 
   -- Enables color highlights within the buffer
   -- when a valid color string is input e.g. #123
-  --[[ use({
-    "norcalli/nvim-colorizer.lua",
-    config = function()
-      require("colorizer-config")
-    end,
-    ft = { "html", "css" },
-  }) ]]
   use({
     "uga-rosa/ccc.nvim",
     config = function()
@@ -75,21 +72,6 @@ return require("packer").startup(function(use)
     end,
   })
 
-  -- vscode-like zen-mode
-  --[[ use({
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode-config")
-    end,
-    cmd = "ZenMode",
-  })
-  use({
-    "folke/twilight.nvim",
-    config = function()
-      require("twilight-config")
-    end,
-    cmd = { "Twilight", "TwilightEnable" },
-  }) ]]
   ------------------------------
 
   -- Useful indicators at the columnsign to show git changes
@@ -341,7 +323,6 @@ return require("packer").startup(function(use)
     config = function()
       require("trouble").setup()
     end,
-    cmd = "Trouble*",
   })
 
   -- nvim-dap + related plugins
@@ -436,7 +417,9 @@ return require("packer").startup(function(use)
 
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
-  if Packer_bootstrap then
+  use({ "sheerun/vim-polyglot" })
+
+  if packer_bootstrap then
     require("packer").sync()
   end
 end)

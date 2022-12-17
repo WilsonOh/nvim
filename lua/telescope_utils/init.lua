@@ -2,8 +2,14 @@ local M = {}
 
 M.custom_search = function()
   local cwd = vim.fn.input("Enter the directory: ")
-  local search_dir = vim.fn.input("Enter the search directory: ")
-  require("telescope.builtin").find_files({ cwd = cwd, search_dir = search_dir })
+  require("telescope.builtin").find_files({ cwd = cwd })
+end
+
+M.config_search = function()
+  local config_path = vim.fn.stdpath("config")
+  require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
+    cwd = config_path,
+  }))
 end
 
 M.project_search = function()

@@ -5,17 +5,8 @@ require("nvim-treesitter.configs").setup({
   highlight = { enable = true },
   autotag = { enable = true },
   endwise = { enable = true },
-  rainbow = { enable = true, extended_mode = false, disable = { "html" } },
+  rainbow = { enable = false, extended_mode = false, disable = { "html" } },
   context_commentstring = { enable = true, enable_autocmd = false },
-  --[[ textsubjects = {
-    enable = true,
-    prev_selection = ',', -- (Optional) keymap to select the previous selection
-    keymaps = {
-      ['.'] = 'textsubjects-smart',
-      [';'] = 'textsubjects-container-outer',
-      ['i;'] = 'textsubjects-container-inner',
-    },
-  }, ]]
   textobjects = {
     move = {
       enable = true,
