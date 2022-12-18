@@ -8,7 +8,6 @@ require("nvim-tree").setup({
   ignore_ft_on_setup = { "alpha" },
   open_on_tab = false,
   hijack_cursor = true,
-  update_cwd = true,
   update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
   system_open = {
     -- the command to run this, leaving nil should work in most cases
