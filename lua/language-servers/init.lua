@@ -27,26 +27,24 @@ local utils = require("language-servers.utils")
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
-      buffer = bufnr,
+      buffer = 0,
       callback = function()
-        utils.format(bufnr)
+        utils.format(0)
       end,
     })
     if client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
+      vim.api.nvim_create_augroup("lsp_document_highlight", {})
       vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
         group = "lsp_document_highlight",
-        buffer = bufnr,
+        buffer = 0,
         callback = vim.lsp.buf.document_highlight,
       })
       vim.api.nvim_create_autocmd("CursorMoved", {
         group = "lsp_document_highlight",
-        buffer = bufnr,
+        buffer = 0,
         callback = vim.lsp.buf.clear_references,
       })
     end

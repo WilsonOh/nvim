@@ -1,3 +1,5 @@
+local get_char_at_cursor = require("globals").get_char_at_cursor()
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "*.tsx", "*.js", "*.jsx" },
   group = vim.api.nvim_create_augroup("jsx_self_closing_elements", { clear = true }),
@@ -11,7 +13,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
       if not node then
         return "/"
       end
-      if require("globals").get_char_at_cursor() == " " then
+      if get_char_at_cursor() == " " then
         return "/>"
       else
         return " />"
