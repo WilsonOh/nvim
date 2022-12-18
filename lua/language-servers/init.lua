@@ -27,6 +27,7 @@ local utils = require("language-servers.utils")
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    vim.api.nvim_clear_autocmds({ group = augroup, pattern = "*" })
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,

@@ -133,16 +133,20 @@ local mappings = {
   x = {
     function()
       vim.cmd("Bdelete")
+    end,
+    "Close Buffer",
+  },
+  w = {
+    function()
+      vim.cmd("Bdelete")
       local curr_win = vim.api.nvim_get_current_win()
       vim.api.nvim_win_close(curr_win, false)
     end,
-    "Close Buffer",
+    "Close Buffer and Window",
   },
   X = {
     function()
       vim.cmd("Bdelete!")
-      local curr_win = vim.api.nvim_get_current_win()
-      vim.api.nvim_win_close(curr_win, true)
     end,
     "Force Close Buffer",
   },
@@ -157,11 +161,6 @@ local mappings = {
     S = { ":PackerStatus<cr>", "Packer Status" },
     u = { ":PackerUpdate<cr>", "Update Plugins" },
   },
-  --[[ z = {
-    name = "Focus",
-    z = { ":ZenMode<cr>", "Toggle Zen Mode" },
-    t = { ":Twilight<cr>", "Toggle Twilight" },
-  }, ]]
   b = {
     name = "Bufferline Options",
     c = { ":BufferLinePick<CR>", "Choose Buffer" },

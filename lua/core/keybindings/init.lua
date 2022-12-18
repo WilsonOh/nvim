@@ -61,7 +61,9 @@ set("i", "?", "?<C-g>u", opts)
 set("i", ";", ";<C-g>u", opts)
 
 -- Save File
-set("n", "<C-s>", ":w<CR>", opts)
+set("n", "<C-s>", function()
+  vim.cmd("silent write")
+end, opts)
 
 -- Move out of Terminal
 set("t", "<C-d>", "<C-Bslash><C-n>:bd!<CR>", opts)

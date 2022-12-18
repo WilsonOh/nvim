@@ -111,7 +111,7 @@ M.format = function(bufnr)
     client_name = other_formatting_clients[1].name
     vim.lsp.buf.format({ bufnr = bufnr, name = client_name })
   end
-  vim.notify(
+  vim.notify_once(
     string.format("%d lines formatted with %s.", vim.api.nvim_buf_line_count(bufnr), client_name),
     vim.log.levels.INFO
   )
