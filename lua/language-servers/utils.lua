@@ -73,8 +73,7 @@ M.get_null_ls_source_by_method = function(method)
       return source.name
     end
   end
-  vim.notify("There's no null-ls source for the method: " .. method)
-  return "NONE"
+  vim.notify("There's no null-ls source for the method: " .. method, vim.log.levels.WARN)
 end
 
 --[[ local navic = require('nvim-navic')
@@ -87,44 +86,38 @@ M.get_navic = function()
   end
 end ]]
 
-M.filtered_formatters = function(bufnr)
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
-  local formatting_clients = {}
+M.format = function(bufnr)
+  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+  local null_ls_formatting_clients = {}
+  local other_formatting_clients = {}
   for _, client in ipairs(clients) do
-    if client.supports_method("textDocument/formatting") or client.server_capabilities.documentFormattingProvider then
-      table.insert(formatting_clients, client)
+    if client.server_capabilities.documentFormattingProvider then
+      if client.name == "null-ls" then
+        table.insert(null_ls_formatting_clients, client)
+      else
+        table.insert(other_formatting_clients, client)
+      end
     end
   end
-  if #formatting_clients == 0 then
-    vim.notify("[LSP] There are no LSPs attached with formatting capabilities")
+  if #null_ls_formatting_clients == 0 and #other_formatting_clients == 0 then
+    vim.notify("[LSP] There are no LSPs attached with formatting capabilities", vim.log.levels.WARN)
     return
   end
-  local null_ls_formatter = vim.tbl_filter(function(client)
-    local null_ls_sources = M.get_null_ls_sources()
-    return client.name == "null-ls" and #null_ls_sources ~= 0
-  end, formatting_clients)
-  if #null_ls_formatter ~= 0 then
+  local client_name = ""
+  if #null_ls_formatting_clients ~= 0 then
     vim.lsp.buf.format({ bufnr = bufnr, name = "null-ls" })
-    vim.notify(
-      string.format(
-        "%d lines formatted with %s.",
-        vim.api.nvim_buf_line_count(0),
-        M.get_null_ls_source_by_method("FORMATTING")
-      )
-    )
-    return
+    client_name = M.get_null_ls_source_by_method("FORMATTING")
+  else
+    client_name = other_formatting_clients[1].name
+    vim.lsp.buf.format({ bufnr = bufnr, name = client_name })
   end
-  for _, client in ipairs(formatting_clients) do
-    if client.name ~= "null-ls" then
-      vim.lsp.buf.format({ bufnr = bufnr, name = client.name })
-      vim.notify(string.format("%d lines formatted with %s.", vim.api.nvim_buf_line_count(0), client.name))
-      return
-    end
-  end
-  vim.notify("[LSP] There are no LSPs attached with formatting capabilities")
+  vim.notify(
+    string.format("%d lines formatted with %s.", vim.api.nvim_buf_line_count(bufnr), client_name),
+    vim.log.levels.INFO
+  )
 end
 
-M.filtered_range_formatters = function(bufnr)
+--[[ M.filtered_range_formatters = function(bufnr)
   local clients = vim.lsp.get_active_clients()
   local formatting_clients = {}
   for _, client in ipairs(clients) do
@@ -166,6 +159,6 @@ M.filtered_range_formatters = function(bufnr)
     end
   end
   vim.notify("[LSP] There are no LSPs attached with range formatting capabilities")
-end
+end ]]
 
 return M

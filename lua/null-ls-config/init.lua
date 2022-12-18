@@ -14,21 +14,22 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local ca = null_ls.builtins.code_actions
 
+local js_opts = {
+  prefer_local = "node_modules/.bin",
+  condition = function(utils)
+    return utils.root_has_file({ "package.json", "deno.json" })
+  end,
+}
+
 local sources = {
   formatting.gofmt,
   formatting.stylua,
   formatting.black,
   diag.flake8,
   formatting.cbfmt,
-  formatting.prettierd.with({
-    prefer_local = "node_modules/.bin",
-  }),
-  diag.eslint_d.with({
-    prefer_local = "node_modules/.bin",
-  }),
-  ca.eslint_d.with({
-    prefer_local = "node_modules/.bin",
-  }),
+  formatting.prettierd.with(js_opts),
+  diag.eslint_d.with(js_opts),
+  ca.eslint_d.with(js_opts),
 }
 
 null_ls.setup({

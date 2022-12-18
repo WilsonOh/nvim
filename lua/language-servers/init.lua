@@ -47,7 +47,7 @@ local on_attach = function(client, bufnr)
       group = augroup,
       buffer = bufnr,
       callback = function()
-        utils.filtered_formatters(bufnr)
+        utils.format(bufnr)
       end,
     })
   end

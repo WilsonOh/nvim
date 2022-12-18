@@ -183,7 +183,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         I = { "<cmd>Mason<cr>", "Open Up Mason Package Manager" },
         f = {
           function()
-            require("language-servers.utils").filtered_formatters(0)
+            require("language-servers.utils").format(0)
           end,
           "Format File",
         },
