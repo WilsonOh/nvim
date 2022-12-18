@@ -8,13 +8,7 @@ require("nvim-tree").setup({
   ignore_ft_on_setup = { "alpha" },
   open_on_tab = false,
   hijack_cursor = true,
-  update_focused_file = { enable = true, update_cwd = true, ignore_list = {} },
-  system_open = {
-    -- the command to run this, leaving nil should work in most cases
-    cmd = nil,
-    -- the command arguments as a list
-    args = {},
-  },
+  update_focused_file = { enable = true, update_root = true, ignore_list = {} },
   view = { width = nvimtree_width, side = "left", mappings = { custom_only = false, list = {} } },
   renderer = {
     indent_markers = { enable = true, icons = { corner = "└ ", edge = "│ ", none = "  " } },
