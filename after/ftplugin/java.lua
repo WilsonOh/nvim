@@ -42,36 +42,6 @@ local config = {
     "-data",
     workspace_dir,
   },
-  on_attach = function(client, bufnr)
-    -- jdtls.setup_dap({ hotcodereplace = "auto" })
-    -- jdtls_dap.setup_dap_main_class_configs()
-
-    if client.server_capabilities.documentHighlightProvider then
-      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
-      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-        group = "lsp_document_highlight",
-        buffer = bufnr,
-        callback = vim.lsp.buf.document_highlight,
-      })
-      vim.api.nvim_create_autocmd("CursorMoved", {
-        group = "lsp_document_highlight",
-        buffer = bufnr,
-        callback = vim.lsp.buf.clear_references,
-      })
-    end
-
-    if client.supports_method("textDocument/formatting") then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          utils.format(bufnr)
-        end,
-      })
-    end
-  end,
   --[[ init_options = {
 		bundles = {
 			vim.fn.glob(

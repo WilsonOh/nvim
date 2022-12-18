@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
       if not node then
         return "/"
       end
-      if get_char_at_cursor() == " " then
+      if require("globals").get_char_at_cursor() == " " then
         return "/>"
       else
         return " />"

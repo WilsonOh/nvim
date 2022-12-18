@@ -23,26 +23,12 @@ local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local utils = require("language-servers.utils")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
-local on_attach = function(client, bufnr)
-  if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
-    vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
-    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-      group = "lsp_document_highlight",
-      buffer = bufnr,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = "lsp_document_highlight",
-      buffer = bufnr,
-      callback = vim.lsp.buf.clear_references,
-    })
-  end
-
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    local bufnr = args.buf
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
       buffer = bufnr,
@@ -50,11 +36,24 @@ local on_attach = function(client, bufnr)
         utils.format(bufnr)
       end,
     })
-  end
-  -- utils.hover_function_on_hold(client, bufnr)
-end
+    if client.server_capabilities.documentHighlightProvider then
+      vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+      vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
+      vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+        group = "lsp_document_highlight",
+        buffer = bufnr,
+        callback = vim.lsp.buf.document_highlight,
+      })
+      vim.api.nvim_create_autocmd("CursorMoved", {
+        group = "lsp_document_highlight",
+        buffer = bufnr,
+        callback = vim.lsp.buf.clear_references,
+      })
+    end
+  end,
+})
 
-local opts = { capabilities = capabilities, on_attach = on_attach }
+local opts = { capabilities = capabilities }
 
 local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
 local codelldb_path = extension_path .. "adapter/codelldb"
@@ -81,7 +80,6 @@ require("mason-lspconfig").setup_handlers({
   ["sumneko_lua"] = function()
     lspconfig.sumneko_lua.setup({
       capabilities = capabilities,
-      on_attach = on_attach,
       settings = {
         Lua = {
           runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
@@ -95,7 +93,6 @@ require("mason-lspconfig").setup_handlers({
   ["jsonls"] = function()
     lspconfig.jsonls.setup({
       capabilities = capabilities,
-      on_attach = on_attach,
       settings = {
         json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } },
       },
