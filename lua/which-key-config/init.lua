@@ -130,8 +130,22 @@ local mappings = {
   s = { ":%so<CR>", "Source Current File" },
   q = { ":copen<CR>", "Open QuickFix List" },
   a = { "ggVG", "Select Entire Buffer" },
-  x = { ":Bdelete<cr>", "Close Buffer" },
-  X = { ":Bdelete!<cr>", "Force Close Buffer" },
+  x = {
+    function()
+      vim.cmd("Bdelete")
+      local curr_win = vim.api.nvim_get_current_win()
+      vim.api.nvim_win_close(curr_win, false)
+    end,
+    "Close Buffer",
+  },
+  X = {
+    function()
+      vim.cmd("Bdelete!")
+      local curr_win = vim.api.nvim_get_current_win()
+      vim.api.nvim_win_close(curr_win, true)
+    end,
+    "Force Close Buffer",
+  },
   y = { ":%y+<CR>", "Copy Entire Buffer to System Clipboard" },
   p = {
     name = "Packer",
