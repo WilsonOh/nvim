@@ -88,13 +88,18 @@ end ]]
 
 M.format = function(bufnr)
   local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
-  local null_ls_formatting_clients = {}
+  -- local null_ls_formatting_clients = {}
   local other_formatting_clients = {}
+
+  local filetype = vim.bo.filetype
+  local n = require("null-ls")
+  local s = require("null-ls.sources")
+  local method = n.methods.FORMATTING
+  local null_ls_formatting_clients = s.get_available(filetype, method)
+
   for _, client in ipairs(clients) do
     if client.server_capabilities.documentFormattingProvider then
-      if client.name == "null-ls" then
-        table.insert(null_ls_formatting_clients, client)
-      else
+      if client.name ~= "null-ls" then
         table.insert(other_formatting_clients, client)
       end
     end
