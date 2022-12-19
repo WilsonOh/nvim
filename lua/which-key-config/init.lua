@@ -127,7 +127,19 @@ local mappings = {
       "Go To Previous Mark",
     },
   },
-  s = { ":%so<CR>", "Source Current File" },
+  s = {
+    function()
+      vim.cmd.source()
+      vim.notify_once("Current file has been sourced", vim.log.levels.INFO)
+    end,
+    "Source Current File",
+  },
+  S = {
+    function()
+      require("iswap").iswap_node_with()
+    end,
+    "Swap Nodes",
+  },
   q = { ":copen<CR>", "Open QuickFix List" },
   a = { "ggVG", "Select Entire Buffer" },
   x = {

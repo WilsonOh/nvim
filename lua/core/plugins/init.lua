@@ -421,6 +421,17 @@ return require("packer").startup(function(use)
 
   use({ "sheerun/vim-polyglot" })
 
+  use({
+    "mizlan/iswap.nvim",
+    config = function()
+      require("iswap").setup({
+        autoswap = true,
+        move_cursor = true,
+        flash_style = false,
+      })
+    end,
+  })
+
   if packer_bootstrap then
     require("packer").sync()
   end

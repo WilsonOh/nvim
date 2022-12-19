@@ -10,6 +10,12 @@ set("n", "<Esc>", function()
   })
 end)
 
+set("v", "J", ":m '>+1<CR>gv=gv", opts)
+set("v", "K", ":m '<-2<CR>gv=gv", opts)
+set("n", "J", "mzJ`z", opts)
+set("n", "<C-d>", "<C-d>zz", opts)
+set("n", "<C-u>", "<C-u>zz", opts)
+
 set("n", "<Space>", "<NOP>", opts)
 
 set("i", "jk", "<ESC>")
@@ -30,9 +36,6 @@ set("n", "<S-Tab>", ":bprevious<CR>", opts)
 
 set("v", "<", "<gv", opts)
 set("v", ">", ">gv", opts)
-
-set("x", "K", ":move '<-2<CR>gv-gv", opts)
-set("x", "J", ":move '>+1<CR>gv-gv", opts)
 
 -- Open Telescope Menu
 set("n", "<leader>T", ":Telescope<CR>", opts)
