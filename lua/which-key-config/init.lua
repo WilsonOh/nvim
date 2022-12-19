@@ -130,7 +130,7 @@ local mappings = {
   s = {
     function()
       vim.cmd.source()
-      vim.notify_once("Current file has been sourced", vim.log.levels.INFO)
+      vim.notify("Current file has been sourced", vim.log.levels.INFO)
     end,
     "Source Current File",
   },
@@ -220,7 +220,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 require("which-key").setup({
-  ignore_missing = true,
+  -- ignore_missing = true,
   show_help = false,
   show_keys = false,
   layout = {

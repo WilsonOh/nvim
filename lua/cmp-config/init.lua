@@ -4,10 +4,6 @@ local luasnip = require("luasnip")
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 
-if not cmp or not luasnip or not lspkind then
-  return
-end
-
 local function has_words_before()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -37,10 +33,9 @@ cmp.setup({
       return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
     end
   end,
-  preselect = cmp.PreselectMode.None,
   formatting = {
     format = lspkind.cmp_format({
-      with_text = true,
+      mode = "text",
       maxwidth = 50,
       menu = {
         buffer = "[Buffer]",
@@ -59,7 +54,6 @@ cmp.setup({
     end,
   },
   view = { entries = { name = "custom", selection_order = "near_cursor" } },
-  confirm_opts = { behavior = cmp.ConfirmBehavior.Replace, select = false },
   window = { documentation = { border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" } } },
   mapping = {
     ["<Up>"] = cmp.mapping.select_prev_item(),
@@ -72,7 +66,7 @@ cmp.setup({
       end
     end, { "i", "s" }),
     ["<C-h>"] = cmp.mapping(function(fallback)
-      if luasnip.jumpable(-1) then
+      if luasnip.locally_jumpable(-1) then
         luasnip.jump(-1)
       else
         fallback()
@@ -80,8 +74,6 @@ cmp.setup({
     end, { "i", "s" }),
     ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable,
     ["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
     ["<CR>"] = cmp.mapping.confirm({ select = false }),
     ["<C-k>"] = cmp.mapping(function(fallback)

@@ -69,7 +69,16 @@ require("mason-lspconfig").setup_handlers({
       dap = {
         adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
       },
-      server = opts,
+      server = {
+        settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              command = "clippy",
+            },
+          },
+        },
+        capabilities = capabilities,
+      },
     })
   end,
   ["clangd"] = function()

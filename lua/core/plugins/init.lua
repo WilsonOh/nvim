@@ -39,6 +39,15 @@ return require("packer").startup(function(use)
       require("ccc").setup({
         highlighter = {
           auto_enable = true,
+          filetypes = {
+            "html",
+            "jsx",
+            "tsx",
+            "js",
+            "css",
+            "ts",
+            "json",
+          },
         },
       })
     end,
@@ -295,7 +304,7 @@ return require("packer").startup(function(use)
   use({ "nvim-treesitter/nvim-treesitter-context" })
 
   -- Project specific marks with a handy UI
-  use({ "ThePrimeagen/harpoon", module_pattern = { "harpoon", "harpoon.ui", "harpoon.mark" } })
+  use({ "ThePrimeagen/harpoon" })
 
   -- Adds functionality to the quickfix list, such as a "magic window"
   use({
@@ -396,8 +405,6 @@ return require("packer").startup(function(use)
   use({ "dstein64/vim-startuptime" })
 
   use({ "JoosepAlviste/nvim-ts-context-commentstring" })
-
-  -- use({ "sheerun/vim-polyglot" })
 
   use({
     "WilsonOh/emoji_picker-nvim",
