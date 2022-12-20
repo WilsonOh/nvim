@@ -108,7 +108,14 @@ require("lazy").setup({
   -- Colorschemes
   { "rose-pine/neovim", name = "rose-pine", lazy = true },
   { "ellisonleao/gruvbox.nvim", name = "gruvbox", lazy = true },
-  { "catppuccin/nvim", name = "catppuccin", lazy = true, build = vim.cmd.CatppuccinCompile },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = true,
+    build = function()
+      pcall(vim.cmd, "CatppuccinCompile")
+    end,
+  },
   { "rebelot/kanagawa.nvim", name = "kanagawa", lazy = true },
   { "sam4llis/nvim-tundra", name = "tundra", lazy = true },
   -------------------------------------------------------------
@@ -244,7 +251,7 @@ require("lazy").setup({
     "karb94/neoscroll.nvim",
     config = function()
       require("neoscroll").setup({ cursor_scrolls_alone = false })
-    end, 
+    end,
   },
   -- Provide a good bit of vscode-style snippets, to be d with luasnip
   -- Show the context of the function/class at the top when you're in a long function
