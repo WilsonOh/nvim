@@ -1,7 +1,7 @@
 -- General
-require("core.plugins")
 require("core.options")
 require("core.keybindings")
+require("core.plugins")
 
 -- LSP and Autocomplete
 require("language-servers")

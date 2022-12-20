@@ -81,12 +81,12 @@ dashboard.section.buttons.val = {
 -- ╰──────────────────────────────────────────────────────────╯
 
 local function footer()
-  local plugins = #vim.tbl_keys(packer_plugins)
+  local plugins = require("lazy").stats().count
   local v = vim.version()
   return string.format(" v%d.%d.%d   %d", v.major, v.minor, v.patch, plugins)
 end
 
-dashboard.section.footer.val = { footer() }
+dashboard.section.footer.val = footer()
 dashboard.section.footer.opts = { position = "center", hl = "AlphaInfo" }
 
 local section = {
