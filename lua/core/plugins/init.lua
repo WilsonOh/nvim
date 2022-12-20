@@ -367,4 +367,6 @@ require("lazy").setup({
       })
     end,
   },
+  { "mbbill/undotree", cmd = "UndotreeToggle" },
+  -- "sheerun/vim-polyglot"
 })

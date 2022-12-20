@@ -1,4 +1,10 @@
 local mappings = {
+  u = {
+    function()
+      vim.cmd("UndotreeToggle")
+    end,
+    "Toggle Undo Tree",
+  },
   r = {
     name = "Run File",
     r = {
