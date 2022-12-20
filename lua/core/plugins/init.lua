@@ -229,6 +229,7 @@ return require("packer").startup(function(use)
     config = function()
       require("telescope-config")
     end,
+    cmd = "Telescope",
   })
 
   -- Highly functional directory tree viewer
