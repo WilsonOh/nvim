@@ -194,7 +194,6 @@ return require("packer").startup(function(use)
   -- Snippet engine + related plugins
   use({
     "L3MON4D3/LuaSnip",
-    after = "nvim-cmp",
     config = function()
       require("luasnip.loaders.from_vscode").lazy_load()
       require("snippets")
@@ -238,6 +237,7 @@ return require("packer").startup(function(use)
     config = function()
       require("nvimtree-config")
     end,
+    cmd = "NvimTreeToggle",
   })
 
   -- Aggregate LSP provider - very useful for formatters
@@ -357,7 +357,7 @@ return require("packer").startup(function(use)
   use({
     "theHamsta/nvim-dap-virtual-text",
     config = function()
-      require("nvim-dap-virtual-text").setup()
+      require("nvim-dap-virtual-text").setup({})
     end,
   })
   ----------------------------------------------------
@@ -426,7 +426,7 @@ return require("packer").startup(function(use)
 
   use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 
-  use({ "sheerun/vim-polyglot" })
+  -- use({ "sheerun/vim-polyglot" })
 
   use({
     "mizlan/iswap.nvim",
