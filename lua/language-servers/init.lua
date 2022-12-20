@@ -16,7 +16,9 @@ require("mason-nvim-dap").setup_handlers({
   end,
 })
 
-require("mason-lspconfig").setup({ ensure_installed = { "sumneko_lua", "clangd", "pyright" } })
+require("mason-lspconfig").setup({
+  ensure_installed = { "sumneko_lua", "clangd", "pyright", "jsonls", "tsserver", "html" },
+})
 
 local lspconfig = require("lspconfig")
 
