@@ -87,12 +87,15 @@ require("mason-lspconfig").setup_handlers({
   -- LSPs with special settings
   ["sumneko_lua"] = function()
     lspconfig.sumneko_lua.setup({
+      on_attach = function(client)
+        client.server_capabilities.semanticTokensProvider = nil
+      end,
       capabilities = capabilities,
       settings = {
         Lua = {
-          runtime = { version = "LuaJIT", path = vim.split(package.path, ";") },
+          -- runtime = { version = "LuaJIT" },
           diagnostics = { globals = { "vim" } },
-          -- workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+          workspace = { library = vim.api.nvim_get_runtime_file("", true) },
           telemetry = { enable = false },
         },
       },
