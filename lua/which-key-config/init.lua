@@ -30,7 +30,6 @@ local mappings = {
       end,
       "Search Config",
     },
-    g = { ":Telescope git_files theme=ivy<CR>", "Search Git Files" },
     p = {
       function()
         require("telescope_utils").project_search()
