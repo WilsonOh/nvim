@@ -324,12 +324,7 @@ require("lazy").setup({
   -- Adds extra concealment for markdown files i.e. conceal links
   { "preservim/vim-markdown", ft = { "markdown" } },
   ---------------------------------- VERY useful multicursor plugin
-  {
-    "mg979/vim-visual-multi",
-    config = function()
-      require("vim-visual-multi-config")
-    end,
-  },
+  "mg979/vim-visual-multi",
   -- Nice highlighting and icons for todos and notes etc.
   {
     "folke/todo-comments.nvim",

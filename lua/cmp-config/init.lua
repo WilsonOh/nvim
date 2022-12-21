@@ -33,6 +33,7 @@ cmp.setup({
       return not context.in_treesitter_capture("comment") and not context.in_syntax_group("Comment")
     end
   end,
+  preselect = cmp.PreselectMode.None,
   formatting = {
     format = lspkind.cmp_format({
       mode = "text",
