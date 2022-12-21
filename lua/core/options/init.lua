@@ -1,5 +1,7 @@
 local tabwidth = 2
 
+vim.g.closetag_filetypes = "html,xhtml,phtml,xml,javascript,typescript,javascriptreact,typescriptreact,"
+
 vim.g.VM_leader = "<Bslash>"
 
 vim.g.VM_maps = {
@@ -19,7 +21,6 @@ vim.o.cmdheight = 2
 vim.o.splitbelow = true
 vim.o.termguicolors = true
 vim.o.splitright = true
-vim.opt.termguicolors = true
 vim.o.conceallevel = 3
 vim.o.showtabline = 2
 vim.o.showmode = false
