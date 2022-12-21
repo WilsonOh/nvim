@@ -34,19 +34,19 @@ M.config = function()
       name = "Run File",
       r = {
         function()
-          require("globals").run_file(false, true)
+          require("utils").run_file(false, true)
         end,
         "Without Input",
       },
       f = {
         function()
-          require("globals").run_file()
+          require("utils").run_file()
         end,
         "From File",
       },
       c = {
         function()
-          require("globals").run_file(true)
+          require("utils").run_file(true)
         end,
         "From Clipboard",
       },

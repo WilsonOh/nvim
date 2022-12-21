@@ -97,6 +97,7 @@ _G.P = function(s)
 end
 
 M.set_colorscheme = function(colorscheme, transparent_bg)
+  require("lazy").load(colorscheme)
   pcall(require, "colorschemes." .. colorscheme)
   vim.cmd.colorscheme(colorscheme)
 

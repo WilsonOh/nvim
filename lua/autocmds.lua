@@ -1,4 +1,4 @@
-local get_char_at_cursor = require("globals").get_char_at_cursor
+local get_char_at_cursor = require("utils").get_char_at_cursor
 
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "*.tsx", "*.js", "*.jsx" },
