@@ -4,10 +4,10 @@ local opts = { silent = true }
 vim.g.mapleader = " "
 
 set("n", "<Esc>", function()
-  require("notify").dismiss({
-    pending = true,
-    silent = true,
-  })
+	require("notify").dismiss({
+		pending = true,
+		silent = true,
+	})
 end)
 
 set("v", "J", ":m '>+1<CR>gv=gv", opts)
@@ -65,7 +65,7 @@ set("i", ";", ";<C-g>u", opts)
 
 -- Save File
 set("n", "<C-s>", function()
-  vim.cmd("silent write")
+	vim.cmd("silent write")
 end, opts)
 
 -- Move out of Terminal
@@ -86,11 +86,11 @@ set("n", "gC", "0C", opts)
 
 -- smart dd
 local smart_dd = function()
-  if vim.api.nvim_get_current_line():match("^%s*$") then
-    return '"_dd'
-  else
-    return "dd"
-  end
+	if vim.api.nvim_get_current_line():match("^%s*$") then
+		return '"_dd'
+	else
+		return "dd"
+	end
 end
 set("n", "dd", smart_dd, { expr = true })
 

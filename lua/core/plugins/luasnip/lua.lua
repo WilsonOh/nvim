@@ -16,14 +16,14 @@ local lambda = require("luasnip.extras").l
 local rep = require("luasnip.extras").rep
 
 return {
-  s(
-    "slreq",
-    fmt([[local {} = require("{}")]], {
-      f(function(input)
-        local parts = vim.split(input[1][1], ".", true)
-        return parts[#parts] or ""
-      end, { 1 }),
-      i(1),
-    })
-  ),
+	s(
+		"slreq",
+		fmt([[local {} = require("{}")]], {
+			f(function(input)
+				local parts = vim.split(input[1][1], ".", true)
+				return parts[#parts] or ""
+			end, { 1 }),
+			i(1),
+		})
+	),
 }
