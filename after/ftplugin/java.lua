@@ -19,8 +19,6 @@ local jdtls_jar = jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v
 
 local jdtls_config = jdtls_path .. "/" .. config_dir
 
-local utils = require("language-servers.utils")
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 local config = {
   cmd = {
     "java",
