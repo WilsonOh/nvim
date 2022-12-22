@@ -77,6 +77,8 @@ M.config = function()
   local codelldb_path = extension_path .. "adapter/codelldb"
   local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
 
+  -- require("neodev").setup({})
+
   require("mason-lspconfig").setup_handlers({
     -- Generic lspconfig setup
     function(server_name)

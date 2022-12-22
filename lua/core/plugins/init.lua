@@ -1,8 +1,21 @@
 return {
-  -- Syntax Highlighting and Visual Plugins
-
-  -- Enables color highlights within the buffer
-  -- when a valid color string is input e.g. #123
+  "folke/neodev.nvim",
+  {
+    "andymass/vim-matchup",
+    config = function()
+      vim.api.nvim_create_augroup("MatchupParen", {})
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          vim.api.nvim_set_hl(0, "MatchParen", { bg = "#AA0044", bold = true, default = false })
+          vim.g.matchup_matchparen_deferred = true
+          vim.g.matchup_matchparen_hi_surround_always = true
+        end,
+      })
+    end,
+  },
+  { "tpope/vim-repeat" },
+  { "wellle/targets.vim" },
   {
     "uga-rosa/ccc.nvim",
     config = function()
@@ -29,6 +42,25 @@ return {
       require("gitsigns").setup()
     end,
     event = "BufReadPre",
+  },
+  "LudoPinelli/comment-box.nvim",
+
+  {
+    "danymat/neogen",
+    config = function()
+      require("neogen").setup({
+        snippet_engine = "luasnip",
+      })
+    end,
+    dependencies = "nvim-treesitter/nvim-treesitter",
+  },
+
+  {
+    "simrat39/symbols-outline.nvim",
+    config = function()
+      require("symbols-outline").setup()
+    end,
+    cmd = "SymbolsOutline",
   },
 
   -----------------------------------------------------------
@@ -59,27 +91,7 @@ return {
       require("nvim-surround").setup()
     end,
   },
-  -- Extend dot-repeat functionality to plugins
-  { "tpope/vim-repeat" },
-  -- Make extent vim motions e.g. c2ib to change in the *outer* bracket
-  { "wellle/targets.vim" },
-  -- Extend % functionality based on the language e.g. function() -> end in lua
-  -- Also gives a nice highlight when hovering over pairs
-  {
-    "andymass/vim-matchup",
-    config = function()
-      vim.api.nvim_create_augroup("MatchupParen", {})
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "*",
-        callback = function()
-          vim.api.nvim_set_hl(0, "MatchParen", { bg = "#AA0044", bold = true, default = false })
-          vim.g.matchup_matchparen_deferred = true
-          vim.g.matchup_matchparen_hi_surround_always = true
-        end,
-      })
-    end,
-  },
-  -- Nice smooth scrolling  ctrl-d and ctrl-u etc.
+
   {
     "karb94/neoscroll.nvim",
     config = function()
