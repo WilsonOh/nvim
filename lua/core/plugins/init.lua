@@ -1,5 +1,5 @@
 return {
-  "stevearc/dressing.nvim",
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
   "folke/neodev.nvim",
   {
     "andymass/vim-matchup",
@@ -79,6 +79,7 @@ return {
   },
   { "rebelot/kanagawa.nvim", name = "kanagawa", lazy = true },
   { "sam4llis/nvim-tundra", name = "tundra", lazy = true },
+  { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon", lazy = true },
   -------------------------------------------------------------
   {
     "ggandor/leap.nvim",
@@ -159,5 +160,5 @@ return {
     lazy = true,
   },
   { "mbbill/undotree", cmd = "UndotreeToggle" },
-  "sheerun/vim-polyglot",
+  -- "sheerun/vim-polyglot",
 }
