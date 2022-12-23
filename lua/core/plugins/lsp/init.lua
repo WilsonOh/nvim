@@ -7,7 +7,7 @@ local M = {
     "p00f/clangd_extensions.nvim",
     "mfussenegger/nvim-jdtls",
     "b0o/schemastore.nvim",
-    "williamboman/mason.nvim",
+    { "williamboman/mason.nvim", commit = "3ccd16" },
     "williamboman/mason-lspconfig.nvim",
     "jayp0521/mason-nvim-dap.nvim",
   },

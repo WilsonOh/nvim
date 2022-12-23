@@ -1,4 +1,5 @@
 return {
+  "stevearc/dressing.nvim",
   "folke/neodev.nvim",
   {
     "andymass/vim-matchup",
@@ -158,5 +159,5 @@ return {
     lazy = true,
   },
   { "mbbill/undotree", cmd = "UndotreeToggle" },
-  -- "sheerun/vim-polyglot"
+  "sheerun/vim-polyglot",
 }
