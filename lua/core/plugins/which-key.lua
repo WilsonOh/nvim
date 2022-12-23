@@ -73,7 +73,7 @@ M.config = function()
       R = { ":Telescope resume<CR>", "Resume Previous Picker" },
       m = {
         function()
-          require("telescope_utils").custom_search()
+          require("core.plugins.telescope.utils").custom_search()
         end,
         "Telescope Custom Search",
       },

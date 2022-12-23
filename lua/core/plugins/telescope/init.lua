@@ -66,6 +66,7 @@ M.config = function()
       },
       pickers = {
         find_files = { theme = "ivy", find_command = { "fd", "--type", "f", "--strip-cwd-prefix" } },
+        colorscheme = { enable_preview = true },
       },
     })
     telescope.load_extension("fzf")

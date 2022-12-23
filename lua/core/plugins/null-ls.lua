@@ -19,6 +19,8 @@ M.config = function()
   }
 
   local sources = {
+    diag.flake8,
+    formatting.black,
     formatting.gofmt,
     formatting.stylua,
     formatting.cbfmt,
