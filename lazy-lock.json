@@ -26,13 +26,7 @@
   "indent-blankline.nvim": { "branch": "master", "commit": "c4c203c3e8a595bc333abaf168fcb10c13ed5fb7" },
   "iswap.nvim": { "branch": "master", "commit": "16cec32fe27dafd5372ffb9da659c070aa21859e" },
   "kanagawa": { "branch": "master", "commit": "fb733c1043a462155b52cd97efd920f1dd72d33a" },
-<<<<<<< Updated upstream
   "lazy.nvim": { "branch": "main", "commit": "5a1812a6335e44d5599962081e7778ce8dcbaaf5" },
-||||||| Stash base
-  "lazy.nvim": { "branch": "main", "commit": "210d1703ecc695878f942e594450196b26cf389f" },
-=======
-  "lazy.nvim": { "branch": "main", "commit": "eb01b6dc0b651a57c61b3219bcf985fb1b6a54b4" },
->>>>>>> Stashed changes
   "leap.nvim": { "branch": "main", "commit": "a5c9504290832e6bdbbb6265fd1ff02fc6485d20" },
   "lsp": { "branch": "master", "commit": "f6cdf0ac0e8ac5b2c40457cc1d83a9357dc2f7ce" },
   "lspkind.nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
@@ -56,25 +50,11 @@
   "nvim-notify": { "branch": "master", "commit": "b005821516f1f37801a73067afd1cef2dbc4dfe8" },
   "nvim-surround": { "branch": "main", "commit": "f0077c3726d243eeaabd2ec280216e8c3ca7da9f" },
   "nvim-toggleterm.lua": { "branch": "main", "commit": "b02a1674bd0010d7982b056fd3df4f717ff8a57a" },
-<<<<<<< Updated upstream
   "nvim-tree.lua": { "branch": "master", "commit": "9e4c39572f631bb60ee15cb9d46e1daa9927a45e" },
   "nvim-treesitter": { "branch": "master", "commit": "06989a933e24d1ae5c140e3934545218a1c1b48f" },
-||||||| Stash base
-  "nvim-tree.lua": { "branch": "master", "commit": "e14c2895b4f36a22001f7773244041c173dcf867" },
-  "nvim-treesitter": { "branch": "master", "commit": "779b4222a3734c165295c146b39351508822735c" },
-=======
-  "nvim-tree.lua": { "branch": "master", "commit": "e14c2895b4f36a22001f7773244041c173dcf867" },
-  "nvim-treesitter": { "branch": "master", "commit": "6f9e5cdba77ff735e8a4b8a9022b23292a41ba95" },
->>>>>>> Stashed changes
   "nvim-treesitter-context": { "branch": "master", "commit": "d28654b012d4c56beafec630ef7143275dff76f8" },
   "nvim-treesitter-endwise": { "branch": "master", "commit": "0cf4601c330cf724769a2394df555a57d5fd3f34" },
-<<<<<<< Updated upstream
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "a60af980b6f0a6e7ee239ffb9d1d519aaaa1de58" },
-||||||| Stash base
-  "nvim-treesitter-textobjects": { "branch": "master", "commit": "e2ee8fd7259389deaa898d1216fdc6846a26c627" },
-=======
-  "nvim-treesitter-textobjects": { "branch": "master", "commit": "a2e436d88d1880da6678049316e4c45135901866" },
->>>>>>> Stashed changes
   "nvim-ts-autotag": { "branch": "main", "commit": "fdefe46c6807441460f11f11a167a2baf8e4534b" },
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "32d9627123321db65a4f158b72b757bcaef1a3f4" },
   "nvim-ts-rainbow": { "branch": "master", "commit": "064fd6c0a15fae7f876c2c6dd4524ca3fad96750" },
