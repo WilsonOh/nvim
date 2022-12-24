@@ -1,4 +1,12 @@
 return {
+  {
+    "rareitems/printer.nvim",
+    config = function()
+      require("printer").setup({
+        keymap = "gp",
+      })
+    end,
+  },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   "folke/neodev.nvim",
   {
@@ -14,6 +22,7 @@ return {
         end,
       })
     end,
+    event = "InsertEnter",
   },
   { "tpope/vim-repeat" },
   { "wellle/targets.vim" },
@@ -54,6 +63,7 @@ return {
       })
     end,
     dependencies = "nvim-treesitter/nvim-treesitter",
+    cmd = "Neogen",
   },
 
   {
@@ -100,9 +110,9 @@ return {
       require("neoscroll").setup({ cursor_scrolls_alone = false })
     end,
   },
-  { "nvim-treesitter/nvim-treesitter-context" },
+  { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
   -- Project specific marks with a handy UI
-  { "ThePrimeagen/harpoon" },
+  { "ThePrimeagen/harpoon", lazy = true },
   -- Adds functionality to the quickfix list, such as a "magic window"
   {
     "kevinhwang91/nvim-bqf",
