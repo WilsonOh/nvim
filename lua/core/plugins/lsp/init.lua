@@ -1,5 +1,6 @@
 local M = {
   "neovim/nvim-lspconfig",
+  event = "BufReadPre",
   name = "lsp",
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
@@ -76,8 +77,6 @@ M.config = function()
   local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
   local codelldb_path = extension_path .. "adapter/codelldb"
   local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-
-  -- require("neodev").setup({})
 
   require("mason-lspconfig").setup_handlers({
     -- Generic lspconfig setup

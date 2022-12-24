@@ -1,14 +1,5 @@
 return {
-  {
-    "rareitems/printer.nvim",
-    config = function()
-      require("printer").setup({
-        keymap = "gp",
-      })
-    end,
-  },
   { "stevearc/dressing.nvim", event = "VeryLazy" },
-  "folke/neodev.nvim",
   {
     "andymass/vim-matchup",
     config = function()
@@ -22,7 +13,6 @@ return {
         end,
       })
     end,
-    event = "InsertEnter",
   },
   { "tpope/vim-repeat" },
   { "wellle/targets.vim" },
