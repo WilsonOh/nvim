@@ -13,6 +13,7 @@ local M = {
       "JoosepAlviste/nvim-ts-context-commentstring",
     },
   },
+  lazy = false,
 }
 
 function M.config()

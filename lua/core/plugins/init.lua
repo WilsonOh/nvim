@@ -1,4 +1,15 @@
 return {
+  "kyazdani42/nvim-web-devicons",
+  "hrsh7th/cmp-nvim-lsp",
+  "simrat39/rust-tools.nvim",
+  "p00f/clangd_extensions.nvim",
+  "mfussenegger/nvim-jdtls",
+  "b0o/schemastore.nvim",
+  { "williamboman/mason.nvim", commit = "3ccd16" },
+  "williamboman/mason-lspconfig.nvim",
+  "jayp0521/mason-nvim-dap.nvim",
+  "MunifTanjim/nui.nvim",
+  "rcarriga/nvim-notify",
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   {
     "andymass/vim-matchup",
@@ -13,9 +24,10 @@ return {
         end,
       })
     end,
+    lazy = false,
   },
-  { "tpope/vim-repeat" },
-  { "wellle/targets.vim" },
+  { "tpope/vim-repeat", lazy = false },
+  { "wellle/targets.vim", lazy = false },
   {
     "uga-rosa/ccc.nvim",
     config = function()
@@ -34,6 +46,7 @@ return {
         },
       })
     end,
+    event = "BufReadPre",
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -92,17 +105,20 @@ return {
     config = function()
       require("nvim-surround").setup()
     end,
+    keys = { "yss", "ys", "cs", "ds" },
   },
 
   {
     "karb94/neoscroll.nvim",
+
     config = function()
       require("neoscroll").setup({ cursor_scrolls_alone = false })
     end,
+    lazy = false,
   },
   { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
   -- Project specific marks with a handy UI
-  { "ThePrimeagen/harpoon", lazy = true },
+  { "ThePrimeagen/harpoon" },
   -- Adds functionality to the quickfix list, such as a "magic window"
   {
     "kevinhwang91/nvim-bqf",
@@ -112,7 +128,7 @@ return {
     end,
   },
   -- Better bdelete and !bdelete
-  { "moll/vim-bbye" },
+  { "moll/vim-bbye", lazy = false },
   -- Neovim greeter
   -- Gather all LSP diagnostics in one place
   {
@@ -128,9 +144,10 @@ return {
     config = function()
       require("fidget").setup({ text = { spinner = "dots" } })
     end,
+    lazy = false,
   },
   { "preservim/vim-markdown", ft = { "markdown" } },
-  "mg979/vim-visual-multi",
+  { "mg979/vim-visual-multi", lazy = false },
   -- Nice highlighting and icons for todos and notes etc.
   {
     "folke/todo-comments.nvim",
@@ -157,7 +174,6 @@ return {
         flash_style = false,
       })
     end,
-    lazy = true,
   },
   { "mbbill/undotree", cmd = "UndotreeToggle" },
   -- "sheerun/vim-polyglot",

@@ -2,16 +2,6 @@ local M = {
   "neovim/nvim-lspconfig",
   event = "BufReadPre",
   name = "lsp",
-  dependencies = {
-    "hrsh7th/cmp-nvim-lsp",
-    "simrat39/rust-tools.nvim",
-    "p00f/clangd_extensions.nvim",
-    "mfussenegger/nvim-jdtls",
-    "b0o/schemastore.nvim",
-    { "williamboman/mason.nvim", commit = "3ccd16" },
-    "williamboman/mason-lspconfig.nvim",
-    "jayp0521/mason-nvim-dap.nvim",
-  },
 }
 
 M.config = function()

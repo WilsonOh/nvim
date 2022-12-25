@@ -1,4 +1,4 @@
-local M = { "onsails/lspkind.nvim" }
+local M = { "onsails/lspkind.nvim", lazy = false }
 
 M.config = function()
   require("lspkind").init({

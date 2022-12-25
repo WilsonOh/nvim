@@ -5,8 +5,6 @@ local M = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-emoji",
-    "hrsh7th/cmp-cmdline",
-    "dmitmel/cmp-cmdline-history",
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
   },
@@ -20,7 +18,6 @@ M.config = function()
   vim.o.completeopt = "menu,menuone,noselect"
 
   local luasnip = require("luasnip")
-  local cmp = require("cmp")
   local lspkind = require("lspkind")
 
   local function has_words_before()
