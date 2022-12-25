@@ -7,10 +7,10 @@ end
 
 M.config_search = function()
   local config_path = vim.fn.stdpath("config")
-  require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
+  require("telescope.builtin").find_files({
     prompt_title = "Search Config...",
     cwd = config_path,
-  }))
+  })
 end
 
 function M.project_search(opts)
