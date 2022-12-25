@@ -30,7 +30,12 @@ M.config = function()
   dashboard.section.buttons.val = {
     dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>", map_opts),
     dashboard.button("f", "  > Find file", ":Telescope find_files<CR>", map_opts),
-    dashboard.button("c", "  > Search Configs", ":lua require('telescope_utils').config_search()<CR>", map_opts),
+    dashboard.button(
+      "c",
+      "  > Search Configs",
+      ":lua require('core.plugins.telescope.utils').config_search()<CR>",
+      map_opts
+    ),
     dashboard.button("r", "  > Recent", ":Telescope oldfiles<CR>", map_opts),
     dashboard.button("s", "  > Settings", string.format(":e %s<CR>", core_config_path), map_opts),
     dashboard.button("q", "  > Quit NVIM", ":qa<CR>", map_opts),
