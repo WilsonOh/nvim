@@ -99,6 +99,7 @@ return {
     config = function()
       require("leap").add_default_mappings()
     end,
+    keys = { "s", "S" },
   },
   {
     "kylechui/nvim-surround",
