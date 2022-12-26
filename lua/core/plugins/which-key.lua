@@ -106,6 +106,14 @@ M.config = function()
         end,
         "Ranger",
       },
+      b = {
+        function()
+          local Terminal = require("toggleterm.terminal").Terminal
+          local bottom = Terminal:new({ cmd = "btm", direction = "horizontal" })
+          return bottom:toggle()
+        end,
+        "Bottom",
+      },
     },
     h = {
       name = "Harpoon",
