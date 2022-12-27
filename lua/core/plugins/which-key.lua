@@ -168,6 +168,7 @@ M.config = function()
     },
     s = {
       function()
+        vim.cmd.write()
         vim.cmd.source()
         vim.notify("Current file has been sourced", vim.log.levels.INFO)
       end,
