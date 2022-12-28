@@ -75,7 +75,7 @@ M.config = function()
   vim.api.nvim_create_autocmd("FileType", {
     group = "alpha_tabline",
     pattern = "alpha",
-    command = "set showtabline=0 noruler",
+    command = "set showtabline=0 noruler | set laststatus=0",
   })
 
   vim.api.nvim_create_autocmd("FileType", {
