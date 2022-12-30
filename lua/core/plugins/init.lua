@@ -21,8 +21,7 @@ return {
     end,
     event = "BufReadPre",
   },
-  "LudoPinelli/comment-box.nvim",
-
+  -- "LudoPinelli/comment-box.nvim",
   {
     "danymat/neogen",
     config = function()
