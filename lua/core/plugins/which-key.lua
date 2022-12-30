@@ -247,7 +247,7 @@ M.config = function()
           I = { vim.cmd.Mason, "Open Up Mason Package Manager" },
           f = {
             function()
-              require("language-servers.utils").format(0)
+              require("core.plugins.lsp.utils").format(0)
             end,
             "Format File",
           },
