@@ -10,12 +10,12 @@ return {
   "jayp0521/mason-nvim-dap.nvim",
   "MunifTanjim/nui.nvim",
   "rcarriga/nvim-notify",
+  "nvim-lua/plenary.nvim",
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "tpope/vim-repeat", lazy = false },
   { "wellle/targets.vim", lazy = false },
   {
     "lewis6991/gitsigns.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       require("gitsigns").setup()
     end,
@@ -29,7 +29,6 @@ return {
         snippet_engine = "luasnip",
       })
     end,
-    dependencies = "nvim-treesitter/nvim-treesitter",
     cmd = "Neogen",
   },
 
@@ -73,7 +72,7 @@ return {
   -- Adds functionality to the quickfix list, such as a "magic window"
   {
     "kevinhwang91/nvim-bqf",
-    ft = "qf",
+    ft = { "qf", "Trouble" },
     config = function()
       require("bqf").setup({ func_map = { ptogglemode = "a" } })
     end,
@@ -85,7 +84,6 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
-    dependencies = "kyazdani42/nvim-web-devicons",
     config = function()
       require("trouble").setup()
     end,
@@ -102,10 +100,11 @@ return {
   -- Nice highlighting and icons for todos and notes etc.
   {
     "folke/todo-comments.nvim",
-    dependencies = "nvim-lua/plenary.nvim",
     config = function()
-      require("todo-comments").setup({})
+      require("todo-comments").setup()
     end,
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    event = "BufReadPost",
   },
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
@@ -115,7 +114,7 @@ return {
     end,
     cmd = "EmojiPicker",
   },
-  { "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim", cmd = { "DiffviewOpen" } },
+  { "sindrets/diffview.nvim", cmd = "DiffviewOpen" },
   {
     "mizlan/iswap.nvim",
     config = function()
