@@ -236,7 +236,7 @@ M.config = function()
             "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
             "List workspace folder",
           },
-          t = { vim.lsp.buf.type_definition, "Type definition" },
+          -- t = { vim.lsp.buf.type_definition, "Type definition" },
           d = { vim.lsp.buf.definition, "Go to definition" },
           r = { ":Trouble lsp_references<CR>", "References" },
           R = { vim.lsp.buf.rename, "Rename" },
@@ -251,7 +251,8 @@ M.config = function()
             end,
             "Format File",
           },
-          T = { ":Trouble<CR>", "Get Diagnostics" },
+          T = { ":Trouble workspace_diagnostics<CR>", "Get Workspace Diagnostics" },
+          t = { ":Trouble document_diagnostics<CR>", "Get Document Diagnostics" },
         },
       }
       require("which-key").register(lsp_mappings, opts)
