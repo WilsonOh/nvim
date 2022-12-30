@@ -82,6 +82,7 @@ M.config = function()
         server = {
           settings = {
             ["rust-analyzer"] = {
+              inlayHints = { locationLinks = false },
               checkOnSave = {
                 command = "clippy",
               },

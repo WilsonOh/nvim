@@ -8,6 +8,7 @@ set("n", "<Esc>", function()
     pending = true,
     silent = true,
   })
+  vim.cmd.nohl()
 end)
 
 set("v", "J", ":m '>+1<CR>gv=gv", opts)
@@ -99,6 +100,9 @@ set("n", "dD", '"_dd')
 set("n", "cC", '"_cc')
 
 set("i", "<M-e>", "<cmd>EmojiPicker<CR>")
+
+-- Search within visual selection
+set("x", "/", "<Esc>/\\%V", opts)
 
 vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
 vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')

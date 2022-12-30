@@ -11,43 +11,8 @@ return {
   "MunifTanjim/nui.nvim",
   "rcarriga/nvim-notify",
   { "stevearc/dressing.nvim", event = "VeryLazy" },
-  {
-    "andymass/vim-matchup",
-    config = function()
-      vim.api.nvim_create_augroup("MatchupParen", {})
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "*",
-        callback = function()
-          vim.api.nvim_set_hl(0, "MatchParen", { bg = "#AA0044", bold = true, default = false })
-          vim.g.matchup_matchparen_deferred = true
-          vim.g.matchup_matchparen_hi_surround_always = true
-        end,
-      })
-    end,
-    lazy = false,
-  },
   { "tpope/vim-repeat", lazy = false },
   { "wellle/targets.vim", lazy = false },
-  {
-    "uga-rosa/ccc.nvim",
-    config = function()
-      require("ccc").setup({
-        highlighter = {
-          auto_enable = true,
-          filetypes = {
-            "html",
-            "jsx",
-            "tsx",
-            "js",
-            "css",
-            "ts",
-            "json",
-          },
-        },
-      })
-    end,
-    event = "BufReadPre",
-  },
   {
     "lewis6991/gitsigns.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -80,27 +45,13 @@ return {
   -----------------------------------------------------------
 
   -- Colorschemes
-  { "rose-pine/neovim", name = "rose-pine", lazy = true },
-  { "ellisonleao/gruvbox.nvim", name = "gruvbox", lazy = true },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    build = function()
-      pcall(vim.cmd, "CatppuccinCompile")
-    end,
-    lazy = true,
-  },
-  { "rebelot/kanagawa.nvim", name = "kanagawa", lazy = true },
-  { "sam4llis/nvim-tundra", name = "tundra", lazy = true },
-  { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon", lazy = true },
+  { "rose-pine/neovim", name = "rose-pine" },
+  { "ellisonleao/gruvbox.nvim", name = "gruvbox" },
+  { "catppuccin/nvim", name = "catppuccin", build = vim.cmd.CatppuccinCompile },
+  { "rebelot/kanagawa.nvim", name = "kanagawa" },
+  { "sam4llis/nvim-tundra", name = "tundra" },
+  { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
   -------------------------------------------------------------
-  {
-    "ggandor/leap.nvim",
-    config = function()
-      require("leap").add_default_mappings()
-    end,
-    keys = { "s", "S" },
-  },
   {
     "kylechui/nvim-surround",
     config = function()

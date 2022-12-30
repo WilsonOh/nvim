@@ -244,7 +244,7 @@ M.config = function()
           e = { vim.diagnostic.open_float, "Show line diagnostics" },
           n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
           N = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-          I = { "<cmd>Mason<cr>", "Open Up Mason Package Manager" },
+          I = { vim.cmd.Mason, "Open Up Mason Package Manager" },
           f = {
             function()
               require("language-servers.utils").format(0)
