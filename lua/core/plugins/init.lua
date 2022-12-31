@@ -5,7 +5,7 @@ return {
   "p00f/clangd_extensions.nvim",
   "mfussenegger/nvim-jdtls",
   "b0o/schemastore.nvim",
-  { "williamboman/mason.nvim", commit = "3ccd16" },
+  { "williamboman/mason.nvim" }, -- commit = "3ccd16" },
   "williamboman/mason-lspconfig.nvim",
   "jayp0521/mason-nvim-dap.nvim",
   "MunifTanjim/nui.nvim",
@@ -30,14 +30,6 @@ return {
       })
     end,
     cmd = "Neogen",
-  },
-
-  {
-    "simrat39/symbols-outline.nvim",
-    config = function()
-      require("symbols-outline").setup()
-    end,
-    cmd = "SymbolsOutline",
   },
 
   -----------------------------------------------------------
