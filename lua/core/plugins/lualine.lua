@@ -73,6 +73,9 @@ M.config = function()
     if #clients == 0 then
       return "No Active LSP"
     end
+    if #clients > 2 then
+      return table.concat(vim.list_slice(clients, 1, 2), ", ") .. ",..."
+    end
     return table.concat(clients, ", ")
   end
 
