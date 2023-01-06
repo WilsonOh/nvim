@@ -93,7 +93,9 @@ M.config = function()
       })
     end,
     ["clangd"] = function()
-      require("clangd_extensions").setup({ server = opts })
+      local clang_d_capabilities = capabilities
+      capabilities.offsetEncoding = { "utf-16" }
+      require("clangd_extensions").setup({ server = { capabilities = clang_d_capabilities } })
     end,
     -- LSPs with special settings
     ["sumneko_lua"] = function()

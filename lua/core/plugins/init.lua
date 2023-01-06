@@ -1,4 +1,5 @@
 return {
+  { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
   "hrsh7th/cmp-nvim-lsp",
   "simrat39/rust-tools.nvim",

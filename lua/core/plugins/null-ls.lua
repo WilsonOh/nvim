@@ -27,6 +27,7 @@ M.config = function()
     formatting.cbfmt,
     formatting.prettierd.with(js_opts),
     diag.eslint_d.with(js_opts),
+    diag.cppcheck,
     ca.eslint_d.with(js_opts),
   }
 

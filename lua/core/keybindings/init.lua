@@ -11,6 +11,8 @@ set("n", "<Esc>", function()
   vim.cmd.nohl()
 end)
 
+set("n", "<leader>i", "g~l", opts)
+
 set("v", "J", ":m '>+1<CR>gv=gv", opts)
 set("v", "K", ":m '<-2<CR>gv=gv", opts)
 set("n", "J", "mzJ`z", opts)
