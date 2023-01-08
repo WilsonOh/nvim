@@ -122,6 +122,13 @@ M.config = function()
         },
       })
     end,
+    ["tsserver"] = function()
+      require("typescript").setup({
+        server = {
+          capabilities = capabilities,
+        },
+      })
+    end,
     ["jdtls"] = function() end,
   })
 

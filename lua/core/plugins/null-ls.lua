@@ -29,6 +29,7 @@ M.config = function()
     diag.eslint_d.with(js_opts),
     diag.cppcheck,
     ca.eslint_d.with(js_opts),
+    require("typescript.extensions.null-ls.code-actions"),
   }
 
   null_ls.setup({

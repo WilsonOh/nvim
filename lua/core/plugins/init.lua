@@ -4,6 +4,7 @@ return {
   "hrsh7th/cmp-nvim-lsp",
   "simrat39/rust-tools.nvim",
   "p00f/clangd_extensions.nvim",
+  "jose-elias-alvarez/typescript.nvim",
   "mfussenegger/nvim-jdtls",
   "b0o/schemastore.nvim",
   { "williamboman/mason.nvim" }, -- commit = "3ccd16" },
