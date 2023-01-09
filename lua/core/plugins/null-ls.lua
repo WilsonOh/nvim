@@ -20,7 +20,9 @@ M.config = function()
   }
 
   local sources = {
-    diag.flake8,
+    diag.flake8.with({
+      extra_args = { "--max-line-length", "88", "--extend-ignore", "E203" },
+    }),
     formatting.black,
     formatting.gofmt,
     formatting.stylua,

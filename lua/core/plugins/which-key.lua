@@ -188,7 +188,7 @@ M.config = function()
       end,
       "Close Buffer",
     },
-    w = {
+    W = {
       function()
         vim.cmd("Bdelete")
         local curr_win = vim.api.nvim_get_current_win()

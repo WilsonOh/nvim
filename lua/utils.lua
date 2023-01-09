@@ -47,7 +47,7 @@ M.run_file = function(from_clipboard, no_input)
         tmp:write(reg)
         cmd = cmd .. string.format(" < %s", tmpname)
         tmp:close()
-        clean_up = clean_up .. string.format(" && rm %s", tmpname)
+        clean_up = clean_up .. string.format(" && rm -f %s", tmpname)
       end
     elseif file_exists("input.txt") then
       cmd = cmd .. " < input.txt"
