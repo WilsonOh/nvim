@@ -21,9 +21,11 @@ M.config = function()
 
   local sources = {
     diag.flake8.with({
-      extra_args = { "--max-line-length", "88", "--extend-ignore", "E203" },
+      extra_args = { "--max-line-length", "120", "--extend-ignore", "E203" },
     }),
-    formatting.black,
+    formatting.black.with({
+      extra_args = { "--line-length", "120" },
+    }),
     formatting.gofmt,
     formatting.stylua,
     formatting.cbfmt,
