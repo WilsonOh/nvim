@@ -1,6 +1,6 @@
 local M = {
   "folke/which-key.nvim",
-  event = "BufReadPre",
+  event = "VeryLazy",
 }
 
 M.config = function()
@@ -218,46 +218,38 @@ M.config = function()
       n = { ":BufferLineMoveNext<CR>", "Move buffer to the right" },
       p = { ":BufferLineMovePrev<CR>", "Move buffer to the left" },
     },
+    l = {
+      name = "LSP",
+      i = { ":LspInfo<CR>", "Connected Language Servers" },
+      k = { vim.lsp.buf.signature_help, "Signature help" },
+      K = { vim.lsp.buf.hover, "Hover" },
+      w = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
+      W = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
+      l = {
+        "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
+        "List workspace folder",
+      },
+      -- t = { vim.lsp.buf.type_definition, "Type definition" },
+      d = { vim.lsp.buf.definition, "Go to definition" },
+      r = { ":Trouble lsp_references<CR>", "References" },
+      R = { vim.lsp.buf.rename, "Rename" },
+      a = { vim.lsp.buf.code_action, "Code actions" },
+      e = { vim.diagnostic.open_float, "Show line diagnostics" },
+      n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
+      N = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
+      I = { vim.cmd.Mason, "Open Up Mason Package Manager" },
+      f = {
+        function()
+          require("core.plugins.lsp.utils").format(0)
+        end,
+        "Format File",
+      },
+      T = { ":Trouble workspace_diagnostics<CR>", "Get Workspace Diagnostics" },
+      t = { ":Trouble document_diagnostics<CR>", "Get Document Diagnostics" },
+    },
   }
 
   local opts = { prefix = "<leader>" }
-
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function()
-      local lsp_mappings = {
-        l = {
-          name = "LSP",
-          i = { ":LspInfo<CR>", "Connected Language Servers" },
-          k = { vim.lsp.buf.signature_help, "Signature help" },
-          K = { vim.lsp.buf.hover, "Hover" },
-          w = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
-          W = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
-          l = {
-            "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-            "List workspace folder",
-          },
-          -- t = { vim.lsp.buf.type_definition, "Type definition" },
-          d = { vim.lsp.buf.definition, "Go to definition" },
-          r = { ":Trouble lsp_references<CR>", "References" },
-          R = { vim.lsp.buf.rename, "Rename" },
-          a = { vim.lsp.buf.code_action, "Code actions" },
-          e = { vim.diagnostic.open_float, "Show line diagnostics" },
-          n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
-          N = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
-          I = { vim.cmd.Mason, "Open Up Mason Package Manager" },
-          f = {
-            function()
-              require("core.plugins.lsp.utils").format(0)
-            end,
-            "Format File",
-          },
-          T = { ":Trouble workspace_diagnostics<CR>", "Get Workspace Diagnostics" },
-          t = { ":Trouble document_diagnostics<CR>", "Get Document Diagnostics" },
-        },
-      }
-      require("which-key").register(lsp_mappings, opts)
-    end,
-  })
 
   require("which-key").setup({
     -- ignore_missing = true,

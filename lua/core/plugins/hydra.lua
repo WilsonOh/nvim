@@ -146,7 +146,7 @@ M.config = function()
           dap.terminate()
           dap.repl.close()
           dap.close()
-          require("dapui").close()
+          require("dapui").close({})
           dap.repl.close()
         end,
       },

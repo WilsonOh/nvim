@@ -14,8 +14,6 @@ return {
   "rcarriga/nvim-notify",
   "nvim-lua/plenary.nvim",
   { "stevearc/dressing.nvim", event = "VeryLazy" },
-  { "tpope/vim-repeat", lazy = false },
-  { "wellle/targets.vim", lazy = false },
   {
     "lewis6991/gitsigns.nvim",
     config = function()
