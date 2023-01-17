@@ -1,5 +1,8 @@
+-- Set java indent options
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+
 local jdtls = require("jdtls")
-local jdtls_dap = require("jdtls.dap")
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 

@@ -29,6 +29,9 @@ M.config = function()
     formatting.gofmt,
     formatting.stylua,
     formatting.cbfmt,
+    formatting.clang_format.with({
+      filetypes = { "java" },
+    }),
     formatting.prettierd.with(js_opts),
     diag.eslint_d.with(js_opts),
     diag.cppcheck,
