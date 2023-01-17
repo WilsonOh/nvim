@@ -16,19 +16,13 @@ return {
   { "stevearc/dressing.nvim", event = "VeryLazy" },
   {
     "lewis6991/gitsigns.nvim",
-    config = function()
-      require("gitsigns").setup()
-    end,
+    config = true,
     event = "BufReadPre",
   },
   -- "LudoPinelli/comment-box.nvim",
   {
     "danymat/neogen",
-    config = function()
-      require("neogen").setup({
-        snippet_engine = "luasnip",
-      })
-    end,
+    opts = { snippet_engine = "luasnip" },
     cmd = "Neogen",
   },
 
@@ -44,19 +38,13 @@ return {
   -------------------------------------------------------------
   {
     "kylechui/nvim-surround",
-    config = function()
-      require("nvim-surround").setup()
-    end,
+    config = true,
     keys = { "yss", "ys", "cs", "ds" },
   },
-
   {
     "karb94/neoscroll.nvim",
-
-    config = function()
-      require("neoscroll").setup({ cursor_scrolls_alone = false })
-    end,
-    lazy = false,
+    opts = { cursor_scrolls_alone = false },
+    event = "VeryLazy",
   },
   { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
   -- Project specific marks with a handy UI
@@ -65,9 +53,7 @@ return {
   {
     "kevinhwang91/nvim-bqf",
     ft = { "qf", "Trouble" },
-    config = function()
-      require("bqf").setup({ func_map = { ptogglemode = "a" } })
-    end,
+    opts = { func_map = { ptogglemode = "a" } },
   },
   -- Better bdelete and !bdelete
   { "moll/vim-bbye", lazy = false },
@@ -76,46 +62,36 @@ return {
   {
     "folke/trouble.nvim",
     cmd = { "TroubleToggle", "Trouble" },
-    config = function()
-      require("trouble").setup()
-    end,
+    config = true,
   },
   {
     "j-hui/fidget.nvim",
-    config = function()
-      require("fidget").setup({ text = { spinner = "dots" } })
-    end,
-    lazy = false,
+    opts = { text = { spinner = "dots" } },
+    event = "BufReadPre",
   },
   { "preservim/vim-markdown", ft = { "markdown" } },
   { "mg979/vim-visual-multi", lazy = false },
   -- Nice highlighting and icons for todos and notes etc.
   {
     "folke/todo-comments.nvim",
-    config = function()
-      require("todo-comments").setup()
-    end,
+    config = true,
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = "BufReadPost",
   },
   { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
     "WilsonOh/emoji_picker-nvim",
-    config = function()
-      require("emoji_picker").setup({})
-    end,
+    config = true,
     cmd = "EmojiPicker",
   },
   { "sindrets/diffview.nvim", cmd = "DiffviewOpen" },
   {
     "mizlan/iswap.nvim",
-    config = function()
-      require("iswap").setup({
-        autoswap = true,
-        move_cursor = true,
-        flash_style = false,
-      })
-    end,
+    opts = {
+      autoswap = true,
+      move_cursor = true,
+      flash_style = false,
+    },
   },
   { "mbbill/undotree", cmd = "UndotreeToggle" },
   -- "sheerun/vim-polyglot",
