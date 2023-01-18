@@ -1,5 +1,6 @@
 M = {
   "lukas-reineke/indent-blankline.nvim",
+  event = "BufReadPost",
 }
 
 M.config = function()
@@ -19,10 +20,6 @@ M.config = function()
       "IndentBlanklineIndent6",
     }
   end
-
-  -- vim.opt.list = true
-  -- vim.opt.listchars:append("space:⋅")
-  -- vim.opt.listchars:append("eol:↴")
 
   local show_rainbow = false
 
