@@ -2,6 +2,7 @@ local M = {
   "neovim/nvim-lspconfig",
   event = "BufReadPre",
   name = "lsp",
+  dependencies = { "folke/neodev.nvim" },
 }
 
 M.config = function()
@@ -27,6 +28,8 @@ M.config = function()
       require("mason-nvim-dap.automatic_setup")(source_name)
     end,
   })
+
+  require("neodev").setup({})
 
   local lspconfig = require("lspconfig")
 
