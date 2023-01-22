@@ -1,5 +1,9 @@
 local tabwidth = 2
 
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
+
 vim.g.closetag_filetypes = "html,xhtml,phtml,xml,javascript,typescript,javascriptreact,typescriptreact,"
 
 vim.g.VM_leader = "<Bslash>"
