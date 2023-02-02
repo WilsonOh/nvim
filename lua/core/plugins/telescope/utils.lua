@@ -18,7 +18,8 @@ function M.project_search(opts)
     prompt_title = "Seach Project...",
   }
   opts.show_untracked = true
-  if vim.loop.fs_stat(".git") then
+  local is_git_repo = vim.fs.find({ ".git" }, { upward = true })
+  if is_git_repo then
     require("telescope.builtin").git_files(opts)
   else
     local client = vim.lsp.get_active_clients()[1]
