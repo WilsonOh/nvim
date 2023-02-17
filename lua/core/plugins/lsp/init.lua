@@ -15,7 +15,7 @@ M.config = function()
 
   require("mason-lspconfig").setup({
     automatic_installation = true,
-    ensure_installed = { "sumneko_lua", "clangd", "pyright", "jsonls", "tsserver", "html", "rust_analyzer" },
+    ensure_installed = { "lua_ls", "clangd", "pyright", "jsonls", "tsserver", "html", "rust_analyzer" },
   })
 
   require("mason-nvim-dap").setup({
@@ -101,8 +101,8 @@ M.config = function()
       require("clangd_extensions").setup({ server = { capabilities = clang_d_capabilities } })
     end,
     -- LSPs with special settings
-    ["sumneko_lua"] = function()
-      lspconfig.sumneko_lua.setup({
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup({
         on_attach = function(client)
           client.server_capabilities.semanticTokensProvider = nil
         end,
