@@ -1,5 +1,6 @@
 local M = {
   "anuvyklack/hydra.nvim",
+  enabled = false,
   keys = { "<leader>d", "<leader>g" },
 }
 

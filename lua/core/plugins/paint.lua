@@ -1,6 +1,7 @@
 return {
   "folke/paint.nvim",
   event = "BufReadPre",
+  enabled = false,
   config = function()
     require("paint").setup({
       highlights = {

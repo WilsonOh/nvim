@@ -1,6 +1,6 @@
 local M = {
   "neovim/nvim-lspconfig",
-  event = "BufReadPre",
+  event = { "BufReadPre", "BufNewFile" },
   name = "lsp",
   dependencies = { "folke/neodev.nvim" },
 }
@@ -16,17 +16,6 @@ M.config = function()
   require("mason-lspconfig").setup({
     automatic_installation = true,
     ensure_installed = { "lua_ls", "clangd", "pyright", "jsonls", "tsserver", "html", "rust_analyzer" },
-  })
-
-  require("mason-nvim-dap").setup({
-    ensure_installed = { "python", "codelldb" },
-    automatic_setup = true,
-  })
-
-  require("mason-nvim-dap").setup_handlers({
-    function(source_name)
-      require("mason-nvim-dap.automatic_setup")(source_name)
-    end,
   })
 
   require("neodev").setup({})
@@ -46,7 +35,7 @@ M.config = function()
         group = augroup,
         pattern = "*",
         callback = function()
-          utils.format(0)
+          utils.format()
         end,
       })
       if client.server_capabilities.documentHighlightProvider then
@@ -67,10 +56,6 @@ M.config = function()
 
   local opts = { capabilities = capabilities }
 
-  local extension_path = vim.env.HOME .. "/.local/share/nvim/mason/packages/codelldb/extension/"
-  local codelldb_path = extension_path .. "adapter/codelldb"
-  local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-
   require("mason-lspconfig").setup_handlers({
     -- Generic lspconfig setup
     function(server_name)
@@ -80,12 +65,11 @@ M.config = function()
     ["rust_analyzer"] = function()
       require("rust-tools").setup({
         dap = {
-          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+          adapter = false,
         },
         server = {
           settings = {
             ["rust-analyzer"] = {
-              inlayHints = { locationLinks = false },
               checkOnSave = {
                 command = "clippy",
               },
@@ -97,7 +81,7 @@ M.config = function()
     end,
     ["clangd"] = function()
       local clang_d_capabilities = capabilities
-      capabilities.offsetEncoding = { "utf-16" }
+      clang_d_capabilities.offsetEncoding = { "utf-16" }
       require("clangd_extensions").setup({ server = { capabilities = clang_d_capabilities } })
     end,
     -- LSPs with special settings
@@ -109,9 +93,10 @@ M.config = function()
         capabilities = capabilities,
         settings = {
           Lua = {
-            -- runtime = { version = "LuaJIT" },
             diagnostics = { globals = { "vim" } },
-            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            workspace = {
+              checkThirdParty = false,
+            },
             telemetry = { enable = false },
           },
         },
@@ -132,6 +117,7 @@ M.config = function()
         },
       })
     end,
+    -- Don't do anything for jdtls as it's setup under the java.lua filetype autocommand
     ["jdtls"] = function() end,
   })
 

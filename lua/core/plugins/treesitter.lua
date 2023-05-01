@@ -13,19 +13,6 @@ local M = {
 M.config = function()
   require("nvim-treesitter.configs").setup({
     enabled = true,
-    ensure_installed = {
-      "cpp",
-      "c",
-      "lua",
-      "rust",
-      "python",
-      "javascript",
-      "typescript",
-      "json",
-      "html",
-      "css",
-      "java",
-    },
     indent = { enable = false },
     highlight = { enable = true },
     autotag = { enable = true },

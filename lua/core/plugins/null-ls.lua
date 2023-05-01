@@ -1,6 +1,6 @@
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
-  event = "BufReadPre",
+  event = { "BufReadPre", "BufNewFile" },
 }
 
 M.config = function()
@@ -33,9 +33,7 @@ M.config = function()
       filetypes = { "java" },
     }),
     formatting.prettierd.with(js_opts),
-    diag.eslint_d.with(js_opts),
     diag.cppcheck,
-    ca.eslint_d.with(js_opts),
     require("typescript.extensions.null-ls.code-actions"),
   }
 

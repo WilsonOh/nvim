@@ -78,7 +78,6 @@ return {
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = "BufReadPost",
   },
-  { "dstein64/vim-startuptime", cmd = "StartupTime" },
   {
     "WilsonOh/emoji_picker-nvim",
     config = true,
@@ -94,5 +93,5 @@ return {
     },
   },
   { "mbbill/undotree", cmd = "UndotreeToggle" },
-  -- "sheerun/vim-polyglot",
+  { "sheerun/vim-polyglot", lazy = false, enabled = false },
 }

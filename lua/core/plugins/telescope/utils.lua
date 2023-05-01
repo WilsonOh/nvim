@@ -19,9 +19,8 @@ function M.project_search(opts)
   }
   opts.show_untracked = true
   local is_git_repo = vim.fs.find({ ".git" }, { upward = true })
-  if is_git_repo then
-    require("telescope.builtin").git_files(opts)
-  else
+  local ok, _ = pcall(require("telescope.builtin").git_files, opts)
+  if not ok then
     local client = vim.lsp.get_active_clients()[1]
     if client then
       opts.cwd = client.config.root_dir
