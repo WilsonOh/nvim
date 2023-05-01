@@ -2,6 +2,7 @@ local M = {
   "akinsho/bufferline.nvim",
   -- event = { "BufReadPre", "BufNewFile" },
   event = "VeryLazy",
+  enabled = false,
 }
 
 M.config = function()
