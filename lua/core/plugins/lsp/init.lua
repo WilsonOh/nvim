@@ -1,6 +1,6 @@
 local M = {
   "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
+  lazy = false,
   name = "lsp",
   dependencies = { "folke/neodev.nvim" },
 }
@@ -54,7 +54,7 @@ M.config = function()
     end,
   })
 
-  local opts = { capabilities = capabilities }
+  local opts = { capabilities = capabilities, single_file_support = true }
 
   require("mason-lspconfig").setup_handlers({
     -- Generic lspconfig setup
