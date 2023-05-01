@@ -1,5 +1,9 @@
 local get_char_at_cursor = require("utils").get_char_at_cursor
 
+vim.cmd(
+  [[autocmd TextYankPost * silent! lua vim.highlight.on_yank {higroup=(vim.fn['hlexists']('HighlightedyankRegion') > 0 and 'HighlightedyankRegion' or 'IncSearch'), timeout=400}]]
+)
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "*.tsx", "*.js", "*.jsx" },
   group = vim.api.nvim_create_augroup("jsx_self_closing_elements", { clear = true }),

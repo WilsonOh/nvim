@@ -1,5 +1,6 @@
 return {
   "gbprod/yanky.nvim",
+  enabled = false,
   config = function()
     require("yanky").setup({
       highlight = {
