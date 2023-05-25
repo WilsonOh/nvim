@@ -68,6 +68,16 @@ M.config = function()
         end,
         "Search Project",
       },
+      F = {
+        function()
+          require("telescope.builtin").grep_string({
+            search = "",
+            only_sort_text = true,
+            word_match = "-w",
+          })
+        end,
+        "Live Fuzzy",
+      },
       r = { ":Telescope live_grep<CR>", "Live Grep" },
       b = { ":Telescope buffers bufnr=0<CR>", "Buffers" },
       o = { ":Telescope oldfiles<CR>", "Recent Files" },
