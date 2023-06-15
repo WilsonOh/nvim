@@ -82,7 +82,8 @@ M.config = function()
     ["clangd"] = function()
       local clang_d_capabilities = capabilities
       clang_d_capabilities.offsetEncoding = { "utf-16" }
-      require("clangd_extensions").setup({ server = { capabilities = clang_d_capabilities } })
+      lspconfig.clangd.setup({ capabilities = clang_d_capabilities })
+      -- require("clangd_extensions").setup({ server = { capabilities = clang_d_capabilities } })
     end,
     -- LSPs with special settings
     ["lua_ls"] = function()

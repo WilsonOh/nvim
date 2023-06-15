@@ -4,6 +4,8 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 
+vim.g.gitblame_enabled = 0
+
 vim.g.closetag_filetypes = "html,xhtml,phtml,xml,javascript,typescript,javascriptreact,typescriptreact,"
 
 vim.g.VM_leader = "<Bslash>"
@@ -58,7 +60,7 @@ vim.o.splitbelow = true
 vim.o.termguicolors = true
 vim.o.splitright = true
 vim.o.conceallevel = 3
-vim.o.showtabline = 0
+vim.o.showtabline = 2
 vim.o.showmode = false
 vim.o.backup = false
 vim.o.writebackup = false

@@ -1,4 +1,5 @@
 return {
+  { "f-person/git-blame.nvim", lazy = false },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
   "hrsh7th/cmp-nvim-lsp",
@@ -52,8 +53,9 @@ return {
   -- Adds functionality to the quickfix list, such as a "magic window"
   {
     "kevinhwang91/nvim-bqf",
-    ft = { "qf", "Trouble" },
-    opts = { func_map = { ptogglemode = "a" } },
+    lazy = false,
+    -- ft = { "qf", "Trouble" },
+    -- opts = { func_map = { ptogglemode = "a" } },
   },
   -- Better bdelete and !bdelete
   { "moll/vim-bbye", lazy = false },
@@ -93,5 +95,5 @@ return {
     },
   },
   { "mbbill/undotree", cmd = "UndotreeToggle" },
-  { "sheerun/vim-polyglot", lazy = false, enabled = false },
+  { "sheerun/vim-polyglot", lazy = false, enabled = true },
 }

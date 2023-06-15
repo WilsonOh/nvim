@@ -11,6 +11,7 @@ local M = {
 }
 
 M.config = function()
+  vim.treesitter.language.register("javascript", "typescriptreact")
   require("nvim-treesitter.configs").setup({
     enabled = true,
     indent = { enable = false },

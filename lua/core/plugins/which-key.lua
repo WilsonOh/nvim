@@ -74,11 +74,12 @@ M.config = function()
             search = "",
             only_sort_text = true,
             word_match = "-w",
+            cwd = "/Users/wilsonoh/govtech_stuff/apex_cloud/apex-cloud-services/src/",
           })
         end,
         "Live Fuzzy",
       },
-      r = { ":Telescope live_grep<CR>", "Live Grep" },
+      r = { require("fzf-lua").grep_project, "Live Grep" },
       b = { ":Telescope buffers bufnr=0<CR>", "Buffers" },
       o = { ":Telescope oldfiles<CR>", "Recent Files" },
       R = { ":Telescope resume<CR>", "Resume Previous Picker" },
@@ -88,10 +89,17 @@ M.config = function()
         end,
         "Telescope Custom Search",
       },
-      C = { ":Telescope current_buffer_fuzzy_find<CR>", "Current Buffer Fuzzy Find" },
+      C = { require("fzf-lua").grep_curbuf, "Current Buffer Fuzzy Find" },
     },
     t = {
-      name = "Terminal",
+      name = "Terminal/Tab",
+      a = { ":$tabnew<CR>", "New Tab" },
+      c = { ":tabclose<CR>", "Close Tab" },
+      o = { ":tabonly<CR>", "Close All Other Tabs" },
+      n = { ":tabn<CR>", "Next Tab" },
+      p = { ":tabp<CR>", "Previous Tab" },
+      mp = { ":-tabmove<CR>", "Move Tab Backwards" },
+      mn = { ":+tabmove<CR>", "Move Tab Forwards" },
       f = {
         function()
           local Terminal = require("toggleterm.terminal").Terminal
@@ -232,14 +240,14 @@ M.config = function()
       name = "LSP",
       i = { ":LspInfo<CR>", "Connected Language Servers" },
       k = { vim.lsp.buf.signature_help, "Signature help" },
-      K = { vim.lsp.buf.hover, "Hover" },
+      K = { ":Lspsaga hover_doc<CR>", "Hover" },
       w = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
       W = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
       l = {
         "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
         "List workspace folder",
       },
-      -- t = { vim.lsp.buf.type_definition, "Type definition" },
+      D = { ":Lspsaga peek_definition<CR>", "Peek Definition" },
       d = { vim.lsp.buf.definition, "Go to definition" },
       r = { ":Trouble lsp_references<CR>", "References" },
       R = { vim.lsp.buf.rename, "Rename" },
@@ -248,6 +256,7 @@ M.config = function()
       n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
       N = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
       I = { vim.cmd.Mason, "Open Up Mason Package Manager" },
+      F = { ":Lspsaga lsp_finder<CR>", "Open LSP Finder" },
       f = {
         function()
           require("core.plugins.lsp.utils").format(0)

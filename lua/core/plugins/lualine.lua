@@ -57,7 +57,8 @@ M.config = function()
 
   local lsp_client_name = function(expand_null_ls)
     local clients = {}
-    for _, client in pairs(vim.lsp.buf_get_clients(0)) do
+    local bufnr = vim.api.nvim_get_current_buf()
+    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = bufnr })) do
       if expand_null_ls then
         if client.name == "null-ls" then
           for _, source in pairs(get_attached_null_ls_sources()) do
@@ -146,7 +147,7 @@ M.config = function()
     component_separators = "",
   })
 
-  ins_left({
+  --[[ ins_left({
     function()
       return lsp_client_name(true)
     end,
@@ -155,7 +156,7 @@ M.config = function()
     color = { fg = cp.base, bg = cp.blue, gui = "bold" },
     separator = { left = "", right = "" },
   })
-
+]]
   require("lualine").setup(config)
 end
 

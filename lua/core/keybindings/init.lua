@@ -106,6 +106,8 @@ set("i", "<M-e>", "<cmd>EmojiPicker<CR>")
 -- Search within visual selection
 set("x", "/", "<Esc>/\\%V", opts)
 
+set("n", "<C-o>", "<C-o>zz", opts)
+
 vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
 vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')
 vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])
