@@ -24,20 +24,11 @@ M.config = function()
 
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-  local utils = require("core.plugins.lsp.utils")
-
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
       vim.api.nvim_clear_autocmds({ group = augroup, pattern = "*" })
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        pattern = "*",
-        callback = function()
-          utils.format()
-        end,
-      })
       if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup("lsp_document_highlight", {})
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {

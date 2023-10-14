@@ -1,6 +1,7 @@
 local M = {
   "jose-elias-alvarez/null-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
+  enabled = true,
 }
 
 M.config = function()
@@ -20,7 +21,7 @@ M.config = function()
   }
 
   local sources = {
-    diag.flake8.with({
+    --[[ diag.flake8.with({
       extra_args = { "--max-line-length", "120", "--extend-ignore", "E203" },
     }),
     formatting.black.with({
@@ -33,8 +34,8 @@ M.config = function()
       filetypes = { "java" },
     }),
     formatting.prettierd.with(js_opts),
-    diag.cppcheck,
-    diag.eslint,
+    diag.cppcheck, ]]
+    diag.eslint_d.with(js_opts),
     require("typescript.extensions.null-ls.code-actions"),
   }
 
