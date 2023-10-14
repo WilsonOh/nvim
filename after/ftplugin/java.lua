@@ -18,7 +18,7 @@ local config_dir = current_os == "Darwin" and "config_mac" or "config_linux"
 
 local jdtls_path = require("mason-registry").get_package("jdtls"):get_install_path()
 
-local jdtls_jar = jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+local jdtls_jar = jdtls_path .. "/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar"
 
 local jdtls_config = jdtls_path .. "/" .. config_dir
 

@@ -1,5 +1,6 @@
 return {
   "petertriho/nvim-scrollbar",
+  enabled = false,
   config = function()
     local cp = require("catppuccin.palettes").get_palette()
     require("scrollbar").setup({

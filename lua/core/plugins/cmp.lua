@@ -96,8 +96,8 @@ M.config = function()
       ["<C-k>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        elseif luasnip.expandable() then
-          luasnip.expand()
+        -- elseif luasnip.expandable() then
+        --   luasnip.expand()
         elseif has_words_before() then
           cmp.complete()
         else

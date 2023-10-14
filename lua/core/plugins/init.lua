@@ -1,4 +1,5 @@
 return {
+  { "abecodes/tabout.nvim", config = true, lazy = false },
   { "f-person/git-blame.nvim", lazy = false },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
@@ -39,15 +40,22 @@ return {
   -------------------------------------------------------------
   {
     "kylechui/nvim-surround",
-    config = true,
-    keys = { "yss", "ys", "cs", "ds" },
+    config = function()
+      require("nvim-surround").setup({
+        keymaps = {
+          normal = "<leader>s",
+          normal_cur = "<leader>ss",
+        },
+      })
+    end,
+    lazy = false,
   },
   {
     "karb94/neoscroll.nvim",
     opts = { cursor_scrolls_alone = false },
     event = "VeryLazy",
   },
-  { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre" },
+  { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre", enabled = false },
   -- Project specific marks with a handy UI
   { "ThePrimeagen/harpoon" },
   -- Adds functionality to the quickfix list, such as a "magic window"
@@ -69,6 +77,7 @@ return {
   {
     "j-hui/fidget.nvim",
     opts = { text = { spinner = "dots" } },
+    tag = "legacy",
     event = "BufReadPre",
   },
   { "preservim/vim-markdown", ft = { "markdown" } },

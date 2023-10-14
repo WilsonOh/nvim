@@ -52,7 +52,8 @@ M.config = function()
         "From Clipboard",
       },
     },
-    e = { ":NvimTreeToggle<cr>", "File Explorer" },
+    e = { ":NvimTreeToggle<cr>", "Toggle File Explorer" },
+    E = { ":NvimTreeFocus<cr>", "Focus File Explorer" },
     f = {
       name = "Telescope",
       f = { ":Telescope find_files theme=ivy<CR>", "Find Files" },
@@ -184,14 +185,14 @@ M.config = function()
         "Go To Previous Mark",
       },
     },
-    s = {
+    --[[ s = {
       function()
         vim.cmd.write()
         vim.cmd.source()
         vim.notify("Current file has been sourced", vim.log.levels.INFO)
       end,
       "Source Current File",
-    },
+    }, ]]
     S = {
       function()
         require("iswap").iswap_node_with()
@@ -220,7 +221,7 @@ M.config = function()
       end,
       "Force Close Buffer",
     },
-    y = { ":%y+<CR>", "Copy Entire Buffer to System Clipboard" },
+    -- y = { ":%y+<CR>", "Copy Entire Buffer to System Clipboard" },
     p = {
       name = "Lazy Package Manager",
       r = { require("lazy").clean, "Remove Unused Plugins" },
@@ -240,7 +241,7 @@ M.config = function()
       name = "LSP",
       i = { ":LspInfo<CR>", "Connected Language Servers" },
       k = { vim.lsp.buf.signature_help, "Signature help" },
-      K = { ":Lspsaga hover_doc<CR>", "Hover" },
+      K = { vim.lsp.buf.hover, "Hover" },
       w = { vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
       W = { vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
       l = {
@@ -256,7 +257,7 @@ M.config = function()
       n = { vim.diagnostic.goto_next, "Go to next diagnostic" },
       N = { vim.diagnostic.goto_prev, "Go to previous diagnostic" },
       I = { vim.cmd.Mason, "Open Up Mason Package Manager" },
-      F = { ":Lspsaga lsp_finder<CR>", "Open LSP Finder" },
+      F = { ":Lspsaga finder<CR>", "Open LSP Finder" },
       f = {
         function()
           require("core.plugins.lsp.utils").format(0)

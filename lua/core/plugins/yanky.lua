@@ -1,19 +1,18 @@
 return {
   "gbprod/yanky.nvim",
-  enabled = false,
+  keys = {
+    { "y", "<Plug>(YankyYank)", { "n", "x" } },
+    { "p", "<Plug>(YankyPutAfter)", { "n", "x" } },
+    { "p", "<Plug>(YankyPutAfter)", { "n", "x" } },
+    { "P", "<Plug>(YankyPutBefore)", { "n", "x" } },
+    { "gp", "<Plug>(YankyGPutAfter)", { "n", "x" } },
+    { "gP", "<Plug>(YankyGPutBefore)", { "n", "x" } },
+  },
   config = function()
     require("yanky").setup({
       highlight = {
         timer = 300,
       },
     })
-
-    -- vim.keymap.set({ "n", "x" }, "Y", "<Plug>(YankyYank)")
-
-    vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-    vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-    vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-    vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
   end,
-  event = "BufReadPost",
 }

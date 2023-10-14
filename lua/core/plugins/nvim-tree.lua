@@ -15,7 +15,6 @@ M.config = function()
     view = {
       width = 50,
       side = "left",
-      mappings = { custom_only = false, list = {} },
     },
     renderer = {
       indent_markers = { enable = true, icons = { corner = "└ ", edge = "│ ", none = "  " } },

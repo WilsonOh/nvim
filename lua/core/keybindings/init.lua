@@ -108,6 +108,8 @@ set("x", "/", "<Esc>/\\%V", opts)
 
 set("n", "<C-o>", "<C-o>zz", opts)
 
+set("x", "<leader>y", [["+y]], opts)
+
 vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
 vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')
 vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])
