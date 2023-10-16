@@ -36,6 +36,7 @@ M.config = function()
     formatting.prettierd.with(js_opts),
     diag.cppcheck, ]]
     diag.eslint_d.with(js_opts),
+    diag.fish,
     require("typescript.extensions.null-ls.code-actions"),
   }
 
