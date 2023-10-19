@@ -1,7 +1,7 @@
 return {
   "gbprod/yanky.nvim",
   keys = {
-    { "y", "<Plug>(YankyYank)", { "n", "x" } },
+    { "y", "<Plug>(YankyYank)", { "n", "x", "o", "v" } },
     { "p", "<Plug>(YankyPutAfter)", { "n", "x" } },
     { "p", "<Plug>(YankyPutAfter)", { "n", "x" } },
     { "P", "<Plug>(YankyPutBefore)", { "n", "x" } },

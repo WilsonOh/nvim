@@ -1,6 +1,7 @@
 local M = {
   "ggandor/leap.nvim",
   event = "VeryLazy",
+  enabled = false,
 
   dependencies = {
     { "ggandor/flit.nvim", config = { labeled_modes = "nvo", multiline = false } },
