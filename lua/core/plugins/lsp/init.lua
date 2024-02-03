@@ -111,6 +111,22 @@ M.config = function()
     end,
     -- Don't do anything for jdtls as it's setup under the java.lua filetype autocommand
     ["jdtls"] = function() end,
+    ["cssls"] = function()
+      lspconfig.cssls.setup({
+        capabilities = capabilities,
+        settings = {
+          css = { validate = true, lint = {
+            unknownAtRules = "ignore",
+          } },
+          scss = { validate = true, lint = {
+            unknownAtRules = "ignore",
+          } },
+          less = { validate = true, lint = {
+            unknownAtRules = "ignore",
+          } },
+        },
+      })
+    end,
   })
 
   require("core.plugins.lsp.settings")

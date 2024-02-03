@@ -56,7 +56,13 @@ M.config = function()
     E = { ":NvimTreeFocus<cr>", "Focus File Explorer" },
     f = {
       name = "Telescope",
-      f = { ":Telescope find_files theme=ivy<CR>", "Find Files" },
+      -- f = { ":Telescope find_files theme=ivy<CR>", "Find Files" },
+      f = {
+        function()
+          require("core.plugins.telescope.utils").search_current_buf_dir()
+        end,
+        "Search Current Buffer Directory",
+      },
       c = {
         function()
           require("core.plugins.telescope.utils").config_search()
@@ -68,17 +74,6 @@ M.config = function()
           require("core.plugins.telescope.utils").project_search()
         end,
         "Search Project",
-      },
-      F = {
-        function()
-          require("telescope.builtin").grep_string({
-            search = "",
-            only_sort_text = true,
-            word_match = "-w",
-            cwd = "/Users/wilsonoh/govtech_stuff/apex_cloud/apex-cloud-services/src/",
-          })
-        end,
-        "Live Fuzzy",
       },
       r = { require("fzf-lua").grep_project, "Live Grep" },
       b = { ":Telescope buffers bufnr=0<CR>", "Buffers" },

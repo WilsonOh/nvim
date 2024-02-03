@@ -1,5 +1,8 @@
 local M = {
   "L3MON4D3/LuaSnip",
+  version = "v2.*",
+  enabled = true,
+  build = "make install_jsregexp",
   dependencies = {
     "rafamadriz/friendly-snippets",
     config = function()

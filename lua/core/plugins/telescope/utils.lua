@@ -14,19 +14,33 @@ M.config_search = function()
 end
 
 function M.project_search(opts)
-  opts = opts or {
+  local default_config = {
     prompt_title = "Seach Project...",
+    show_untracked = true,
   }
-  opts.show_untracked = true
-  local is_git_repo = vim.fs.find({ ".git" }, { upward = true })
+  opts = vim.tbl_deep_extend("force", opts or {}, default_config)
+  local client = vim.lsp.get_active_clients()[1]
+  if client then
+    opts.cwd = client.config.root_dir
+    return require("telescope.builtin").find_files(opts)
+  end
   local ok, _ = pcall(require("telescope.builtin").git_files, opts)
   if not ok then
-    local client = vim.lsp.get_active_clients()[1]
-    if client then
-      opts.cwd = client.config.root_dir
-    end
+    vim.notify_once(
+      "Unable to do project search, not LSP workspace or git directory detected.\nOpening Telescope in CWD instead",
+      vim.log.levels.WARN
+    )
     require("telescope.builtin").find_files(opts)
   end
+end
+
+M.search_current_buf_dir = function()
+  local buf_path = vim.fn.expand("%:p")
+  local buf_dir = vim.fs.dirname(buf_path)
+  require("telescope.builtin").find_files({
+    prompt_title = "Search Current Buffer Directory...",
+    cwd = buf_dir,
+  })
 end
 
 return M

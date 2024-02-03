@@ -10,6 +10,27 @@ local function file_exists(name)
   end
 end
 
+M.get_node = function()
+  local query = vim.treesitter.query.parse(
+    vim.bo.filetype,
+    [[
+(((comment) @swagger_docs
+            (#contains? @swagger_docs "@swagger")) @injection.content
+            (#set! injection.language "yaml")
+            (#offset! @injection.content 2 3 0 0))
+  ]]
+  )
+  local parser = vim.treesitter.get_parser(0, vim.bo.filetype, {})
+  local root = parser:parse()[1]:root()
+  for id, node in query:iter_captures(root, 0, 0, -1) do
+    local capture_name = query.captures[id]
+    if capture_name == "injection.content" then
+      local text = vim.treesitter.get_node_text(node, 0)
+      vim.print(text)
+    end
+  end
+end
+
 M.run_file = function(from_clipboard, no_input)
   local filename = vim.fn.expand("%:r")
   local filetype = vim.bo.filetype

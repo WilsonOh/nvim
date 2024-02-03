@@ -10,6 +10,7 @@ local M = {
 
 M.config = function()
   local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
   local telescope = require("telescope")
   if telescope and actions then
     telescope.setup({
@@ -48,6 +49,17 @@ M.config = function()
             ["<C-k>"] = actions.move_selection_previous,
             ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
             ["<CR>"] = actions.select_default + actions.center,
+            ["<C-d>"] = function(prompt_bufnr)
+              local api = require("nvim-tree.api")
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              api.tree.find_file({
+                buf = selection.cwd .. "/" .. selection.value,
+                open = true,
+                update_root = true,
+                focus = true,
+              })
+            end,
           },
           n = {
             ["<C-j>"] = actions.move_selection_next,

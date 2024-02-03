@@ -25,3 +25,17 @@
 --     end, { expr = true, buffer = true })
 --   end,
 -- })
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = vim.api.nvim_create_augroup("HurlGroup", { clear = true }),
+  pattern = "*.hurl",
+  callback = function()
+    vim.cmd.setfiletype("hurl")
+  end,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  group = vim.api.nvim_create_augroup("QueryGroup", { clear = true }),
+  pattern = "*/nvim/*/queries/*.scm",
+  command = "set filetype=query",
+})

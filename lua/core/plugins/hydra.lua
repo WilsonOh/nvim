@@ -25,14 +25,14 @@ M.config = function()
       invoke_on_body = true,
       hint = { position = "bottom", border = "rounded" },
       on_enter = function()
-        gitsigns.toggle_signs(true)
         gitsigns.toggle_linehl(true)
         gitsigns.toggle_deleted(true)
+        vim.cmd([[GitBlameEnable]])
       end,
       on_exit = function()
-        gitsigns.toggle_signs(false)
         gitsigns.toggle_linehl(false)
         gitsigns.toggle_deleted(false)
+        vim.cmd([[GitBlameDisable]])
       end,
     },
     mode = { "n", "x" },

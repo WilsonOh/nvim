@@ -6,8 +6,9 @@
     name: (identifier) @_name (#eq? @_name "query"))
 
  (token_tree
-   (raw_string_literal) @sql) 
-   (#offset! @sql 1 0 0 0))
+   (raw_string_literal) @injection.content
+   (#set! injection.language "sql")) 
+   (#offset! @injection.content 1 0 1 0))
 
 ((line_comment) @_first 
  (_) @rust

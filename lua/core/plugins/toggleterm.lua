@@ -3,7 +3,7 @@ local M = {
   keys = { [[<C-\>]] },
 }
 
-M.init = function()
+--[[ M.init = function()
   local toggleterm_spawn = vim.api.nvim_create_augroup("toggleterm_spawn", {})
   vim.api.nvim_create_autocmd("VimEnter", {
     group = toggleterm_spawn,
@@ -14,7 +14,7 @@ M.init = function()
       term:spawn()
     end,
   })
-end
+end ]]
 
 M.config = function()
   local toggleterm_height = math.ceil(vim.api.nvim_win_get_height(0) * 0.45)

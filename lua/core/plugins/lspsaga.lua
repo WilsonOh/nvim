@@ -8,7 +8,15 @@ return {
         enable = false,
       },
       symbol_in_winbar = {
-        respect_root = true,
+        hide_keyword = true,
+      },
+      finder = {
+        keys = {
+          vsplit = "v",
+          split = "s",
+          toggle_or_open = "<CR>",
+        },
+        default = "ref",
       },
     })
   end,

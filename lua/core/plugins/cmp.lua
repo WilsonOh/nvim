@@ -38,7 +38,7 @@ M.config = function()
     enabled = function()
       -- disable if in telescope
       if vim.bo.filetype == "TelescopePrompt" then
-        return
+        return false
       end
       -- disable completion in comments
       local context = require("cmp.config.context")
