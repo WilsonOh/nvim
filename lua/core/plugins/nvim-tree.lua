@@ -24,7 +24,7 @@ M.config = function()
 
   require("nvim-tree").setup({
     on_attach = on_attach,
-    filters = { custom = { "*.tmp", ".git" } },
+    -- filters = { custom = { "*.tmp", ".git" } },
     disable_netrw = true,
     hijack_netrw = true,
     hijack_cursor = true,
