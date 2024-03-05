@@ -1,16 +1,4 @@
 return {
-  {
-    "monkoose/matchparen.nvim",
-    config = true,
-    enabled = false,
-    event = "BufReadPost"
-  },
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    config = function()
-      require("telescope").load_extension("frecency")
-    end,
-  },
   { "abecodes/tabout.nvim",     config = true,    lazy = false },
   { "f-person/git-blame.nvim",  lazy = false },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
