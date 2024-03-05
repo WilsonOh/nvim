@@ -1,12 +1,18 @@
 return {
   {
+    "monkoose/matchparen.nvim",
+    config = true,
+    enabled = false,
+    event = "BufReadPost"
+  },
+  {
     "nvim-telescope/telescope-frecency.nvim",
     config = function()
       require("telescope").load_extension("frecency")
     end,
   },
-  { "abecodes/tabout.nvim", config = true, lazy = false },
-  { "f-person/git-blame.nvim", lazy = false },
+  { "abecodes/tabout.nvim",     config = true,    lazy = false },
+  { "f-person/git-blame.nvim",  lazy = false },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
   "hrsh7th/cmp-nvim-lsp",
@@ -37,11 +43,11 @@ return {
   -----------------------------------------------------------
 
   -- Colorschemes
-  { "rose-pine/neovim", name = "rose-pine" },
-  { "ellisonleao/gruvbox.nvim", name = "gruvbox" },
-  { "catppuccin/nvim", name = "catppuccin", build = ":CatppuccinCompile" },
-  { "rebelot/kanagawa.nvim", name = "kanagawa" },
-  { "sam4llis/nvim-tundra", name = "tundra" },
+  { "rose-pine/neovim",                 name = "rose-pine" },
+  { "ellisonleao/gruvbox.nvim",         name = "gruvbox" },
+  { "catppuccin/nvim",                  name = "catppuccin", build = ":CatppuccinCompile" },
+  { "rebelot/kanagawa.nvim",            name = "kanagawa" },
+  { "sam4llis/nvim-tundra",             name = "tundra" },
   { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
   -------------------------------------------------------------
   {
@@ -73,7 +79,7 @@ return {
     -- opts = { func_map = { ptogglemode = "a" } },
   },
   -- Better bdelete and !bdelete
-  { "moll/vim-bbye", lazy = false },
+  { "moll/vim-bbye",          lazy = false },
   -- Neovim greeter
   -- Gather all LSP diagnostics in one place
   {
@@ -110,6 +116,6 @@ return {
       flash_style = false,
     },
   },
-  { "mbbill/undotree", cmd = "UndotreeToggle" },
-  { "sheerun/vim-polyglot", lazy = false, enabled = true },
+  { "mbbill/undotree",        cmd = "UndotreeToggle" },
+  { "sheerun/vim-polyglot",   lazy = false,          enabled = true },
 }

@@ -3,7 +3,7 @@ local M = {
   enabled = true,
   build = ":TSUpdate",
   event = "BufReadPost",
-  commit = "364b86ec8ea88e4a77ba676b93fb10829d6a9cb3",
+  -- commit = "364b86ec8ea88e4a77ba676b93fb10829d6a9cb3",
 
   dependencies = {
     "windwp/nvim-ts-autotag",
@@ -31,9 +31,6 @@ M.config = function()
     endwise = { enable = true },
     -- context_commentstring = { enable = true, enable_autocmd = false },
     playground = { enable = true },
-    matchip = {
-      enable = true,
-    },
   })
 end
 
