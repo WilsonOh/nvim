@@ -18,21 +18,33 @@ end
 
 -- Diagnostics
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-
 vim.diagnostic.config({
   virtual_text = {
-    source = "always", -- Or "if_many"
+    source = true, -- Or "if_many"
   },
   float = {
-    source = "always", -- Or "if_many"
+    source = true, -- Or "if_many"
   },
 })
 
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+-- local hl = "DiagnosticSign" .. type
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = ' ',
+      [vim.diagnostic.severity.WARN] = ' ',
+      [vim.diagnostic.severity.HINT] = ' ',
+      [vim.diagnostic.severity.INFO] = ' ',
+    },
+    texthl = {
+
+    },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+    },
+  },
+})
+-- vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 
 -- Show icons in autocomplete
 require("vim.lsp.protocol").CompletionItemKind = {
@@ -65,6 +77,6 @@ require("vim.lsp.protocol").CompletionItemKind = {
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = true,
-  virtual_text = { source = "always", "spacing = 5", severity_limit = "Warning" },
+  virtual_text = { source = "always", "spacing = 5", min = vim.diagnostic.severity.WARN },
   update_in_insert = true,
 })

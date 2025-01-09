@@ -85,6 +85,10 @@ set("i", "<C-a>", "<esc>I", opts)
 set("n", "gd", "0D", opts)
 set("n", "gC", "0C", opts)
 
+
+set("i", "<C-h>", "<Left>", opts)
+set("i", "<C-l>", "<Right>", opts)
+
 -- Copy entire buffer to system clipboard
 
 -- smart dd

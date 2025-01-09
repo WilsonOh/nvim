@@ -7,10 +7,18 @@ local M = {
     "hrsh7th/cmp-emoji",
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
+    {
+      "xzbdmw/colorful-menu.nvim",
+      config = function()
+        require("colorful-menu").setup()
+      end,
+    },
   },
+  enabled = true
 }
 
 M.config = function()
+  local f = require("core.plugins.cmp.format")
   local cmp_autopairs = require("nvim-autopairs.completion.cmp")
   local cmp = require("cmp")
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
@@ -26,7 +34,7 @@ M.config = function()
   end
 
   local cmp_sources = {
-    { name = "nvim_lsp" },
+    { name = "nvim_lsp",   priority = 100 },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
@@ -50,20 +58,66 @@ M.config = function()
       end
     end,
     preselect = cmp.PreselectMode.None,
+    completion = {
+      completeopt = "menu,menuone,noinsert",
+    },
+    performance = {
+      debounce = 0,
+      throttle = 0,
+      fetching_timeout = 20000,
+      confirm_resolve_timeout = 1,
+      async_budget = 1,
+      max_view_entries = 100,
+    },
+    -- formatting = {
+    --   format = lspkind.cmp_format({
+    --     mode = "symbol_text",
+    --     maxwidth = 50,
+    --     menu = {
+    --       buffer = "[Buffer]",
+    --       nvim_lsp = "[LSP]",
+    --       luasnip = "[LuaSnip]",
+    --       path = "[Path]",
+    --       dictionary = "[Dictionary]",
+    --       emoji = "[Emoji]",
+    --     },
+    --   }),
+    --   fields = { "kind", "abbr", "menu" },
+    --   expandable_indicator = true
+    -- },
     formatting = {
-      format = lspkind.cmp_format({
-        mode = "symbol_text",
-        maxwidth = 50,
-        menu = {
-          buffer = "[Buffer]",
-          nvim_lsp = "[LSP]",
-          luasnip = "[LuaSnip]",
-          path = "[Path]",
-          dictionary = "[Dictionary]",
-          emoji = "[Emoji]",
-        },
-      }),
+      -- kind is icon, abbr is completion name, menu is [Function]
       fields = { "kind", "abbr", "menu" },
+      format = function(entry, vim_item)
+        local highlights_info = require("colorful-menu").cmp_highlights(entry)
+        if highlights_info ~= nil then
+          vim_item.abbr_hl_group = highlights_info.highlights
+          vim_item.abbr = highlights_info.text
+        end
+        local function commom_format(e, item)
+          local kind = lspkind.cmp_format({
+            mode = "symbol_text",
+            -- show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+          })(e, item)
+          local strings = vim.split(kind.kind, "%s", { trimempty = true })
+          kind.kind = " " .. (strings[1] or "") .. " "
+          kind.menu = ""
+          kind.concat = kind.abbr
+          return kind
+        end
+        if vim.bo.filetype == "rust" then
+          return f.rust_fmt(entry, vim_item)
+        elseif vim.bo.filetype == "lua" then
+          return f.lua_fmt(entry, vim_item)
+        elseif vim.bo.filetype == "c" or vim.bo.filetype == "cpp" then
+          return f.cpp_fmt(entry, vim_item)
+        elseif vim.bo.filetype == "go" then
+          return f.go_fmt(entry, vim_item)
+        else
+          return commom_format(entry, vim_item)
+        end
+      end,
+      expandable_indicator = true
     },
     snippet = {
       expand = function(args)
@@ -93,18 +147,18 @@ M.config = function()
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<C-e>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
       ["<CR>"] = cmp.mapping.confirm({ select = false }),
-      ["<C-k>"] = cmp.mapping(function(fallback)
+      ["<C-j>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
-        -- elseif luasnip.expandable() then
-        --   luasnip.expand()
+          -- elseif luasnip.expandable() then
+          --   luasnip.expand()
         elseif has_words_before() then
           cmp.complete()
         else
           fallback()
         end
       end, { "i", "s" }),
-      ["<C-j>"] = cmp.mapping(function(fallback)
+      ["<C-k>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
         else

@@ -14,6 +14,9 @@ return {
       uppercase = false,
     },
     modes = {
+      search = {
+        enabled = true,
+      },
       char = {
         enabled = false,
         jump_labels = true,

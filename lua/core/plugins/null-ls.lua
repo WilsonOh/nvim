@@ -1,6 +1,9 @@
 local M = {
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
   event = { "BufReadPre", "BufNewFile" },
+  dependencies = {
+    "nvimtools/none-ls-extras.nvim",
+  },
   enabled = true,
 }
 
@@ -9,7 +12,7 @@ M.config = function()
 
   local formatting = null_ls.builtins.formatting
 
-  local diag = null_ls.builtins.diagnostics
+  -- local diag = null_ls.builtins.diagnostics
 
   local ca = null_ls.builtins.code_actions
 
@@ -35,9 +38,10 @@ M.config = function()
     }),
     formatting.prettierd.with(js_opts),
     diag.cppcheck, ]]
-    diag.eslint_d.with(js_opts),
-    diag.fish,
-    require("typescript.extensions.null-ls.code-actions"),
+    require("none-ls.diagnostics.eslint_d").with(js_opts),
+
+    -- diag.fish,
+    -- require("typescript.extensions.null-ls.code-actions"),
   }
 
   null_ls.setup({

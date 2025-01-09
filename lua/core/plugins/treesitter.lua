@@ -6,7 +6,6 @@ local M = {
   -- commit = "364b86ec8ea88e4a77ba676b93fb10829d6a9cb3",
 
   dependencies = {
-    "windwp/nvim-ts-autotag",
     "RRethy/nvim-treesitter-endwise",
     { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
   },
@@ -27,8 +26,7 @@ M.config = function()
     },
     indent = { enable = false },
     highlight = { enable = true },
-    autotag = { enable = true, enable_close_on_slash = false },
-    endwise = { enable = true },
+    endwise = { enable = false },
     -- context_commentstring = { enable = true, enable_autocmd = false },
     playground = { enable = true },
   })

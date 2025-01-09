@@ -3,7 +3,7 @@ local null_ls = require("null-ls")
 local M = {}
 
 M.find_project_root = function()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   local non_null_ls_clients = vim.tbl_filter(function(client)
     return client.name ~= null_ls
   end, clients)
@@ -78,7 +78,7 @@ end
 
 M.format = function(bufnr)
   bufnr = bufnr or 0
-  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
   local other_formatting_clients = {}
 
   local filetype = vim.bo.filetype

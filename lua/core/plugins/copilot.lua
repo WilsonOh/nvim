@@ -2,10 +2,10 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     opts = {
       suggestion = {
-        enabled = false,
+        enabled = true,
         auto_trigger = true,
         keymap = {
           accept = "<M-j>",
@@ -24,7 +24,7 @@ return {
   {
     "zbirenbaum/copilot-cmp",
     config = true,
-    enabled = false,
+    enabled = true,
     dependencies = {
       "zbirenbaum/copilot.lua",
       "hrsh7th/nvim-cmp",

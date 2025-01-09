@@ -19,7 +19,7 @@ function M.project_search(opts)
     show_untracked = true,
   }
   opts = vim.tbl_deep_extend("force", opts or {}, default_config)
-  local client = vim.lsp.get_active_clients()[1]
+  local client = vim.lsp.get_clients()[1]
   if client then
     opts.cwd = client.config.root_dir
     return require("telescope.builtin").find_files(opts)

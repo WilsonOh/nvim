@@ -15,7 +15,7 @@ M.config = function()
 
   require("mason-lspconfig").setup({
     automatic_installation = true,
-    ensure_installed = { "lua_ls", "clangd", "pyright", "jsonls", "tsserver", "html", "rust_analyzer" },
+    ensure_installed = { "lua_ls", "clangd", "pyright", "jsonls", "ts_ls", "html", "rust_analyzer" },
   })
 
   require("neodev").setup({})
@@ -29,6 +29,9 @@ M.config = function()
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
       vim.api.nvim_clear_autocmds({ group = augroup, pattern = "*" })
       local client = vim.lsp.get_client_by_id(args.data.client_id)
+      if client == nil then
+        return
+      end
       if client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_augroup("lsp_document_highlight", {})
         vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -102,31 +105,60 @@ M.config = function()
         },
       })
     end,
-    ["tsserver"] = function()
-      require("typescript").setup({
-        server = {
-          capabilities = capabilities,
-        },
+    ["ts_ls"] = function()
+      require("typescript-tools").setup({
+        capabilities = capabilities,
       })
     end,
     -- Don't do anything for jdtls as it's setup under the java.lua filetype autocommand
     ["jdtls"] = function() end,
+    ["ocamllsp"] = function()
+      lspconfig.ocamllsp.setup({
+        settings = {
+          codelens = { enable = true },
+        },
+        capabilities = capabilities,
+        filetypes = { "ocaml" },
+      })
+    end,
+
     ["cssls"] = function()
       lspconfig.cssls.setup({
         capabilities = capabilities,
         settings = {
-          css = { validate = true, lint = {
-            unknownAtRules = "ignore",
-          } },
-          scss = { validate = true, lint = {
-            unknownAtRules = "ignore",
-          } },
-          less = { validate = true, lint = {
-            unknownAtRules = "ignore",
-          } },
+          css = {
+            validate = true,
+            lint = {
+              unknownAtRules = "ignore",
+            }
+          },
+          scss = {
+            validate = true,
+            lint = {
+              unknownAtRules = "ignore",
+            }
+          },
+          less = {
+            validate = true,
+            lint = {
+              unknownAtRules = "ignore",
+            }
+          },
         },
       })
     end,
+    ["arduino_language_server"] = function()
+      lspconfig["arduino_language_server"].setup({
+        capabilities = capabilities,
+        cmd = {
+          "arduino-language-server",
+          "-clangd", "/usr/local/bin/clangd",
+          "-cli", "/opt/homebrew/bin/arduino-cli",
+          "-cli-config", "/Users/wilsonoh/Library/Arduino15/arduino-cli.yaml",
+          "-fqbn", "arduino:avr:uno"
+        }
+      })
+    end
   })
 
   require("core.plugins.lsp.settings")

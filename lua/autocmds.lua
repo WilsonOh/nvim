@@ -39,3 +39,21 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*/nvim/*/queries/*.scm",
   command = "set filetype=query",
 })
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("AsmFileType", { clear = true }),
+  pattern = { "*.s", "*.asm" },
+  command = "setlocal filetype=asm",
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("MenhirFileType", { clear = true }),
+  pattern = { "*.mly" },
+  command = "setlocal filetype=menhir",
+})
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("OCamlLexFileType", { clear = true }),
+  pattern = { "*.mll" },
+  command = "setlocal filetype=ocamllex",
+})

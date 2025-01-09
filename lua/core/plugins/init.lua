@@ -3,13 +3,12 @@ return {
   { "f-person/git-blame.nvim",  lazy = false },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
-  "hrsh7th/cmp-nvim-lsp",
   "simrat39/rust-tools.nvim",
   "p00f/clangd_extensions.nvim",
   "jose-elias-alvarez/typescript.nvim",
   "mfussenegger/nvim-jdtls",
   "b0o/schemastore.nvim",
-  { "williamboman/mason.nvim" }, -- commit = "3ccd16" },
+  { "williamboman/mason.nvim" },
   "williamboman/mason-lspconfig.nvim",
   "jayp0521/mason-nvim-dap.nvim",
   "MunifTanjim/nui.nvim",
@@ -60,14 +59,8 @@ return {
   -- Project specific marks with a handy UI
   { "ThePrimeagen/harpoon" },
   -- Adds functionality to the quickfix list, such as a "magic window"
-  {
-    "kevinhwang91/nvim-bqf",
-    lazy = false,
-    -- ft = { "qf", "Trouble" },
-    -- opts = { func_map = { ptogglemode = "a" } },
-  },
   -- Better bdelete and !bdelete
-  { "moll/vim-bbye",          lazy = false },
+  { "moll/vim-bbye",                           lazy = false },
   -- Neovim greeter
   -- Gather all LSP diagnostics in one place
   {
@@ -82,7 +75,7 @@ return {
     event = "BufReadPre",
   },
   { "preservim/vim-markdown", ft = { "markdown" } },
-  { "mg979/vim-visual-multi", lazy = false },
+  { "mg979/vim-visual-multi", enabled = false,    lazy = false },
   -- Nice highlighting and icons for todos and notes etc.
   {
     "folke/todo-comments.nvim",

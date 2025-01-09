@@ -1,6 +1,7 @@
 local M = {
   "folke/which-key.nvim",
   event = "VeryLazy",
+  tag = "v2.1.0"
 }
 
 M.config = function()
@@ -245,7 +246,7 @@ M.config = function()
       },
       D = { ":Lspsaga peek_definition<CR>", "Peek Definition" },
       d = { vim.lsp.buf.definition, "Go to definition" },
-      r = { ":Trouble lsp_references<CR>", "References" },
+      r = { ":Trouble lsp_references focus=true<CR>", "References" },
       R = { vim.lsp.buf.rename, "Rename" },
       a = { vim.lsp.buf.code_action, "Code actions" },
       e = { vim.diagnostic.open_float, "Show line diagnostics" },
