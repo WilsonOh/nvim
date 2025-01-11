@@ -54,7 +54,7 @@ return {
       },
     },
 
-    -- experimental signature help support
+    signature = { enabled = true },
     snippets = { preset = 'luasnip' },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "lazydev", },
