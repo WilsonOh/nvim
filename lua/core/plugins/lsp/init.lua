@@ -22,31 +22,8 @@ M.config = function()
 
   local lspconfig = require("lspconfig")
 
-  local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-      vim.api.nvim_clear_autocmds({ group = augroup, pattern = "*" })
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      if client == nil then
-        return
-      end
-      if client.server_capabilities.documentHighlightProvider then
-        vim.api.nvim_create_augroup("lsp_document_highlight", {})
-        vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-          group = "lsp_document_highlight",
-          buffer = args.buf,
-          callback = vim.lsp.buf.document_highlight,
-        })
-        vim.api.nvim_create_autocmd("CursorMoved", {
-          group = "lsp_document_highlight",
-          buffer = args.buf,
-          callback = vim.lsp.buf.clear_references,
-        })
-      end
-    end,
-  })
+  local capabilities = require('blink.cmp').get_lsp_capabilities() --require("cmp_nvim_lsp").default_capabilities()
+  -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   local opts = { capabilities = capabilities, single_file_support = true }
 

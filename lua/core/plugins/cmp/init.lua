@@ -10,11 +10,11 @@ local M = {
     {
       "xzbdmw/colorful-menu.nvim",
       config = function()
-        require("colorful-menu").setup()
+        require("colorful-menu").setup({})
       end,
     },
   },
-  enabled = true
+  enabled = false
 }
 
 M.config = function()

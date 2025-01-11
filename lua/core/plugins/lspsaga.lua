@@ -8,6 +8,7 @@ return {
         enable = false,
       },
       symbol_in_winbar = {
+        enable = true,
         hide_keyword = true,
       },
       finder = {

@@ -6,6 +6,9 @@ local filetypes = {
   "css",
   "typescript",
   "json",
+  "golang",
+  "c",
+  "cpp",
 }
 
 return {

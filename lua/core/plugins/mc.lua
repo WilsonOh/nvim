@@ -9,8 +9,8 @@ return {
     mc.setup()
 
     -- Add cursors above/below the main cursor.
-    vim.keymap.set({ "n", "v" }, "<up>", function() mc.addCursor("k") end)
-    vim.keymap.set({ "n", "v" }, "<down>", function() mc.addCursor("j") end)
+    vim.keymap.set({ "n", "v" }, "<C-k>", function() mc.addCursor("k") end)
+    vim.keymap.set({ "n", "v" }, "<C-j>", function() mc.addCursor("j") end)
 
     -- Add a cursor and jump to the next word under cursor.
     vim.keymap.set({ "n", "v" }, "<c-n>", function() mc.addCursor("*") end)
@@ -43,13 +43,13 @@ return {
         mc.enableCursors()
       elseif mc.hasCursors() then
         mc.clearCursors()
-      else
-        require("notify").dismiss({
-          pending = true,
-          silent = true,
-        })
-        vim.cmd.nohl()
       end
+      require("notify").dismiss({
+        pending = true,
+        silent = true,
+      })
+      vim.cmd.nohl()
+      vim.cmd.nohlsearch()
     end)
 
     -- Align cursor columns.
