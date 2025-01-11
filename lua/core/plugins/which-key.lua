@@ -246,7 +246,7 @@ M.config = function()
       },
       D = { ":Lspsaga peek_definition<CR>", "Peek Definition" },
       d = { vim.lsp.buf.definition, "Go to definition" },
-      r = { ":Trouble lsp_references focus=true<CR>", "References" },
+      r = { vim.lsp.buf.references, "References" },
       R = { vim.lsp.buf.rename, "Rename" },
       a = { vim.lsp.buf.code_action, "Code actions" },
       e = { vim.diagnostic.open_float, "Show line diagnostics" },

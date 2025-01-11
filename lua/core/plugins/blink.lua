@@ -7,14 +7,12 @@ return {
   },
   dependencies = {
     "rafamadriz/friendly-snippets",
-    {
-      "saghen/blink.compat",
-      version = "*"
-    },
-    { 'echasnovski/mini.icons', version = '*' },
+    "saghen/blink.compat",
+    "echasnovski/mini.icons"
   },
   event = "InsertEnter",
 
+  ---@type blink.cmp.Config
   opts = {
     enabled = function()
       return not vim.tbl_contains({ "DressingInput", "TelescopePrompt" }, vim.bo.filetype)
@@ -59,7 +57,7 @@ return {
     -- experimental signature help support
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "lazydev" },
+      default = { "lsp", "path", "snippets", "buffer", "lazydev", },
       cmdline = {},
       providers = {
         lazydev = {
