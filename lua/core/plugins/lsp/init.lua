@@ -2,7 +2,17 @@ local M = {
   "neovim/nvim-lspconfig",
   lazy = false,
   name = "lsp",
-  dependencies = { "folke/neodev.nvim" },
+  dependencies = {
+    {
+      "folke/lazydev.nvim",
+      ft = "lua", -- only load on lua files
+      opts = {
+        library = {
+          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+        },
+      },
+    },
+  }
 }
 
 M.config = function()
@@ -18,7 +28,6 @@ M.config = function()
     ensure_installed = { "lua_ls", "clangd", "pyright", "jsonls", "ts_ls", "html", "rust_analyzer" },
   })
 
-  require("neodev").setup({})
 
   local lspconfig = require("lspconfig")
 
@@ -59,9 +68,9 @@ M.config = function()
     -- LSPs with special settings
     ["lua_ls"] = function()
       lspconfig.lua_ls.setup({
-        on_attach = function(client)
-          client.server_capabilities.semanticTokensProvider = nil
-        end,
+        -- on_attach = function(client)
+        --   client.server_capabilities.semanticTokensProvider = nil
+        -- end,
         capabilities = capabilities,
         settings = {
           Lua = {

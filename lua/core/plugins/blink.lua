@@ -59,8 +59,15 @@ return {
     -- experimental signature help support
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "snippets", "buffer", "lazydev" },
       cmdline = {},
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
+      },
     },
 
 
@@ -68,7 +75,7 @@ return {
       preset = "enter",
       ['<C-j>'] = { "select_next", "fallback" },
       ['<C-k>'] = { "select_prev", "fallback" },
-      ['<C-e>'] = { "cancel" },
+      ['<C-e>'] = { "hide", "fallback" },
       ['<C-h>'] = { "snippet_backward" },
       ['<C-l>'] = { "snippet_forward" },
       ['<C-d>'] = { "scroll_documentation_down" },
