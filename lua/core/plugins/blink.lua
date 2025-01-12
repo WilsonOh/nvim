@@ -54,7 +54,12 @@ return {
       },
     },
 
-    signature = { enabled = true },
+    signature = {
+      enabled = true,
+      window = {
+        border = "single"
+      }
+    },
     snippets = { preset = 'luasnip' },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "lazydev", },
