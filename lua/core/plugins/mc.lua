@@ -11,9 +11,8 @@ return {
     vim.keymap.set({ "n", "v" }, "<C-k>", function() mc.addCursor("k") end)
     vim.keymap.set({ "n", "v" }, "<C-j>", function() mc.addCursor("j") end)
 
-    vim.keymap.set({ "n", "v" }, "<c-n>", function() mc.addCursor("*") end)
-
-    vim.keymap.set({ "n", "v" }, "<leader>x", mc.deleteCursor)
+    vim.keymap.set({ "n", "v" }, "<c-n>", function() mc.matchAddCursor(-1) end)
+    vim.keymap.set({ "n", "v" }, "<c-N>", function() mc.matchAddCursor(1) end)
 
     vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
 
@@ -38,8 +37,5 @@ return {
       vim.cmd.nohl()
       vim.cmd.nohlsearch()
     end)
-
-    vim.keymap.set("v", "I", mc.insertVisual)
-    vim.keymap.set("v", "A", mc.appendVisual)
   end,
 }
