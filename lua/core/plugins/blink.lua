@@ -89,6 +89,7 @@ return {
     require('mini.icons').setup({
       lsp = {
         snippet = { glyph = '', hl = 'MiniIconsPurple' },
+        ["function"] = { glyph = '󰡱' },
       }
     })
     require("blink.cmp").setup(opts)
