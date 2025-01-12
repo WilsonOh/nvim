@@ -76,7 +76,7 @@ M.config = function()
         end,
         "Search Project",
       },
-      r = { require("fzf-lua").grep_project, "Live Grep" },
+      r = { "<cmd>FzfLua grep_project<cr>", "Live Grep" },
       b = { ":Telescope buffers bufnr=0<CR>", "Buffers" },
       o = { ":Telescope oldfiles<CR>", "Recent Files" },
       R = { ":Telescope resume<CR>", "Resume Previous Picker" },
@@ -86,7 +86,7 @@ M.config = function()
         end,
         "Telescope Custom Search",
       },
-      C = { require("fzf-lua").grep_curbuf, "Current Buffer Fuzzy Find" },
+      C = { "<cmd>FzfLua grep_curbuf<cr>", "Current Buffer Fuzzy Find" },
     },
     t = {
       name = "Terminal/Tab",

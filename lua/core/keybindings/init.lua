@@ -87,10 +87,6 @@ set("i", "<C-a>", "<esc>I", opts)
 set("n", "gd", "0D", opts)
 set("n", "gC", "0C", opts)
 
-
-set("i", "<C-h>", "<Left>", opts)
-set("i", "<C-l>", "<Right>", opts)
-
 -- Copy entire buffer to system clipboard
 
 -- smart dd
@@ -115,6 +111,8 @@ set("x", "/", "<Esc>/\\%V", opts)
 set("n", "<C-o>", "<C-o>zz", opts)
 
 set("x", "<leader>y", [["+y]], opts)
+
+set("n", "-", "<cmd>Oil<cr>", opts)
 
 vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
 vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')

@@ -57,7 +57,7 @@ return {
     signature = {
       enabled = true,
       window = {
-        border = "single"
+        border = "single",
       }
     },
     snippets = { preset = 'luasnip' },
@@ -76,8 +76,8 @@ return {
 
     keymap = {
       preset = "enter",
-      ['<C-j>'] = { "select_next", "fallback" },
-      ['<C-k>'] = { "select_prev", "fallback" },
+      ['<C-j>'] = { "show", "select_next", "fallback" },
+      ['<C-k>'] = { "show", "select_prev", "fallback" },
       ['<C-e>'] = { "hide", "fallback" },
       ['<C-h>'] = { "snippet_backward" },
       ['<C-l>'] = { "snippet_forward" },

@@ -8,46 +8,6 @@ vim.g.gitblame_enabled = 0
 
 vim.g.closetag_filetypes = "html,xhtml,phtml,xml,javascript,typescript,javascriptreact,typescriptreact,"
 
-vim.g.VM_leader = "<Bslash>"
-
-vim.g.VM_maps = {
-  ["Add Cursor Down"] = "<C-j>",
-  ["Add Cursor Up"] = "<C-k>",
-  ["Add Cursor At Pos"] = "<C-Space>",
-  ["I BS"] = "",
-}
-
--- vim.o.clipboard = "unnamedplus"
-
--- Just in case I need to sync the neovim clipboard with the system clipboard,
--- but it's not very worth it as it introduces lag when cutting text
---[[ if vim.loop.os_uname().sysname == "Darwin" then
-  vim.g.clipboard = {
-    name = "macOS-clipboard",
-    copy = {
-      ["+"] = "pbcopy",
-      ["*"] = "pbcopy",
-    },
-    paste = {
-      ["+"] = "pbpaste",
-      ["*"] = "pbpaste",
-    },
-    cache_enabled = 0,
-  }
-else
-  vim.g.clipboard = {
-    name = "win32yank",
-    copy = {
-      ["+"] = "win32yank.exe -i --crlf",
-      ["*"] = "win32yank.exe -i --crlf",
-    },
-    paste = {
-      ["+"] = "win32yank.exe -o --lf",
-      ["*"] = "win32yank.exe -o --lf",
-    },
-    cache_enabled = 0,
-  }
-end ]]
 
 vim.cmd("filetype plugin indent on")
 vim.o.shortmess = vim.o.shortmess .. "cW"
@@ -81,8 +41,6 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.cursorline = true
 vim.wo.signcolumn = "yes"
---[[ vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'nvim_treesitter#foldexpr()' ]]
 
 vim.o.tabstop = tabwidth
 vim.bo.tabstop = tabwidth
