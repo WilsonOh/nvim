@@ -9,6 +9,8 @@ return {
       ["<C-v>"] = { "actions.select", opts = { vertical = true } },
     },
   },
+  keys = {
+    { "-", "<cmd>Oil<cr>", desc = "Open up oil.nvim" },
+  },
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
-  lazy = false,
 }

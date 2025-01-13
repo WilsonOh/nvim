@@ -82,6 +82,7 @@ return {
     "WilsonOh/emoji_picker-nvim",
     config = true,
     cmd = "EmojiPicker",
+    keys = { { mode = "i", "<M-e>", "<cmd>EmojiPicker<cr>", desc = "Open EmojiPicker" } },
   },
   { "sindrets/diffview.nvim", cmd = "DiffviewOpen" },
   {

@@ -3,14 +3,6 @@ local opts = { silent = true }
 
 vim.g.mapleader = " "
 
-set("n", "<Esc>", function()
-  require("notify").dismiss({
-    pending = true,
-    silent = true,
-  })
-  vim.cmd.nohl()
-end)
-
 set("n", "<leader>i", "g~l", opts)
 
 set("v", "J", ":m '>+1<CR>gv=gv", opts)
@@ -48,7 +40,6 @@ set("n", "<leader>T", ":Telescope<CR>", opts)
 -- Normal Mode New Line
 set("n", "<leader>o", "o<esc>k", opts)
 set("n", "<leader>O", "O<esc>j", opts)
-set("n", "<leader>D", "dd<leader>O<esc>", opts)
 
 -- Whole Word Find and Replace
 -- set('n', '<leader>s', [[:%s/\<\>/<Left><Left><Left>]], opts)
@@ -77,9 +68,6 @@ end, opts)
 set("t", "<C-d>", "<C-Bslash><C-n>:bd!<CR>", opts)
 set("t", "<C-w>", "<C-Bslash><C-n><C-w>", opts)
 
--- Normal Terminal
-set("n", "T", ":vsplit<CR>:term<CR>a", opts)
-
 -- Insert mode Mappings
 set("i", "<C-e>", "<esc>A", opts)
 set("i", "<C-a>", "<esc>I", opts)
@@ -103,17 +91,9 @@ set("n", "dd", smart_dd, { expr = true })
 set("n", "dD", '"_dd')
 set("n", "cC", '"_cc')
 
-set("i", "<M-e>", "<cmd>EmojiPicker<CR>")
-
 -- Search within visual selection
 set("x", "/", "<Esc>/\\%V", opts)
 
 set("n", "<C-o>", "<C-o>zz", opts)
 
 set("x", "<leader>y", [["+y]], opts)
-
-set("n", "-", "<cmd>Oil<cr>", opts)
-
-vim.cmd('inoremap <expr> <c-j> ("\\<C-n>")')
-vim.cmd('inoremap <expr> <c-k> ("\\<C-p>")')
-vim.cmd([[vnoremap // y/\\V<C-R>=escape(@",\'/\\')<CR><CR>]])
