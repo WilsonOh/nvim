@@ -17,7 +17,7 @@ return {
       custom_textobjects = {
         a = ai.gen_spec.treesitter({
           a = { "@parameter.outer" },
-          i = { "@parameter.inner" }
+          i = { "@parameter.inner" },
         }),
         t = ai.gen_spec.treesitter({
           a = { "@tag.outer" },

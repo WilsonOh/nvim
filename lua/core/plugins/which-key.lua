@@ -1,7 +1,7 @@
 local M = {
   "folke/which-key.nvim",
   event = "VeryLazy",
-  tag = "v2.1.0"
+  tag = "v2.1.0",
 }
 
 M.config = function()
@@ -256,7 +256,8 @@ M.config = function()
       F = { ":Lspsaga finder<CR>", "Open LSP Finder" },
       f = {
         function()
-          require("core.plugins.lsp.utils").format(0)
+          vim.lsp.buf.format()
+          -- require("core.plugins.lsp.utils").format(0)
         end,
         "Format File",
       },

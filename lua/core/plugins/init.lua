@@ -1,16 +1,13 @@
 return {
-  { "abecodes/tabout.nvim",     config = true,    lazy = false },
-  { "f-person/git-blame.nvim",  lazy = false },
+  { "abecodes/tabout.nvim", config = true, lazy = false },
+  { "f-person/git-blame.nvim", lazy = false },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
-  "simrat39/rust-tools.nvim",
-  "p00f/clangd_extensions.nvim",
-  "jose-elias-alvarez/typescript.nvim",
+  -- "simrat39/rust-tools.nvim",
+  -- "p00f/clangd_extensions.nvim",
+  -- "jose-elias-alvarez/typescript.nvim",
   "mfussenegger/nvim-jdtls",
   "b0o/schemastore.nvim",
-  { "williamboman/mason.nvim" },
-  "williamboman/mason-lspconfig.nvim",
-  "jayp0521/mason-nvim-dap.nvim",
   "MunifTanjim/nui.nvim",
   "rcarriga/nvim-notify",
   "nvim-lua/plenary.nvim",
@@ -30,11 +27,11 @@ return {
   -----------------------------------------------------------
 
   -- Colorschemes
-  { "rose-pine/neovim",                 name = "rose-pine" },
-  { "ellisonleao/gruvbox.nvim",         name = "gruvbox" },
-  { "catppuccin/nvim",                  name = "catppuccin", build = ":CatppuccinCompile" },
-  { "rebelot/kanagawa.nvim",            name = "kanagawa" },
-  { "sam4llis/nvim-tundra",             name = "tundra" },
+  { "rose-pine/neovim", name = "rose-pine" },
+  { "ellisonleao/gruvbox.nvim", name = "gruvbox" },
+  { "catppuccin/nvim", name = "catppuccin", build = ":CatppuccinCompile" },
+  { "rebelot/kanagawa.nvim", name = "kanagawa" },
+  { "sam4llis/nvim-tundra", name = "tundra" },
   { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
   -------------------------------------------------------------
   {
@@ -55,12 +52,10 @@ return {
     opts = { cursor_scrolls_alone = false },
     event = "VeryLazy",
   },
-  { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre", enabled = false },
   -- Project specific marks with a handy UI
   { "ThePrimeagen/harpoon" },
-  -- Adds functionality to the quickfix list, such as a "magic window"
   -- Better bdelete and !bdelete
-  { "moll/vim-bbye",                           lazy = false },
+  { "moll/vim-bbye", lazy = false },
   -- Neovim greeter
   -- Gather all LSP diagnostics in one place
   {
@@ -75,7 +70,7 @@ return {
     event = "BufReadPre",
   },
   { "preservim/vim-markdown", ft = { "markdown" } },
-  { "mg979/vim-visual-multi", enabled = false,    lazy = false },
+  { "mg979/vim-visual-multi", enabled = false, lazy = false },
   -- Nice highlighting and icons for todos and notes etc.
   {
     "folke/todo-comments.nvim",
@@ -97,6 +92,6 @@ return {
       flash_style = false,
     },
   },
-  { "mbbill/undotree",        cmd = "UndotreeToggle" },
-  { "sheerun/vim-polyglot",   lazy = false,          enabled = true },
+  { "mbbill/undotree", cmd = "UndotreeToggle" },
+  { "sheerun/vim-polyglot", lazy = false, enabled = true },
 }

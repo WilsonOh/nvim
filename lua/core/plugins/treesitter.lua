@@ -8,6 +8,7 @@ local M = {
   dependencies = {
     "RRethy/nvim-treesitter-endwise",
     { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+    { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre", enabled = false },
   },
 }
 

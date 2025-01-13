@@ -14,7 +14,7 @@ local M = {
       end,
     },
   },
-  enabled = false
+  enabled = false,
 }
 
 M.config = function()
@@ -34,7 +34,7 @@ M.config = function()
   end
 
   local cmp_sources = {
-    { name = "nvim_lsp",   priority = 100 },
+    { name = "nvim_lsp", priority = 100 },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
@@ -117,7 +117,7 @@ M.config = function()
           return commom_format(entry, vim_item)
         end
       end,
-      expandable_indicator = true
+      expandable_indicator = true,
     },
     snippet = {
       expand = function(args)

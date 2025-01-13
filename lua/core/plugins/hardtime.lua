@@ -3,5 +3,5 @@ return {
   enabled = false,
   dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
   opts = {},
-  event = "VeryLazy"
+  event = "VeryLazy",
 }

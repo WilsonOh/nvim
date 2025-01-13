@@ -11,5 +11,5 @@ return {
         horizontal = "right:50%",
       },
     },
-  }
+  },
 }

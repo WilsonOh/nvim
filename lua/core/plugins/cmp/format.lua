@@ -191,14 +191,14 @@ end
 
 function M.match_fn(description)
   return string.match(description, "^pub fn")
-      or string.match(description, "^fn")
-      or string.match(description, "^unsafe fn")
-      or string.match(description, "^pub unsafe fn")
-      or string.match(description, "^pub async fn")
-      or string.match(description, "^async fn")
-      or string.match(description, "^pub const unsafe fn")
-      or string.match(description, "^const fn")
-      or string.match(description, "^pub const fn")
+    or string.match(description, "^fn")
+    or string.match(description, "^unsafe fn")
+    or string.match(description, "^pub unsafe fn")
+    or string.match(description, "^pub async fn")
+    or string.match(description, "^async fn")
+    or string.match(description, "^pub const unsafe fn")
+    or string.match(description, "^const fn")
+    or string.match(description, "^pub const fn")
 end
 
 function M.rust_fmt(entry, vim_item)
@@ -227,9 +227,7 @@ function M.rust_fmt(entry, vim_item)
           description = description:sub(1, #description - 1)
         end
       end
-      if
-          (detail and vim.startswith(detail, "macro")) or (description and vim.startswith(description, "macro"))
-      then
+      if (detail and vim.startswith(detail, "macro")) or (description and vim.startswith(description, "macro")) then
         kind.concat = kind.abbr
         goto OUT
       end
@@ -390,7 +388,7 @@ function M.lua_fmt(entry, vim_item)
   end
 
   local item_kind = entry:get_kind() --- @type lsp.CompletionItemKind | number
-  if item_kind == 5 then             -- Field
+  if item_kind == 5 then -- Field
     kind.concat = "v." .. kind.abbr
     kind.offset = 2
   elseif item_kind == 1 or item_kind == 16 then -- Text

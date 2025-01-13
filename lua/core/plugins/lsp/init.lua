@@ -3,16 +3,19 @@ local M = {
   lazy = false,
   name = "lsp",
   dependencies = {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "jayp0521/mason-nvim-dap.nvim",
     {
       "folke/lazydev.nvim",
-      ft = "lua", -- only load on lua files
+      ft = "lua",
       opts = {
         library = {
           { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         },
       },
     },
-  }
+  },
 }
 
 M.config = function()
@@ -28,13 +31,20 @@ M.config = function()
     ensure_installed = { "lua_ls", "clangd", "pyright", "jsonls", "ts_ls", "html", "rust_analyzer" },
   })
 
-
   local lspconfig = require("lspconfig")
 
-  local capabilities = require('blink.cmp').get_lsp_capabilities() --require("cmp_nvim_lsp").default_capabilities()
+  local capabilities = require("blink.cmp").get_lsp_capabilities()
   -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-  local opts = { capabilities = capabilities, single_file_support = true }
+  local function on_attach(client, bufnr)
+    if client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint.enable(true, {
+        bufnr = bufnr,
+      })
+    end
+  end
+
+  local opts = { capabilities = capabilities, single_file_support = true, on_attach = on_attach }
 
   require("mason-lspconfig").setup_handlers({
     -- Generic lspconfig setup
@@ -43,27 +53,21 @@ M.config = function()
     end,
     -- Calling the setup function through language specific plugins
     ["rust_analyzer"] = function()
-      require("rust-tools").setup({
-        dap = {
-          adapter = false,
-        },
-        server = {
-          settings = {
-            ["rust-analyzer"] = {
-              checkOnSave = {
-                command = "clippy",
-              },
+      local rust_opts = vim.tbl_deep_extend("force", opts, {
+        settings = {
+          ["rust-analyzer"] = {
+            checkOnSave = {
+              command = "clippy",
             },
           },
-          capabilities = capabilities,
         },
       })
+      lspconfig["rust_analyzer"].setup(rust_opts)
     end,
     ["clangd"] = function()
-      local clang_d_capabilities = capabilities
-      clang_d_capabilities.offsetEncoding = { "utf-16" }
-      lspconfig.clangd.setup({ capabilities = clang_d_capabilities })
-      -- require("clangd_extensions").setup({ server = { capabilities = clang_d_capabilities } })
+      -- local clang_d_capabilities = capabilities
+      -- clang_d_capabilities.offsetEncoding = { "utf-16" }
+      lspconfig.clangd.setup(opts)
     end,
     -- LSPs with special settings
     ["lua_ls"] = function()
@@ -116,19 +120,19 @@ M.config = function()
             validate = true,
             lint = {
               unknownAtRules = "ignore",
-            }
+            },
           },
           scss = {
             validate = true,
             lint = {
               unknownAtRules = "ignore",
-            }
+            },
           },
           less = {
             validate = true,
             lint = {
               unknownAtRules = "ignore",
-            }
+            },
           },
         },
       })
@@ -138,13 +142,17 @@ M.config = function()
         capabilities = capabilities,
         cmd = {
           "arduino-language-server",
-          "-clangd", "/usr/local/bin/clangd",
-          "-cli", "/opt/homebrew/bin/arduino-cli",
-          "-cli-config", "/Users/wilsonoh/Library/Arduino15/arduino-cli.yaml",
-          "-fqbn", "arduino:avr:uno"
-        }
+          "-clangd",
+          "/usr/local/bin/clangd",
+          "-cli",
+          "/opt/homebrew/bin/arduino-cli",
+          "-cli-config",
+          "/Users/wilsonoh/Library/Arduino15/arduino-cli.yaml",
+          "-fqbn",
+          "arduino:avr:uno",
+        },
       })
-    end
+    end,
   })
 
   require("core.plugins.lsp.settings")

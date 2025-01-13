@@ -2,14 +2,14 @@ return {
   "RRethy/vim-illuminate",
   event = "VeryLazy",
   config = function()
-    require('illuminate').configure({
+    require("illuminate").configure({
       filetypes_denylist = {
-        'dirbuf',
-        'dirvish',
-        'fugitive',
+        "dirbuf",
+        "dirvish",
+        "fugitive",
         "TelescopePrompt",
-        "NvimTree"
-      }
+        "NvimTree",
+      },
     })
-  end
+  end,
 }

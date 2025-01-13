@@ -8,7 +8,6 @@ vim.g.gitblame_enabled = 0
 
 vim.g.closetag_filetypes = "html,xhtml,phtml,xml,javascript,typescript,javascriptreact,typescriptreact,"
 
-
 vim.cmd("filetype plugin indent on")
 vim.o.shortmess = vim.o.shortmess .. "cW"
 vim.o.hidden = true
