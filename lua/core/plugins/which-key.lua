@@ -53,8 +53,8 @@ M.config = function()
         "From Clipboard",
       },
     },
-    --[[ e = { ":NvimTreeToggle<cr>", "Toggle File Explorer" },
-    E = { ":NvimTreeFocus<cr>", "Focus File Explorer" }, ]]
+    e = { ":NvimTreeToggle<cr>", "Toggle File Explorer" },
+    E = { ":NvimTreeFocus<cr>", "Focus File Explorer" },
     f = {
       name = "Telescope",
       -- f = { ":Telescope find_files theme=ivy<CR>", "Find Files" },
@@ -76,6 +76,7 @@ M.config = function()
         end,
         "Search Project",
       },
+      P = { require("core.plugins.telescope.utils").search_plugin_files, "Search Plugin Files" },
       r = { "<cmd>FzfLua grep_project<cr>", "Live Grep" },
       b = { ":Telescope buffers bufnr=0<CR>", "Buffers" },
       o = { ":Telescope oldfiles<CR>", "Recent Files" },

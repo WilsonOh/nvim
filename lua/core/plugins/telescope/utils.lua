@@ -43,4 +43,11 @@ M.search_current_buf_dir = function()
   })
 end
 
+M.search_plugin_files = function()
+  return require("telescope.builtin").find_files({
+    prompt_title = "Search Plugin Files",
+    cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
+  })
+end
+
 return M

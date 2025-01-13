@@ -1,7 +1,7 @@
 local M = {
   "kyazdani42/nvim-tree.lua",
   cmd = "NvimTreeToggle",
-  enabled = false,
+  enabled = true,
 }
 
 local function on_attach(bufnr)
