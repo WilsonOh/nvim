@@ -1,12 +1,8 @@
 local tabwidth = 2
 
--- vim.opt.list = true
--- vim.opt.listchars:append("space:⋅")
--- vim.opt.listchars:append("eol:↴")
-
-vim.g.gitblame_enabled = 0
-
-vim.g.closetag_filetypes = "html,xhtml,phtml,xml,javascript,typescript,javascriptreact,typescriptreact,"
+vim.opt.list = true
+vim.opt.listchars:append("space:⋅")
+vim.opt.listchars:append("eol:↴")
 
 vim.cmd("filetype plugin indent on")
 vim.o.shortmess = vim.o.shortmess .. "cW"
@@ -14,7 +10,6 @@ vim.o.hidden = true
 vim.o.whichwrap = "b,s,<,>,[,],h,l"
 vim.o.pumheight = 10
 vim.o.fileencoding = "utf-8"
-vim.o.cmdheight = 2
 vim.o.splitbelow = true
 vim.o.termguicolors = true
 vim.o.splitright = true
@@ -33,7 +28,6 @@ vim.o.scrolloff = 3
 vim.o.sidescrolloff = 5
 vim.o.mouse = "a"
 vim.o.laststatus = 3
--- vim.o.cmdheight = 0
 
 vim.wo.wrap = false
 vim.wo.number = true
