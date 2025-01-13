@@ -11,5 +11,10 @@ return {
         horizontal = "right:50%",
       },
     },
+    keymap = {
+      fzf = {
+        ["ctrl-q"] = "select-all+accept",
+      },
+    },
   },
 }
