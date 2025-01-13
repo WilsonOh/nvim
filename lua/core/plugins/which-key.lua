@@ -53,8 +53,8 @@ M.config = function()
         "From Clipboard",
       },
     },
-    e = { ":NvimTreeToggle<cr>", "Toggle File Explorer" },
-    E = { ":NvimTreeFocus<cr>", "Focus File Explorer" },
+    --[[ e = { ":NvimTreeToggle<cr>", "Toggle File Explorer" },
+    E = { ":NvimTreeFocus<cr>", "Focus File Explorer" }, ]]
     f = {
       name = "Telescope",
       -- f = { ":Telescope find_files theme=ivy<CR>", "Find Files" },
@@ -261,8 +261,8 @@ M.config = function()
         end,
         "Format File",
       },
-      T = { ":Trouble workspace_diagnostics<CR>", "Get Workspace Diagnostics" },
-      t = { ":Trouble document_diagnostics<CR>", "Get Document Diagnostics" },
+      -- T = { ":Trouble workspace_diagnostics<CR>", "Get Workspace Diagnostics" },
+      -- t = { ":Trouble document_diagnostics<CR>", "Get Document Diagnostics" },
     },
   }
 

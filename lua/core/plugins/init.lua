@@ -1,6 +1,6 @@
 return {
-  { "abecodes/tabout.nvim", config = true, lazy = false },
-  { "f-person/git-blame.nvim", lazy = false },
+  { "abecodes/tabout.nvim", config = true, event = "InsertEnter" },
+  { "f-person/git-blame.nvim", cmd = "GitBlameEnable" },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
   -- "simrat39/rust-tools.nvim",
@@ -66,7 +66,7 @@ return {
   {
     "j-hui/fidget.nvim",
     opts = { text = { spinner = "dots" } },
-    tag = "legacy",
+    -- tag = "legacy",
     event = "BufReadPre",
   },
   { "preservim/vim-markdown", ft = { "markdown" } },

@@ -45,7 +45,7 @@ M.config = function()
             return "]c"
           end
           vim.schedule(function()
-            gitsigns.next_hunk()
+            gitsigns.nav_hunk("next")
           end)
           return "<Ignore>"
         end,
@@ -58,7 +58,7 @@ M.config = function()
             return "[c"
           end
           vim.schedule(function()
-            gitsigns.prev_hunk()
+            gitsigns.nav_hunk("prev")
           end)
           return "<Ignore>"
         end,
