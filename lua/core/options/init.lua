@@ -4,64 +4,37 @@ vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 
-vim.cmd("filetype plugin indent on")
-vim.o.shortmess = vim.o.shortmess .. "cW"
-vim.o.hidden = true
-vim.o.whichwrap = "b,s,<,>,[,],h,l"
-vim.o.pumheight = 10
-vim.o.fileencoding = "utf-8"
-vim.o.splitbelow = true
-vim.o.termguicolors = true
-vim.o.splitright = true
-vim.o.conceallevel = 3
-vim.o.showtabline = 2
-vim.o.showmode = false
-vim.o.backup = false
-vim.o.writebackup = false
-vim.o.updatetime = 300
-vim.o.timeoutlen = 100
-vim.o.background = "dark"
-vim.o.hlsearch = true
-vim.o.incsearch = true
-vim.o.ignorecase = true
-vim.o.scrolloff = 3
-vim.o.sidescrolloff = 5
-vim.o.mouse = "a"
-vim.o.laststatus = 3
-
-vim.wo.wrap = false
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.wo.cursorline = true
-vim.wo.signcolumn = "yes"
-
-vim.o.tabstop = tabwidth
-vim.bo.tabstop = tabwidth
-vim.o.softtabstop = tabwidth
-vim.bo.softtabstop = tabwidth
-vim.o.shiftwidth = tabwidth
-vim.bo.shiftwidth = tabwidth
-vim.o.autoindent = true
-vim.o.smartindent = true
-vim.bo.autoindent = true
-vim.o.expandtab = true
-vim.bo.expandtab = true
-
-vim.g.c_syntax_for_h = 1
-vim.g.vim_markdown_folding_disabled = true
-
--- Disable various builtin plugins in Vim that bog down speed
-vim.g.loaded_matchparen = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_logiPat = 1
-vim.g.loaded_rrhelper = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_shada_plugin = 1
-vim.g.loaded_spellfile_plugin = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_tutor_mode_plugin = 1
-vim.g.loaded_remote_plugins = 1
+vim.opt.shortmess:append({ W = true, I = true, c = true, C = true })
+vim.opt.hidden = true
+vim.opt.pumheight = 10
+vim.opt.fileencoding = "utf-8"
+vim.opt.splitbelow = true
+vim.opt.termguicolors = true
+vim.opt.splitright = true
+vim.opt.conceallevel = 3
+vim.opt.showtabline = 2
+vim.opt.showmode = false
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.updatetime = 300
+vim.opt.timeoutlen = 100
+vim.opt.background = "dark"
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+vim.opt.ignorecase = true
+vim.opt.scrolloff = 3
+vim.opt.sidescrolloff = 5
+vim.opt.mouse = "a"
+vim.opt.laststatus = 3
+vim.opt.smoothscroll = true
+vim.opt.wrap = false
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+vim.opt.signcolumn = "yes"
+vim.opt.tabstop = tabwidth
+vim.opt.softtabstop = tabwidth
+vim.opt.shiftwidth = tabwidth
+vim.opt.autoindent = true
+vim.opt.smartindent = true
+vim.opt.expandtab = true

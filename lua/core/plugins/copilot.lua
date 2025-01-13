@@ -6,7 +6,7 @@ return {
     enabled = false,
     opts = {
       suggestion = {
-        enabled = false,
+        enabled = true,
         auto_trigger = true,
         keymap = {
           accept = "<M-j>",
@@ -19,16 +19,6 @@ return {
         panel = { enabled = false },
       },
       config = true,
-      enabled = true,
-    },
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = true,
-    enabled = true,
-    dependencies = {
-      "zbirenbaum/copilot.lua",
-      "hrsh7th/nvim-cmp",
     },
   },
 }
