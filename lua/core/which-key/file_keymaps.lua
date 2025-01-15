@@ -9,33 +9,33 @@ M.mappings = {
   {
     "f",
     function()
-      require("core.plugins.telescope.utils").search_current_buf_dir()
+      require("core.search_utils").search_current_buf_dir()
     end,
     "Search Current Buffer Directory",
   },
   {
     "c",
     function()
-      require("core.plugins.telescope.utils").config_search()
+      require("core.search_utils").config_search()
     end,
     "Search Config",
   },
   {
     "p",
     function()
-      require("core.plugins.telescope.utils").project_search()
+      require("core.search_utils").project_search()
     end,
     "Search Project",
   },
-  { "P", require("core.plugins.telescope.utils").search_plugin_files, "Search Plugin Files" },
+  { "P", require("core.search_utils").search_plugin_files, "Search Plugin Files" },
   { "r", "<cmd>FzfLua grep_project<cr>", "Live Grep" },
-  { "b", ":Telescope buffers bufnr=0<CR>", "Buffers" },
-  { "o", ":Telescope oldfiles<CR>", "Recent Files" },
-  { "R", ":Telescope resume<CR>", "Resume Previous Picker" },
+  { "b", "<cmd>FzfLua buffers<cmd>", "Search Buffers" },
+  { "o", "<cmd>FzfLua oldfiles<cr>", "Search Recent Files" },
+  { "R", "<cmd>FzfLua resume<cr>", "Resume Previous Picker" },
   {
     "m",
     function()
-      require("core.plugins.telescope.utils").custom_search()
+      require("core.search_utils").custom_search()
     end,
     "Telescope Custom Search",
   },
