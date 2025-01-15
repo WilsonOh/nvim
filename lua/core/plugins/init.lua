@@ -6,8 +6,6 @@ return {
   -- "simrat39/rust-tools.nvim",
   -- "p00f/clangd_extensions.nvim",
   -- "jose-elias-alvarez/typescript.nvim",
-  "mfussenegger/nvim-jdtls",
-  "b0o/schemastore.nvim",
   "MunifTanjim/nui.nvim",
   "rcarriga/nvim-notify",
   "nvim-lua/plenary.nvim",
@@ -35,28 +33,12 @@ return {
   { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
   -------------------------------------------------------------
   {
-    "kylechui/nvim-surround",
-    config = function()
-      require("nvim-surround").setup({
-        keymaps = {
-          normal = "<leader>s",
-          normal_cur = "<leader>ss",
-        },
-        move_cursor = false,
-      })
-    end,
-    lazy = false,
-  },
-  {
     "karb94/neoscroll.nvim",
     opts = { cursor_scrolls_alone = false },
     event = "VeryLazy",
   },
   -- Project specific marks with a handy UI
   { "ThePrimeagen/harpoon" },
-  -- Better bdelete and !bdelete
-  { "moll/vim-bbye", lazy = false },
-  -- Neovim greeter
   -- Gather all LSP diagnostics in one place
   {
     "folke/trouble.nvim",
@@ -70,8 +52,6 @@ return {
     event = "BufReadPre",
   },
   { "preservim/vim-markdown", ft = { "markdown" } },
-  { "mg979/vim-visual-multi", enabled = false, lazy = false },
-  -- Nice highlighting and icons for todos and notes etc.
   {
     "folke/todo-comments.nvim",
     config = true,
@@ -92,7 +72,15 @@ return {
       move_cursor = true,
       flash_style = false,
     },
+    keys = {
+      {
+        "S",
+        function()
+          require("iswap").iswap_node_with()
+        end,
+        desc = "Swap Nodes",
+      },
+    },
   },
-  { "mbbill/undotree", cmd = "UndotreeToggle" },
   { "sheerun/vim-polyglot", lazy = false, enabled = true },
 }

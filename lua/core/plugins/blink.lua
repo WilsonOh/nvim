@@ -78,8 +78,8 @@ return {
       ["<C-j>"] = { "show", "select_next", "fallback" },
       ["<C-k>"] = { "show", "select_prev", "fallback" },
       ["<C-e>"] = { "hide", "fallback" },
-      ["<C-h>"] = { "snippet_backward" },
-      ["<C-l>"] = { "snippet_forward" },
+      ["<C-h>"] = { "snippet_backward", "fallback" },
+      ["<C-l>"] = { "snippet_forward", "fallback" },
       ["<C-d>"] = { "scroll_documentation_down" },
       ["<C-f>"] = { "scroll_documentation_up" },
     },
@@ -89,7 +89,7 @@ return {
       lsp = {
         snippet = { glyph = "", hl = "MiniIconsPurple" },
         ["function"] = { glyph = "󰡱" },
-        variable = { glyph = "󰫧" },
+        variable = { glyph = "󰀫" },
       },
     })
     require("blink.cmp").setup(opts)

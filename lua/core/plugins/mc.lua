@@ -8,23 +8,24 @@ return {
 
     mc.setup()
 
-    vim.keymap.set({ "n", "v" }, "<C-k>", function()
+    vim.keymap.set({ "n" }, "<C-k>", function()
       mc.addCursor("k")
     end)
-    vim.keymap.set({ "n", "v" }, "<C-j>", function()
+
+    vim.keymap.set({ "n" }, "<C-j>", function()
       mc.addCursor("j")
     end)
 
-    vim.keymap.set({ "n", "v" }, "<c-n>", function()
+    vim.keymap.set({ "n" }, "<c-n>", function()
       mc.matchAddCursor(-1)
     end)
-    vim.keymap.set({ "n", "v" }, "<c-N>", function()
+    vim.keymap.set({ "n" }, "<c-N>", function()
       mc.matchAddCursor(1)
     end)
 
     vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
 
-    vim.keymap.set({ "n", "v" }, "<c-q>", function()
+    vim.keymap.set({ "n" }, "<c-q>", function()
       if mc.cursorsEnabled() then
         mc.disableCursors()
       else

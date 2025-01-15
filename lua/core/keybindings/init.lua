@@ -16,10 +16,6 @@ set("n", "<Space>", "<NOP>", opts)
 set("i", "jk", "<ESC>")
 set("i", "kj", "<ESC>")
 
--- set("n", "<M-j>", ":resize -2<CR>", opts)
--- set("n", "<M-k>", ":resize +2<CR>", opts)
--- set("n", "<M-h>", ":vertical resize -2<CR>", opts)
--- set("n", "<M-l>", ":vertical resize +2<CR>", opts)
 set("n", "<M-j>", "<cmd>cnext<cr>", opts)
 set("n", "<M-k>", "<cmd>cprev<cr>", opts)
 
@@ -33,6 +29,12 @@ set("n", "<S-Tab>", ":bprevious<CR>", opts)
 
 set("v", "<", "<gv", opts)
 set("v", ">", ">gv", opts)
+
+set("n", "<C-l>", ">>", opts)
+set("n", "<C-h>", "<<", opts)
+
+set("i", "<C-h>", "<Left>", opts)
+set("i", "<C-l>", "<Right>", opts)
 
 -- Open Telescope Menu
 set("n", "<leader>T", ":Telescope<CR>", opts)
@@ -97,3 +99,4 @@ set("x", "/", "<Esc>/\\%V", opts)
 set("n", "<C-o>", "<C-o>zz", opts)
 
 set("x", "<leader>y", [["+y]], opts)
+set("n", "<leader>a", "ggVG", { desc = "Select Entire Buffer" })

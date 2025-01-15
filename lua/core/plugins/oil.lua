@@ -12,5 +12,6 @@ return {
   keys = {
     { "-", "<cmd>Oil<cr>", desc = "Open up oil.nvim" },
   },
+  cmd = "Oil",
   dependencies = { { "echasnovski/mini.icons", opts = {} } },
 }

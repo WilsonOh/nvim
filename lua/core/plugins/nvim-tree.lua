@@ -2,6 +2,10 @@ local M = {
   "kyazdani42/nvim-tree.lua",
   cmd = "NvimTreeToggle",
   enabled = true,
+  keys = {
+    { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Nvim Tree" },
+    { "<leader>E", "<cmd>NvimTreeFocus<cr>", desc = "Focus Nvim Tree" },
+  },
 }
 
 local function on_attach(bufnr)

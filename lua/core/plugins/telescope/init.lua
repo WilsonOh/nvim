@@ -31,7 +31,9 @@ M.config = function()
         file_sorter = require("telescope.sorters").get_fuzzy_file,
         file_ignore_patterns = { "venv", "node_modules", "build", "dist", "yarn.lock", "package-lock.json" },
         generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-        path_display = {},
+        path_display = {
+          truncate = 3,
+        },
         winblend = 0,
         border = {},
         borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },

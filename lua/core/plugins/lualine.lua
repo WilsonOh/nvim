@@ -110,7 +110,7 @@ M.config = function()
       lualine_z = {
         {
           function()
-            return "[%l/%L] C:%c 並%p%% "
+            return "[%l/%L] C:%c 󰕱 %p%% "
           end,
         },
       },

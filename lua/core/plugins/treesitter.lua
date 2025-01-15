@@ -7,15 +7,15 @@ local M = {
 
   dependencies = {
     "RRethy/nvim-treesitter-endwise",
-    { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
-    { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre", enabled = false },
+    -- { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+    -- { "nvim-treesitter/nvim-treesitter-context", event = "BufReadPre", enabled = false },
   },
 }
 
 M.config = function()
   -- vim.treesitter.language.register("javascript", "typescriptreact")
   require("nvim-treesitter.configs").setup({
-    enabled = true,
+    auto_install = false,
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -27,9 +27,9 @@ M.config = function()
     },
     indent = { enable = false },
     highlight = { enable = true },
-    endwise = { enable = false },
+    endwise = { enable = true },
     -- context_commentstring = { enable = true, enable_autocmd = false },
-    playground = { enable = true },
+    playground = { enable = false },
   })
 end
 

@@ -10,7 +10,7 @@ local function file_exists(name)
   end
 end
 
-M.get_node = function()
+M.get_swagger_docs_node = function()
   local query = vim.treesitter.query.parse(
     vim.bo.filetype,
     [[
@@ -29,6 +29,43 @@ M.get_node = function()
       vim.print(text)
     end
   end
+end
+
+--- @param filename string
+--- @return boolean
+local function check_file_exists(filename)
+  local cwd = vim.uv.cwd()
+  return vim.fn.filereadable(cwd .. filename) == 1
+end
+
+local function is_cmake_project()
+  return check_file_exists("CMakeLists.txt")
+end
+
+M.run_cmake_project = function()
+  local Job = require("plenary.job")
+  local executable_command = ""
+  local get_project_name_job = Job:new({
+    command = "rg",
+    args = { [[project\((.*)\)]], "CMakeLists.txt", "-or", "$1" },
+    cwd = vim.uv.cwd(),
+    on_stdout = function(_, data, _)
+      local tokens = vim.split(data, " ", { trimempty = true })
+      local project_name = tokens[1]
+      executable_command = "build/" .. project_name
+      print(executable_command)
+    end,
+  })
+  local build_job = Job:new({
+    command = "cmake",
+    args = { "--build", "build" },
+  })
+  --[[ local execute_job = Job:new({
+    command = executable_command,
+  }) ]]
+  get_project_name_job:and_then(build_job)
+  -- build_job:and_then_on_success(execute_job)
+  get_project_name_job:start()
 end
 
 M.run_file = function(from_clipboard, no_input)
