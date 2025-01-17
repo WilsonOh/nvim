@@ -29,7 +29,7 @@ M.mappings = {
   },
   { "P", require("core.search_utils").search_plugin_files, "Search Plugin Files" },
   { "r", "<cmd>FzfLua grep_project<cr>", "Live Grep" },
-  { "b", "<cmd>FzfLua buffers<cmd>", "Search Buffers" },
+  { "b", "<cmd>FzfLua buffers<cr>", "Search Buffers" },
   { "o", "<cmd>FzfLua oldfiles<cr>", "Search Recent Files" },
   { "R", "<cmd>FzfLua resume<cr>", "Resume Previous Picker" },
   {
