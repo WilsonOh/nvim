@@ -31,6 +31,13 @@ M.mappings = {
   },
   { "P", require("core.search_utils").search_plugin_files, "Search Plugin Files" },
   {
+    "h",
+    function()
+      Snacks.picker.help()
+    end,
+    "Search Help",
+  },
+  {
     "w",
     function()
       Snacks.picker.grep_word()

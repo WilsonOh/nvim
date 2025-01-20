@@ -1,8 +1,9 @@
 local M = {}
 
 M.custom_search = function()
-  local cwd = vim.fn.input("Enter the directory: ")
-  Snacks.picker.files({ cwd = cwd, title = string.format("Searching %s", cwd) })
+  Snacks.input.input({ prompt = "Enter the directory: ", completion = "dir" }, function(value)
+    Snacks.picker.files({ cwd = value, title = string.format("Searching %s", value) })
+  end)
   -- require("telescope.builtin").find_files({ cwd = cwd })
 end
 
