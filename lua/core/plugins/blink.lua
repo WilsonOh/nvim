@@ -1,3 +1,4 @@
+local disabled_filetypes = { "DressingInput", "TelescopePrompt", "snacks_picker_input" }
 return {
   "saghen/blink.cmp",
   enabled = true,
@@ -15,7 +16,7 @@ return {
   ---@type blink.cmp.Config
   opts = {
     enabled = function()
-      return not vim.tbl_contains({ "DressingInput", "TelescopePrompt" }, vim.bo.filetype)
+      return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype)
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
     end,

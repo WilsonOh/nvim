@@ -2,15 +2,17 @@ local M = {}
 
 M.custom_search = function()
   local cwd = vim.fn.input("Enter the directory: ")
-  require("telescope.builtin").find_files({ cwd = cwd })
+  Snacks.picker.files({ cwd = cwd, title = string.format("Searching %s", cwd) })
+  -- require("telescope.builtin").find_files({ cwd = cwd })
 end
 
 M.config_search = function()
   local config_path = vim.fn.stdpath("config")
-  require("fzf-lua").files({
+  --[[ require("fzf-lua").files({
     prompt_title = "Search Config...",
     cwd = config_path,
-  })
+  }) ]]
+  Snacks.picker.files({ cwd = config_path, title = "Search Config..." })
 end
 
 function M.project_search(opts)
@@ -26,30 +28,36 @@ function M.project_search(opts)
     opts.cwd = client.config.root_dir
     return fzf.files(opts)
   end
-  local ok, _ = pcall(fzf.git_files, opts)
-  if not ok then
+  local obj = vim.system({ "git", "rev-parse", "--is-inside-work-tree" }):wait()
+  if obj.code ~= 0 then
     vim.notify_once(
       "Unable to do project search, not LSP workspace or git directory detected.\nSearching in CWD instead",
       vim.log.levels.WARN
     )
-    return fzf.files()
+    fzf.files()
+  else
+    fzf.git_files()
   end
 end
 
 M.search_current_buf_dir = function()
   local buf_path = vim.fn.expand("%:p")
   local buf_dir = vim.fs.dirname(buf_path)
-  require("fzf-lua").files({
+  Snacks.picker.files({ cwd = buf_dir, title = "Search Current Buffer Directory..." })
+  --[[ require("fzf-lua").files({
     prompt_title = "Search Current Buffer Directory...",
     cwd = buf_dir,
-  })
+  }) ]]
 end
 
 M.search_plugin_files = function()
-  return require("fzf-lua").files({
+  local title = "Search Plugin Files"
+  local cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+  Snacks.picker.files({ title = title, cwd = cwd })
+  --[[ return require("fzf-lua").files({
     prompt_title = "Search Plugin Files",
     cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
-  })
+  }) ]]
 end
 
 return M

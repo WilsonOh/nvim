@@ -4,7 +4,7 @@ return {
   enabled = true,
   cmd = "FzfLua",
   opts = {
-    "max-perf",
+    "telescope",
     winopts = {
       fullscreen = true,
       preview = {

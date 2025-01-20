@@ -5,7 +5,9 @@ local M = {
 
 M.config = function()
   local npairs = require("nvim-autopairs")
-  npairs.setup({})
+  npairs.setup({
+    disable_filetype = { "TelescopePrompt", "spectre_panel", "snacks_picker_input" },
+  })
 
   local Rule = require("nvim-autopairs.rule")
 

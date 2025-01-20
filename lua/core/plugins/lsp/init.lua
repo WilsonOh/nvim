@@ -18,6 +18,7 @@ local M = {
       opts = {
         library = {
           { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          { path = "snacks.nvim", words = { "Snacks" } },
         },
       },
     },
@@ -28,7 +29,10 @@ M.config = function()
   local lspconfig = require("lspconfig")
   local configs = require("core.plugins.lsp.configs")
 
-  local lsp_servers = require("mason-lspconfig").get_installed_servers()
+  local mason_lsp_servers = require("mason-lspconfig").get_installed_servers()
+  local custom_lsp_servers = { "fish_lsp" }
+  local lsp_servers = vim.tbl_extend("force", mason_lsp_servers, custom_lsp_servers)
+
   for _, server in ipairs(lsp_servers) do
     lspconfig[server].setup(configs.get_lspconfig_opts(server))
   end

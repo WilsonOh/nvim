@@ -1,5 +1,7 @@
 local M = {}
 
+local picker = Snacks.picker
+
 M.meta = {
   group = "Files",
   prefix = "f",
@@ -28,18 +30,55 @@ M.mappings = {
     "Search Project",
   },
   { "P", require("core.search_utils").search_plugin_files, "Search Plugin Files" },
-  { "r", "<cmd>FzfLua grep_project<cr>", "Live Grep" },
-  { "b", "<cmd>FzfLua buffers<cr>", "Search Buffers" },
-  { "o", "<cmd>FzfLua oldfiles<cr>", "Search Recent Files" },
-  { "R", "<cmd>FzfLua resume<cr>", "Resume Previous Picker" },
+  {
+    "w",
+    function()
+      Snacks.picker.grep_word()
+    end,
+    "Search Plugin Files",
+  },
+  {
+    "r",
+    function()
+      picker.grep()
+    end,
+    "Live Grep",
+  },
+  {
+    "b",
+    function()
+      Snacks.picker.buffers()
+    end,
+    "Search Buffers",
+  },
+  {
+    "o",
+    function()
+      Snacks.picker.recent()
+    end,
+    "Search Recent Files",
+  },
+  {
+    "R",
+    function()
+      picker.resume()
+    end,
+    "Resume Previous Picker",
+  },
   {
     "m",
     function()
       require("core.search_utils").custom_search()
     end,
-    "Telescope Custom Search",
+    "Search Directory from Input",
   },
-  { "C", "<cmd>FzfLua grep_curbuf<cr>", "Current Buffer Fuzzy Find" },
+  {
+    "C",
+    function()
+      picker.lines()
+    end,
+    "Current Buffer Fuzzy Find",
+  },
 }
 
 return M

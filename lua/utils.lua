@@ -178,4 +178,28 @@ M.get_word_under_cursor = function()
   return word
 end
 
+M.format_json = function()
+  local command = "/Users/wilsonoh/json_parser_rs/target/release/json_parser_rs"
+  local Job = require("plenary.job")
+  local formatted = {}
+  Job:new({
+    command = command,
+    writer = vim.api.nvim_buf_get_lines(0, 0, -1, false),
+    -- args = { "-c", ".", vim.fn.expand("%:p") },
+    on_stdout = function(_, data)
+      vim.schedule(function()
+        table.insert(formatted, data)
+      end)
+    end,
+    on_exit = function()
+      vim.schedule(function()
+        vim.api.nvim_buf_set_lines(0, 0, -1, false, formatted)
+      end)
+    end,
+    on_stderr = function()
+      vim.print("failed to format json")
+    end,
+  }):start()
+end
+
 return M
