@@ -13,9 +13,6 @@ set("n", "<C-u>", "<C-u>zz", opts)
 
 set("n", "<Space>", "<NOP>", opts)
 
-set("i", "jk", "<ESC>")
-set("i", "kj", "<ESC>")
-
 set("n", "<M-j>", "<cmd>cnext<cr>", opts)
 set("n", "<M-k>", "<cmd>cprev<cr>", opts)
 

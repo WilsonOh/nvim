@@ -8,7 +8,7 @@ return {
   },
   dependencies = {
     "rafamadriz/friendly-snippets",
-    "saghen/blink.compat",
+    -- "saghen/blink.compat",
     "echasnovski/mini.icons",
   },
   event = "InsertEnter",
