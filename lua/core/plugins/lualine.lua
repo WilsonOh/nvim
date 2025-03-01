@@ -99,7 +99,7 @@ M.config = function()
         { "filetype", icon_only = true, separator = "" },
         {
           "filename",
-          symbols = { modified = " ", readonly = "[RO]" },
+          symbols = { modified = "󰏫", readonly = "[RO]" },
           separator = "",
           padding = { left = 0, right = 1 },
         },

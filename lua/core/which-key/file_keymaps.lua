@@ -52,6 +52,13 @@ M.mappings = {
     "Live Grep",
   },
   {
+    "s",
+    function()
+      Snacks.picker.smart()
+    end,
+    "Smart Search Files",
+  },
+  {
     "b",
     function()
       Snacks.picker.buffers()
@@ -82,7 +89,7 @@ M.mappings = {
   {
     "C",
     function()
-      picker.lines()
+      require("fzf-lua").grep_curbuf()
     end,
     "Current Buffer Fuzzy Find",
   },

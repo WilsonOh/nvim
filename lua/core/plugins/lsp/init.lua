@@ -9,7 +9,7 @@ local M = {
     {
       "williamboman/mason-lspconfig.nvim",
       opts = {
-        ensure_installed = { "lua_ls", "clangd", "pyright", "jsonls", "ts_ls", "html", "rust_analyzer" },
+        ensure_installed = { "lua_ls", "clangd", "jsonls", "ts_ls", "html", "rust_analyzer" },
       },
     },
     {
@@ -32,9 +32,12 @@ M.config = function()
   local mason_lsp_servers = require("mason-lspconfig").get_installed_servers()
   local custom_lsp_servers = { "fish_lsp" }
   local lsp_servers = vim.tbl_extend("force", mason_lsp_servers, custom_lsp_servers)
+  local exclude = { "jdtls" }
 
   for _, server in ipairs(lsp_servers) do
-    lspconfig[server].setup(configs.get_lspconfig_opts(server))
+    if not vim.list_contains(exclude, server) then
+      lspconfig[server].setup(configs.get_lspconfig_opts(server))
+    end
   end
 
   require("core.plugins.lsp.settings")

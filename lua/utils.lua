@@ -154,6 +154,7 @@ _G.P = function(s)
   vim.pretty_print(s)
 end
 
+--- @param colorscheme "catppuccin" | "rose-pine" | "oxocarbon" | "kanagawa" | "tundra" | "gruvbox"
 M.set_colorscheme = function(colorscheme, transparent_bg)
   --[[ require("lazy").load({
     plugins = { colorscheme },

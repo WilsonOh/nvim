@@ -97,3 +97,4 @@ set("n", "<C-o>", "<C-o>zz", opts)
 
 set("x", "<leader>y", [["+y]], opts)
 set("n", "<leader>a", "ggVG", { desc = "Select Entire Buffer" })
+set("c", "<C-a>", "<Home>")

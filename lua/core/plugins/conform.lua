@@ -20,7 +20,7 @@ local prettier_fts = {
 local formatters_by_ft = {
   fish = { "fish_indent" },
   lua = { "stylua" },
-  python = { "black" },
+  python = { "ruff_format" },
   ocaml = { "ocamlformat" },
   asm = { "asmfmt" },
 }

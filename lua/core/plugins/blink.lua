@@ -27,6 +27,9 @@ return {
         },
       },
       menu = {
+        auto_show = function(ctx)
+          return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
+        end,
         border = "single",
         draw = {
           treesitter = { "lsp" },
@@ -64,8 +67,10 @@ return {
     snippets = { preset = "luasnip" },
     sources = {
       default = { "lsp", "path", "snippets", "buffer", "lazydev" },
-      cmdline = {},
       providers = {
+        cmdline = {
+          enabled = false,
+        },
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
@@ -75,7 +80,8 @@ return {
     },
 
     keymap = {
-      preset = "enter",
+      preset = "none",
+      ["<CR>"] = { "select_and_accept", "fallback" },
       ["<C-j>"] = { "show", "select_next", "fallback" },
       ["<C-k>"] = { "show", "select_prev", "fallback" },
       ["<C-e>"] = { "hide", "fallback" },
