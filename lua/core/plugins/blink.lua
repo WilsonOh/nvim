@@ -20,6 +20,9 @@ return {
         and vim.bo.buftype ~= "prompt"
         and vim.b.completion ~= false
     end,
+    cmdline = {
+      enabled = false,
+    },
     completion = {
       accept = {
         auto_brackets = {
