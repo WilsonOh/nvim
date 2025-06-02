@@ -2,6 +2,7 @@
 require("core.options")
 require("core.keybindings")
 require("core.lazy")
+require("core.lsp")
 
 -- Souce all autocommands
 require("autocmds")

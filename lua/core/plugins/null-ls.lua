@@ -4,7 +4,7 @@ local M = {
   dependencies = {
     "nvimtools/none-ls-extras.nvim",
   },
-  enabled = true,
+  enabled = false,
 }
 
 M.config = function()

@@ -1,4 +1,7 @@
 return {
+  { "neovim/nvim-lspconfig", lazy = false },
+  { "williamboman/mason.nvim", opts = {}, lazy = false },
+  "b0o/schemastore.nvim",
   { "abecodes/tabout.nvim", config = true, event = "InsertEnter" },
   { "f-person/git-blame.nvim", cmd = "GitBlameEnable" },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },

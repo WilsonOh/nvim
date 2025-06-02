@@ -19,10 +19,6 @@ return {
           a = { "@parameter.outer" },
           i = { "@parameter.inner" },
         }),
-        t = ai.gen_spec.treesitter({
-          a = { "@tag.outer" },
-          i = { "@tag.inner" },
-        }, {}),
         j = ai.gen_spec.treesitter({
           a = { "@jsx_attribute.outer" },
           i = { "@jsx_attribute.inner" },
