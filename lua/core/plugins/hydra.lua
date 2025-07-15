@@ -1,7 +1,7 @@
 local M = {
-  "anuvyklack/hydra.nvim",
-  enabled = true,
-  keys = { "<leader>g" },
+  "nvimtools/hydra.nvim",
+  enabled = false,
+  keys = { "<leader>G" },
 }
 
 M.config = function()
@@ -11,11 +11,9 @@ M.config = function()
   local hint = [[
 ^                               Git Mode
 ^                              ----------
-^ _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
-^ _K_: prev hunk   _u_: undo stage hunk   _p_: preview hunk   _B_: blame show full 
-^ ^ ^              _S_: stage buffer      _r_: reset hunk     _/_: show base file
-^ ^
-^ ^ ^                           _<Esc>_: exit
+^                _n_: next hunk        _r_: reset hunk
+^                _N_: prev hunk        _<Esc>_: exit
+^ ^ ^
 ]]
 
   Hydra({
@@ -23,67 +21,34 @@ M.config = function()
     config = {
       color = "pink",
       invoke_on_body = true,
-      hint = { position = "bottom", border = "rounded" },
+      hint = { position = "bottom", float_opts = { border = "rounded" } },
       on_enter = function()
+        gitsigns.preview_hunk_inline()
         gitsigns.toggle_linehl(true)
-        gitsigns.toggle_deleted(true)
-        vim.cmd([[GitBlameEnable]])
+        vim.cmd [[BlameToggle]]
       end,
       on_exit = function()
         gitsigns.toggle_linehl(false)
-        gitsigns.toggle_deleted(false)
-        vim.cmd([[GitBlameDisable]])
+        vim.cmd [[BlameToggle]]
       end,
     },
     mode = { "n", "x" },
-    body = "<leader>g",
+    body = "<leader>G",
     heads = {
       {
-        "J",
+        "n",
         function()
-          if vim.wo.diff then
-            return "]c"
-          end
-          vim.schedule(function()
-            gitsigns.nav_hunk("next")
-          end)
-          return "<Ignore>"
-        end,
-        { expr = true },
-      },
-      {
-        "K",
-        function()
-          if vim.wo.diff then
-            return "[c"
-          end
-          vim.schedule(function()
-            gitsigns.nav_hunk("prev")
-          end)
-          return "<Ignore>"
-        end,
-        { expr = true },
-      },
-      { "s", ":Gitsigns stage_hunk<CR>", { silent = true } },
-      { "u", gitsigns.undo_stage_hunk },
-      { "S", gitsigns.stage_buffer },
-      { "p", gitsigns.preview_hunk },
-      { "d", gitsigns.toggle_deleted, { nowait = true } },
-      { "b", gitsigns.blame_line },
-      {
-        "r",
-        vim.schedule_wrap(function()
-          gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-        end),
-      },
-      {
-        "B",
-        function()
-          gitsigns.blame_line({ full = true })
+          gitsigns.nav_hunk("next")
         end,
       },
-      { "/", gitsigns.show, { exit = true } }, -- show the base of the file
-      { "<Esc>", nil, { exit = true, nowait = true } },
+      {
+        "N",
+        function()
+          gitsigns.nav_hunk("prev")
+        end,
+      },
+      { "r",     gitsigns.reset_hunk },
+      { "<Esc>", nil,                { exit = true, nowait = true } },
     },
   })
 end

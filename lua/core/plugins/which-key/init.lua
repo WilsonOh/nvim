@@ -17,6 +17,7 @@ M.config = function()
     require("core.which-key.run_file_keymaps"),
     require("core.which-key.noice_keymaps"),
     require("core.which-key.lsp_keymaps"),
+    require("core.which-key.git_keymaps"),
   }
   local format_mappings = require("core.which-key.utils").format_keymaps
   for _, keymap in pairs(keymaps) do

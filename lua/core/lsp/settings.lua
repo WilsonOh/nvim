@@ -1,3 +1,5 @@
+vim.g.format_on_save = true
+
 local border = {
   { "╭", "FloatBorder" },
   { "─", "FloatBorder" },

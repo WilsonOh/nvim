@@ -1,5 +1,7 @@
 local tabwidth = 2
 
+vim.g.editorconfig = false
+
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
@@ -11,7 +13,7 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.splitbelow = true
 vim.opt.termguicolors = true
 vim.opt.splitright = true
-vim.opt.conceallevel = 3
+vim.opt.conceallevel = 0
 vim.opt.showtabline = 2
 vim.opt.showmode = false
 vim.opt.backup = false

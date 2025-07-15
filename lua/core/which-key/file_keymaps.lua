@@ -25,7 +25,8 @@ M.mappings = {
   {
     "p",
     function()
-      require("core.search_utils").project_search()
+      -- require("core.search_utils").project_search()
+      Snacks.picker.files()
     end,
     "Search Project",
   },
@@ -38,17 +39,23 @@ M.mappings = {
     "Search Help",
   },
   {
+    "g",
+    function()
+      Snacks.picker.git_files()
+    end,
+    "Search Git Files",
+  },
+  {
     "w",
     function()
       Snacks.picker.grep_word()
     end,
-    "Search Plugin Files",
+    "Grep word",
   },
   {
     "r",
-    function()
-      picker.grep()
-    end,
+    -- "<cmd>FzfLua grep_project<cr>",
+    Snacks.picker.grep,
     "Live Grep",
   },
   {
@@ -74,9 +81,8 @@ M.mappings = {
   },
   {
     "R",
-    function()
-      picker.resume()
-    end,
+    -- "<cmd>FzfLua resume<cr>",
+    Snacks.picker.resume,
     "Resume Previous Picker",
   },
   {
@@ -88,9 +94,7 @@ M.mappings = {
   },
   {
     "C",
-    function()
-      require("fzf-lua").grep_curbuf()
-    end,
+    "<cmd>FzfLua grep_curbuf<cr>",
     "Current Buffer Fuzzy Find",
   },
 }

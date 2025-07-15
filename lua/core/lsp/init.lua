@@ -63,7 +63,7 @@ require("core.lsp.settings")
 
 vim.lsp.enable({
   "basedpyright",
-  "clangd",
+  -- "clangd",
   "emmet_ls",
   "gopls",
   "html",
@@ -74,7 +74,10 @@ vim.lsp.enable({
   "rust_analyzer",
   "svelte",
   "tailwindcss",
-  "ts_ls",
+  -- "ts_ls",
   "xmlformatter",
   "zls",
+  "docker_compose_language_service",
+  "protols",
+  "yamlls"
 })

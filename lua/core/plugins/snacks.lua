@@ -8,6 +8,11 @@ return {
         preset = "telescope",
         fullscreen = true,
       },
+      formatters = {
+        file = {
+          truncate = 80,
+        }
+      }
     },
   },
   lazy = false,

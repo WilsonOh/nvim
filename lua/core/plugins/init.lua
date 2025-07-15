@@ -1,9 +1,9 @@
 return {
-  { "neovim/nvim-lspconfig", lazy = false },
-  { "williamboman/mason.nvim", opts = {}, lazy = false },
+  { "neovim/nvim-lspconfig",   lazy = false },
+  { "williamboman/mason.nvim", opts = {},   lazy = false },
   "b0o/schemastore.nvim",
-  { "abecodes/tabout.nvim", config = true, event = "InsertEnter" },
-  { "f-person/git-blame.nvim", cmd = "GitBlameEnable" },
+  { "abecodes/tabout.nvim",     config = true,         event = "InsertEnter" },
+  { "f-person/git-blame.nvim",  cmd = "GitBlameEnable" },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
   -- "simrat39/rust-tools.nvim",
@@ -12,12 +12,7 @@ return {
   "MunifTanjim/nui.nvim",
   "rcarriga/nvim-notify",
   "nvim-lua/plenary.nvim",
-  { "stevearc/dressing.nvim", event = "VeryLazy" },
-  {
-    "lewis6991/gitsigns.nvim",
-    config = true,
-    event = "BufReadPre",
-  },
+  { "stevearc/dressing.nvim",           event = "VeryLazy" },
   -- "LudoPinelli/comment-box.nvim",
   {
     "danymat/neogen",
@@ -28,11 +23,11 @@ return {
   -----------------------------------------------------------
 
   -- Colorschemes
-  { "rose-pine/neovim", name = "rose-pine" },
-  { "ellisonleao/gruvbox.nvim", name = "gruvbox" },
-  { "catppuccin/nvim", name = "catppuccin", build = ":CatppuccinCompile" },
-  { "rebelot/kanagawa.nvim", name = "kanagawa" },
-  { "sam4llis/nvim-tundra", name = "tundra" },
+  { "rose-pine/neovim",                 name = "rose-pine" },
+  { "ellisonleao/gruvbox.nvim",         name = "gruvbox" },
+  { "catppuccin/nvim",                  name = "catppuccin", build = ":CatppuccinCompile" },
+  { "rebelot/kanagawa.nvim",            name = "kanagawa" },
+  { "sam4llis/nvim-tundra",             name = "tundra" },
   { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
   -------------------------------------------------------------
   {
@@ -41,12 +36,9 @@ return {
     event = "VeryLazy",
   },
   -- Project specific marks with a handy UI
-  { "ThePrimeagen/harpoon" },
-  -- Gather all LSP diagnostics in one place
   {
-    "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
-    config = true,
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
   },
   {
     "j-hui/fidget.nvim",
@@ -67,7 +59,10 @@ return {
     cmd = "EmojiPicker",
     keys = { { mode = "i", "<M-e>", "<cmd>EmojiPicker<cr>", desc = "Open EmojiPicker" } },
   },
-  { "sindrets/diffview.nvim", cmd = "DiffviewOpen" },
+  {
+    "sindrets/diffview.nvim",
+    cmd = "DiffviewOpen",
+  },
   {
     "mizlan/iswap.nvim",
     opts = {
@@ -85,5 +80,9 @@ return {
       },
     },
   },
-  { "sheerun/vim-polyglot", lazy = false, enabled = true },
+  {
+    "sheerun/vim-polyglot",
+    lazy = false,
+    enabled = true
+  },
 }

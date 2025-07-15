@@ -2,6 +2,7 @@ local set = vim.keymap.set
 local opts = { silent = true }
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 set("n", "<leader>i", "g~l", opts)
 
