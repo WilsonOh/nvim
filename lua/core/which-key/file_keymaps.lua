@@ -1,13 +1,16 @@
 local M = {}
 
-local picker = Snacks.picker
-
 M.meta = {
   group = "Files",
   prefix = "f",
 }
 
 M.mappings = {
+  {
+    "H",
+    Snacks.picker.command_history,
+    "Search Current Buffer Directory",
+  },
   {
     "f",
     function()
