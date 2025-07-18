@@ -21,6 +21,7 @@ return {
         ["ag"] = "@comment.outer",
         ["ig"] = "@comment.inner",
         ["ac"] = "@class.outer",
+        ["aj"] = "@jsx_attribute.outer",
         ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
       },
       -- You can also use captures from other query groups like `locals.scm`
@@ -35,5 +36,11 @@ return {
         end)
       end
     end
+    vim.keymap.set("n", "<c-l>", function()
+      require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+    end)
+    vim.keymap.set("n", "<c-h>", function()
+      require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
+    end)
   end
 }

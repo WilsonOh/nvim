@@ -65,6 +65,7 @@ return {
   },
   {
     "mizlan/iswap.nvim",
+    enabled = false,
     opts = {
       autoswap = true,
       move_cursor = true,

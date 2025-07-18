@@ -28,8 +28,8 @@ set("n", "<S-Tab>", ":bprevious<CR>", opts)
 set("v", "<", "<gv", opts)
 set("v", ">", ">gv", opts)
 
-set("n", "<C-l>", ">>", opts)
-set("n", "<C-h>", "<<", opts)
+-- set("n", "<C-l>", ">>", opts)
+-- set("n", "<C-h>", "<<", opts)
 
 set("i", "<C-h>", "<Left>", opts)
 set("i", "<C-l>", "<Right>", opts)
