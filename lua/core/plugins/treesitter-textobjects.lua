@@ -27,7 +27,7 @@ return {
       -- You can also use captures from other query groups like `locals.scm`
       locals = {
         ["as"] = { query = "@local.scope", query_group = "locals", desc = "Select language scope" },
-      }
+      },
     }
     for group, keymaps in pairs(keymapGroups) do
       for key, query in pairs(keymaps) do
@@ -36,11 +36,5 @@ return {
         end)
       end
     end
-    vim.keymap.set("n", "<c-l>", function()
-      require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
-    end)
-    vim.keymap.set("n", "<c-h>", function()
-      require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
-    end)
-  end
+  end,
 }
