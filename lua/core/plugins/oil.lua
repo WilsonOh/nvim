@@ -3,6 +3,7 @@ return {
   ---@module 'oil'
   ---@type oil.SetupOpts
   opts = {
+    default_file_explorer = true,
     keymaps = {
       ["q"] = { "actions.close", mode = "n" },
       ["<C-s>"] = { vim.cmd.write },
@@ -12,6 +13,5 @@ return {
   keys = {
     { "-", "<cmd>Oil<cr>", desc = "Open up oil.nvim" },
   },
-  cmd = "Oil",
-  dependencies = { { "echasnovski/mini.icons", opts = {} } },
+  lazy = false,
 }

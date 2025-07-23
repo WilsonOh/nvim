@@ -1,21 +1,6 @@
 local M = {
   "monaqa/dial.nvim",
-  keys = {
-    {
-      "<C-a>",
-      function()
-        return require("dial.map").inc_normal()
-      end,
-      expr = true,
-    },
-    {
-      "<C-x>",
-      function()
-        return require("dial.map").dec_normal()
-      end,
-      expr = true,
-    },
-  },
+  lazy = false,
 }
 
 M.config = function()
@@ -47,6 +32,12 @@ M.config = function()
       augend.semver.alias.semver,
     },
   })
+  vim.keymap.set("n", "<C-a>", function()
+    require("dial.map").manipulate("increment", "normal")
+  end)
+  vim.keymap.set("n", "<C-x>", function()
+    require("dial.map").manipulate("decrement", "normal")
+  end)
 end
 
 return M

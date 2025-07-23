@@ -1,5 +1,14 @@
 local M = {}
 
+function M.is_quickfix_open()
+  for _, win_info in ipairs(vim.fn.getwininfo()) do
+    if win_info.quickfix == 1 then
+      return true
+    end
+  end
+  return false
+end
+
 local function file_exists(name)
   local f = io.open(name, "r")
   if f ~= nil then

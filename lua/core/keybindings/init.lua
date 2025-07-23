@@ -1,6 +1,8 @@
 local set = vim.keymap.set
 local opts = { silent = true }
 
+local is_quickfix_open = require("utils").is_quickfix_open
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -14,8 +16,17 @@ set("n", "<C-u>", "<C-u>zz", opts)
 
 set("n", "<Space>", "<NOP>", opts)
 
-set("n", "<M-j>", "<cmd>cnext<cr>", opts)
-set("n", "<M-k>", "<cmd>cprev<cr>", opts)
+set("n", "<M-j>", function()
+  if is_quickfix_open() then
+    vim.cmd.cnext()
+  end
+end, opts)
+
+set("n", "<M-k>", function()
+  if is_quickfix_open() then
+    vim.cmd.cprev()
+  end
+end, opts)
 
 set("n", "<C-Left>", "<C-w>h", opts)
 set("n", "<C-Down>", "<C-w>j", opts)
@@ -28,11 +39,8 @@ set("n", "<S-Tab>", ":bprevious<CR>", opts)
 set("v", "<", "<gv", opts)
 set("v", ">", ">gv", opts)
 
-set("n", "<C-l>", ">>", opts)
-set("n", "<C-h>", "<<", opts)
-
-set("i", "<C-h>", "<Left>", opts)
-set("i", "<C-l>", "<Right>", opts)
+-- set("i", "<C-h>", "<Left>", opts)
+-- set("i", "<C-l>", "<Right>", opts)
 
 -- Open Telescope Menu
 set("n", "<leader>T", ":Telescope<CR>", opts)

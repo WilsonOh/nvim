@@ -36,5 +36,12 @@ return {
         end)
       end
     end
+
+    vim.keymap.set("n", "<c-l>", function()
+      require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
+    end)
+    vim.keymap.set("n", "<c-h>", function()
+      require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
+    end)
   end,
 }
