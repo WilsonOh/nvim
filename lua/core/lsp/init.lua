@@ -80,5 +80,5 @@ vim.lsp.enable({
   "zls",
   "docker_compose_language_service",
   "protols",
-  "yamlls"
+  "yamlls",
 })

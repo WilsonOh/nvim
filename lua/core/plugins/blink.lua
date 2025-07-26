@@ -1,4 +1,5 @@
-local disabled_filetypes = { "DressingInput", "TelescopePrompt", "snacks_picker_input", "dropbar_menu", "dropbar_menu_fzf" }
+local disabled_filetypes =
+  { "DressingInput", "TelescopePrompt", "snacks_picker_input", "dropbar_menu", "dropbar_menu_fzf" }
 return {
   "saghen/blink.cmp",
   enabled = true,
