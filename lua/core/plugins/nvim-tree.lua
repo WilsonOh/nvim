@@ -22,6 +22,11 @@ local function on_attach(bufnr)
     api.tree.close()
     api.tree.open({ find_file = true, update_root = true })
   end, opts("Update root to current file"))
+
+  vim.keymap.set("n", "<C-c>", function()
+    local global_cwd = vim.fn.getcwd(-1, -1)
+    api.tree.change_root(global_cwd)
+  end, opts("Change Root To Global CWD"))
 end
 
 M.config = function()

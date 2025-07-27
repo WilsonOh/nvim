@@ -11,7 +11,7 @@ M.mappings = {
   { "W", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
   { "l", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspace folder" },
   { "D", "<cmd>FzfLua lsp_document_diagnostics<cr>", "Document Diagnostics" },
-  { "d", vim.lsp.buf.definition, "Go to definition" },
+  { "d", Snacks.picker.lsp_definitions, "Go to definition" },
   { "r", Snacks.picker.lsp_references, "References" },
   { "R", vim.lsp.buf.rename, "Rename" },
   { "a", vim.lsp.buf.code_action, "Code actions" },
@@ -34,7 +34,7 @@ M.mappings = {
   { "m", vim.cmd.Mason, "Open Up Mason Package Manager" },
   -- { "F", ":Lspsaga finder<CR>", "Open LSP Finder" },
   { "f", require("conform").format, "Format File" },
-  { "t", vim.lsp.buf.type_definition, "Go to type definition" },
+  { "t", Snacks.picker.lsp_type_definitions, "Go to type definition" },
   { "s", Snacks.picker.lsp_symbols, "LSP Document Symbols Picker" },
   { "S", Snacks.picker.lsp_workspace_symbols, "LSP Workspace Symbols Picker" },
 }
