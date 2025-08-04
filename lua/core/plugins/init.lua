@@ -25,7 +25,7 @@ return {
   -- Colorschemes
   { "rose-pine/neovim",                 name = "rose-pine" },
   { "ellisonleao/gruvbox.nvim",         name = "gruvbox" },
-  { "catppuccin/nvim",                  name = "catppuccin", build = ":CatppuccinCompile" },
+  { "catppuccin/nvim",                  name = "catppuccin" },
   { "rebelot/kanagawa.nvim",            name = "kanagawa" },
   { "sam4llis/nvim-tundra",             name = "tundra" },
   { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
