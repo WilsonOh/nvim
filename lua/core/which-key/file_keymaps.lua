@@ -29,8 +29,9 @@ M.mappings = {
     "p",
     function()
       -- require("core.search_utils").project_search()
-      local root = vim.fs.root(0, { "go.mod", "package.json", ".git" })
-      Snacks.picker.files({ cwd = root })
+      -- local root = vim.fs.root(0, { "go.mod", "package.json", ".git" })
+      -- Snacks.picker.files({ cwd = root })
+      Snacks.picker.files()
     end,
     "Search Project",
   },
@@ -59,8 +60,9 @@ M.mappings = {
   {
     "r",
     function()
-      local root = vim.fs.root(0, { "go.mod", "package.json", ".git" })
-      Snacks.picker.grep({ cwd = root })
+      -- local root = vim.fs.root(0, { "go.mod", "package.json", ".git" })
+      -- Snacks.picker.grep({ cwd = root })
+      Snacks.picker.grep()
     end,
     "Live Grep",
   },

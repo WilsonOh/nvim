@@ -95,7 +95,8 @@ return {
 
     keymap = {
       preset = "none",
-      ["<CR>"] = { "select_and_accept", "fallback" },
+      -- ["<CR>"] = { "select_and_accept", "fallback" },
+      ["<C-y>"] = { "select_and_accept", "fallback" },
       ["<C-j>"] = { "show", "select_next", "fallback" },
       ["<C-k>"] = { "show", "select_prev", "fallback" },
       ["<C-e>"] = { "hide", "fallback" },
