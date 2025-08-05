@@ -25,7 +25,8 @@ return {
   -- Colorschemes
   { "rose-pine/neovim",                 name = "rose-pine" },
   { "ellisonleao/gruvbox.nvim",         name = "gruvbox" },
-  { "catppuccin/nvim",                  name = "catppuccin" },
+  -- to maintain the old blink.cmp pmenu bg color https://github.com/catppuccin/nvim/commit/931a129463ca09c8805d564a28b3d0090e536e1d
+  { "catppuccin/nvim",                  name = "catppuccin", version = "1.11.0" },
   { "rebelot/kanagawa.nvim",            name = "kanagawa" },
   { "sam4llis/nvim-tundra",             name = "tundra" },
   { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
