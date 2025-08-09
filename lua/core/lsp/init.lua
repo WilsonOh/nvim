@@ -62,8 +62,9 @@ vim.lsp.config("cssls", {
 require("core.lsp.settings")
 
 vim.lsp.enable({
+  "fish_lsp",
   "basedpyright",
-  -- "clangd",
+  "clangd",
   "emmet_language_server",
   "emmet_ls",
   "gopls",
