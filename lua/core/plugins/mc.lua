@@ -32,6 +32,9 @@ return {
       end
     end)
 
+    vim.keymap.set("x", "I", mc.insertVisual)
+    vim.keymap.set("x", "A", mc.appendVisual)
+
     vim.keymap.set("n", "<esc>", function()
       if not mc.cursorsEnabled() then
         mc.enableCursors()

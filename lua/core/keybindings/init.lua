@@ -104,6 +104,9 @@ set("x", "/", "<Esc>/\\%V", opts)
 
 set("n", "<C-o>", "<C-o>zz", opts)
 
+-- disable macro recording
+set("n", "q", "<Nop>", opts)
+
 set({ "x", "v" }, "<leader>y", [["+y]], opts)
 set("n", "<leader>a", "ggVG", { desc = "Select Entire Buffer" })
 set("c", "<C-a>", "<Home>")

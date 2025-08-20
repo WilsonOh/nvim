@@ -1,9 +1,9 @@
 return {
-  { "neovim/nvim-lspconfig",   lazy = false },
-  { "williamboman/mason.nvim", opts = {},   lazy = false },
+  { "neovim/nvim-lspconfig", lazy = false },
+  { "williamboman/mason.nvim", opts = {}, lazy = false },
   "b0o/schemastore.nvim",
-  { "abecodes/tabout.nvim",     config = true,         event = "InsertEnter" },
-  { "f-person/git-blame.nvim",  cmd = "GitBlameEnable" },
+  { "abecodes/tabout.nvim", config = true, event = "InsertEnter" },
+  { "f-person/git-blame.nvim", cmd = "GitBlameEnable" },
   { "ThePrimeagen/vim-be-good", cmd = "VimBeGood" },
   "kyazdani42/nvim-web-devicons",
   -- "simrat39/rust-tools.nvim",
@@ -12,7 +12,7 @@ return {
   "MunifTanjim/nui.nvim",
   "rcarriga/nvim-notify",
   "nvim-lua/plenary.nvim",
-  { "stevearc/dressing.nvim",           event = "VeryLazy" },
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
   -- "LudoPinelli/comment-box.nvim",
   {
     "danymat/neogen",
@@ -23,12 +23,12 @@ return {
   -----------------------------------------------------------
 
   -- Colorschemes
-  { "rose-pine/neovim",                 name = "rose-pine" },
-  { "ellisonleao/gruvbox.nvim",         name = "gruvbox" },
+  { "rose-pine/neovim", name = "rose-pine" },
+  { "ellisonleao/gruvbox.nvim", name = "gruvbox" },
   -- to maintain the old blink.cmp pmenu bg color https://github.com/catppuccin/nvim/commit/931a129463ca09c8805d564a28b3d0090e536e1d
-  { "catppuccin/nvim",                  name = "catppuccin", version = "1.11.0" },
-  { "rebelot/kanagawa.nvim",            name = "kanagawa" },
-  { "sam4llis/nvim-tundra",             name = "tundra" },
+  { "catppuccin/nvim", name = "catppuccin", version = "1.11.0" },
+  { "rebelot/kanagawa.nvim", name = "kanagawa" },
+  { "sam4llis/nvim-tundra", name = "tundra" },
   { "nyoom-engineering/oxocarbon.nvim", name = "oxocarbon" },
   -------------------------------------------------------------
   {
@@ -85,6 +85,6 @@ return {
   {
     "sheerun/vim-polyglot",
     lazy = false,
-    enabled = true
+    enabled = true,
   },
 }
