@@ -43,5 +43,19 @@ return {
     vim.keymap.set("n", "<c-h>", function()
       require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
     end)
+
+    -- move
+    vim.keymap.set({ "n", "x", "o" }, "]m", function()
+      require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
+    end)
+    vim.keymap.set({ "n", "x", "o" }, "]M", function()
+      require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
+    end)
+    vim.keymap.set({ "n", "x", "o" }, "[m", function()
+      require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
+    end)
+    vim.keymap.set({ "n", "x", "o" }, "[M", function()
+      require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
+    end)
   end,
 }
