@@ -7,6 +7,11 @@ return {
     vim.keymap.set("n", "];", dropbar_api.select_next_context, { desc = "Select next context" })
 
     require("dropbar").setup({
+      sources = {
+        path = {
+          relative_to = "~",
+        },
+      },
       bar = {
         enable = function(buf, win, _)
           if

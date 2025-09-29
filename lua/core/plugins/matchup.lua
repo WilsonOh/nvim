@@ -4,6 +4,7 @@ return {
   -- commit = "e2cca1747ab175b8d839a5d28679427564643a57",
   config = function()
     vim.g.matchup_treesitter_enabled = false
+    vim.g.matchup_delim_stopline = 10000
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "*",
       group = vim.api.nvim_create_augroup("MatchupParen", { clear = true }),

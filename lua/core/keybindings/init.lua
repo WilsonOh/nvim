@@ -86,14 +86,14 @@ set("n", "gC", "0C", opts)
 -- Copy entire buffer to system clipboard
 
 -- smart dd
-local smart_dd = function()
+--[[ local smart_dd = function()
   if vim.api.nvim_get_current_line():match("^%s*$") then
     return '"_dd'
   else
     return "dd"
   end
 end
-set("n", "dd", smart_dd, { expr = true })
+set("n", "dd", smart_dd, { expr = true }) ]]
 
 -- blackhole delete/change
 set("n", "dD", '"_dd')
@@ -108,5 +108,7 @@ set("n", "<C-o>", "<C-o>zz", opts)
 set("n", "q", "<Nop>", opts)
 
 set({ "x", "v" }, "<leader>y", [["+y]], opts)
+set("n", "<leader>Y", "<cmd>%y+<cr>", opts)
+
 set("n", "<leader>a", "ggVG", { desc = "Select Entire Buffer" })
 set("c", "<C-a>", "<Home>")

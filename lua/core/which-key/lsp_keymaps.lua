@@ -11,7 +11,13 @@ M.mappings = {
   { "W", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
   { "l", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspace folder" },
   { "D", "<cmd>FzfLua lsp_document_diagnostics<cr>", "Document Diagnostics" },
-  { "d", Snacks.picker.lsp_definitions, "Go to definition" },
+  {
+    "d",
+    function()
+      Snacks.picker.lsp_definitions({ jump = { reuse_win = false } })
+    end,
+    "Go to definition",
+  },
   { "r", Snacks.picker.lsp_references, "References" },
   { "R", vim.lsp.buf.rename, "Rename" },
   { "a", vim.lsp.buf.code_action, "Code actions" },

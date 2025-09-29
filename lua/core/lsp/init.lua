@@ -59,9 +59,21 @@ vim.lsp.config("cssls", {
   },
 })
 
+vim.lsp.config("gopls", {
+  settings = {
+    gopls = {
+      semanticTokens = true,
+      analyses = {
+        unusedparams = true,
+      },
+    },
+  },
+})
+
 require("core.lsp.settings")
 
 vim.lsp.enable({
+  "golangci_lint_ls",
   "fish_lsp",
   "basedpyright",
   "clangd",

@@ -1,10 +1,12 @@
+--- @type LazySpec
 return {
   "folke/flash.nvim",
   event = "VeryLazy",
+  enabled = true,
   ---@type Flash.Config
   opts = {
     search = {
-      multi_window = false,
+      multi_window = true,
       incremental = true,
       exclude = {
         "toggleterm",
@@ -18,7 +20,7 @@ return {
         enabled = true,
       },
       char = {
-        enabled = true,
+        enabled = false,
         jump_labels = true,
         multi_line = false,
       },

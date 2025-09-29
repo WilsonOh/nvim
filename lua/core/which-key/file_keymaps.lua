@@ -26,6 +26,13 @@ M.mappings = {
     "Search Config",
   },
   {
+    "S",
+    function()
+      Snacks.picker.files({ cwd = "~/shopee/" })
+    end,
+    "Search Shopee Projects",
+  },
+  {
     "p",
     function()
       -- require("core.search_utils").project_search()
