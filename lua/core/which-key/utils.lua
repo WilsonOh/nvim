@@ -13,6 +13,7 @@ M.format_keymaps = function(mappings, format_opts, map_opts)
         prefix .. keymap[1],
         keymap[2],
         desc = keymap[3],
+        mode = keymap[4],
       }
       return vim.tbl_deep_extend("force", new_mapping, map_opts)
     end)

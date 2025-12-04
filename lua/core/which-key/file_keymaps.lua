@@ -112,6 +112,12 @@ M.mappings = {
     "<cmd>FzfLua grep_curbuf<cr>",
     "Current Buffer Fuzzy Find",
   },
+  {
+    "w",
+    Snacks.picker.grep_word,
+    "Visual selection or word",
+    { "n", "x" },
+  },
 }
 
 return M

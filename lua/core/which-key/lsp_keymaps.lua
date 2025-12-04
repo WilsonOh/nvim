@@ -10,7 +10,15 @@ M.mappings = {
   { "w", vim.lsp.buf.add_workspace_folder, "Add workspace folder" },
   { "W", vim.lsp.buf.remove_workspace_folder, "Remove workspace folder" },
   { "l", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>", "List workspace folder" },
-  { "D", "<cmd>FzfLua lsp_document_diagnostics<cr>", "Document Diagnostics" },
+  {
+    "D",
+    function()
+      Snacks.picker.diagnostics({
+        severity = vim.diagnostic.severity.ERROR,
+      })
+    end,
+    "Document Diagnostics",
+  },
   {
     "d",
     function()

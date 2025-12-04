@@ -31,6 +31,11 @@ M.mappings = {
     "<cmd>BlameToggle<cr>",
     "Toggle Git Blame Window",
   },
+  {
+    "o",
+    require("utils.git").gotoGitlab,
+    "Open Current File in remote GitLab",
+  },
 }
 
 return M

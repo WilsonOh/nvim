@@ -14,7 +14,7 @@ vim.lsp.config("basedpyright", {
   settings = {
     basedpyright = {
       analysis = {
-        typeCheckingMode = "recommended",
+        typeCheckingMode = "basic",
       },
     },
   },
@@ -73,6 +73,7 @@ vim.lsp.config("gopls", {
 require("core.lsp.settings")
 
 vim.lsp.enable({
+  "jqls",
   "golangci_lint_ls",
   "fish_lsp",
   "basedpyright",

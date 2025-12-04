@@ -2,7 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter-textobjects",
   lazy = false,
   branch = "main",
-  enabled = false,
+  enabled = true,
   config = function()
     require("nvim-treesitter-textobjects").setup({
       select = {

@@ -10,7 +10,7 @@ require("autocmds")
 -- Second optional parameter sets transparent background if true
 require("utils").set_colorscheme("catppuccin")
 
---[[ vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("FileType", {
   pattern = { "*" },
   callback = function(args)
     local buf = args.buf
@@ -26,4 +26,4 @@ require("utils").set_colorscheme("catppuccin")
       vim.o.fillchars = "fold: "
     end
   end,
-}) ]]
+})
