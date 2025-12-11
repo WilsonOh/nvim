@@ -85,6 +85,6 @@ return {
   {
     "sheerun/vim-polyglot",
     lazy = false,
-    enabled = true,
+    enabled = false,
   },
 }

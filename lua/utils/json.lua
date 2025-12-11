@@ -81,4 +81,85 @@ M.SelectJsonValue = function()
   }):start()
 end
 
+M.GetJqPathAtCursor = function()
+  -- 1. Get the current node at cursor
+  local node = vim.treesitter.get_node()
+
+  if not node then
+    vim.notify("Not on a Tree-sitter node.", vim.log.levels.ERROR)
+    return
+  end
+
+  local path = {}
+  local current = node
+
+  -- 2. Traverse up the tree to the root
+  while current do
+    local parent = current:parent()
+    if not parent then
+      break
+    end
+
+    local parent_type = parent:type()
+
+    -- Case: Parent is a "pair" ("key": value)
+    -- Both the key and the value share this parent.
+    -- We always want the text of the key (child 0).
+    if parent_type == "pair" then
+      local key_node = parent:child(0)
+      if key_node then
+        local key_text = vim.treesitter.get_node_text(key_node, 0)
+        -- Clean up quotes: '"foo"' -> 'foo'
+        -- vim.json.decode handles escapes safely
+        local ok, decoded = pcall(vim.json.decode, key_text)
+        if not ok then
+          decoded = key_text:gsub('^"(.*)"$', "%1")
+        end
+        table.insert(path, { type = "key", name = decoded })
+      end
+
+    -- Case: Parent is an "array" ([item1, item2])
+    -- We need to find our numeric index.
+    elseif parent_type == "array" then
+      local index = 0
+      -- Iterate over named children only (skipping brackets/commas)
+      for child in parent:iter_children() do
+        if child:named() then
+          if child:id() == current:id() then
+            break
+          end
+          index = index + 1
+        end
+      end
+      table.insert(path, { type = "index", value = index })
+    end
+
+    -- Move up
+    current = parent
+  end
+
+  -- 3. Construct the JQ query string
+  -- The path was built bottom-up, so we traverse it in reverse.
+  local query = "."
+  for i = #path, 1, -1 do
+    local part = path[i]
+    if part.type == "key" then
+      -- Use dot notation for simple keys, bracket for complex ones
+      if part.name:match("^[a-zA-Z_][a-zA-Z0-9_]*$") then
+        if query == "." then
+          query = query .. part.name
+        else
+          query = query .. "." .. part.name
+        end
+      else
+        query = query .. '["' .. part.name .. '"]'
+      end
+    elseif part.type == "index" then
+      query = query .. "[" .. part.value .. "]"
+    end
+  end
+
+  return query
+end
+
 return M
